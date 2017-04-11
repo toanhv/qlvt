@@ -1,0 +1,4 @@
+-- Dich lai 3 file script
+-- Single sign-on.sql
+-- Application.sql
+-- WebService.sql

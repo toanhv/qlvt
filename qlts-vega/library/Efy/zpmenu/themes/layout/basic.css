@@ -1,0 +1,234 @@
+/* Basic CSS for menus to be included by other CSS files */
+
+/* LAYOUT CSS -- this part should not be altered! */
+
+/* This selector will activate on page load when the menue is displayed */
+.zpMenuContainer, .zpMenu {
+	float: left; /* IE fix */
+	position: relative;
+	color: #0033FF;
+	/*background: #FFFFFF;*/
+	background-image:url(../../../../images/image_bg_top_menu.gif);
+	background-position:center;
+	background-repeat:repeat-x;
+	width:100%;
+	height:22px;
+	border-bottom:#000000 1 solid	
+}
+
+
+/* Top menu, horizontal */
+.zpMenu-horizontal-mode .zpMenu-level-1 {
+	float: left;
+	/*padding-left:5px;
+	padding-right:12px;*/
+	height: 20px;
+	text-align:center;
+}
+
+/* Anchor has NO style */
+.zpMenu-top a{
+	text-decoration:none;
+}
+
+/* All NON-Selected Labels font color black */
+.zpMenu-top .zpMenu-label,
+.zpMenu-top a{
+	color: #0033FF;
+}
+
+/* ALL Selected Labels font color black */
+.zpMenu-top .zpMenu-item-selected .zpMenu-label,
+.zpMenu-top .zpMenu-item-selected a {
+	color: #0033FF;
+}
+
+/* What to do if the LI has NO icon
+by default show NO icons
+-you css can override this
+*/
+.zpMenu-level-1  {
+	background: none;
+}
+
+/* Vertical: true */
+.zpMenu-vertical-mode  .zpMenu-level-1 {
+	width: 10em;
+	position:relative;
+	/* override float:left in basic.css */
+	float:none;
+	margin:0;
+	padding-left: 5px;	/* Label 5px in */
+	border-bottom:1px solid black;	
+ }
+
+.zpMenu-vertical-mode .zpMenu-level-1 .zpMenu-item-last {
+	border-bottom: none;
+}
+
+/* FORMATTING CSS -- can be altered. */
+
+
+/* Menu containers */
+
+.zpMenu-item table.zpMenu-table {
+	font-family:tahoma;
+	font-size:11px;
+	font-weight:bold;
+	color: #0033FF;
+}
+
+.zpMenu-item table.zpMenu-table a {
+	font-family:Tahoma, Arial, Helvetica, sans-serif;
+	font-size:11px;
+	font-weight:none;
+	color: #000000;
+	text-decoration:none;
+}
+/* Update:N.Ð.Trong */
+.zpMenu-table a:link {
+	font-family:Tahoma, Arial, Helvetica, sans-serif;
+	font-size:11px;
+	font-weight:none;
+	color: #000000;
+}
+.zpMenu-table a:hover {	
+	font-family:Tahoma, Arial, Helvetica, sans-serif;
+	font-size:11px;
+	font-weight:none;
+	color: #FF0000;	
+}
+.zpMenu-table a:visited {
+	font-family:Tahoma, Arial, Helvetica, sans-serif;
+	font-size:11px;
+	font-weight:none;
+	color: #000000;	
+}
+
+.zpMenu-item {
+	cursor: pointer;
+}
+
+/* Hide expansion indicators */
+
+/* These are indicators for items that have sub-menus, and are hidden cause they generate a
+   blank space in front of the content of those items */
+
+.zpMenu .zpMenu-item .minus,
+.zpMenuContainer .zpMenuContainer .zpMenu-item .minus,
+.zpMenu .zpMenu-item .plus,
+.zpMenuContainer .zpMenuContainer .zpMenu-item .plus {
+	display: none;
+}
+
+/* Helper classes to hide the menu onload */
+/* ??? I guess these are to be used on low Internet connection to display nothing befor all the needed things for the menu are loaded*/
+.zpHideOnLoad {
+	background: url("images/menuLoad.gif") no-repeat 100% 100%;
+	display:none;
+}
+.zpHideOnLoad ul {
+	display:none;
+}
+
+
+/* Begin HR style */
+/* Controls the behavior of <hr>  it the menu
+Overide ALL element contained in a zpMenu-item-hr */
+.zpMenuContainer .zpMenuContainer .zpMenu-item .zpMenu-item-hr,
+.zpMenuContainer .zpMenuContainer .zpMenu-item-hr .zpMenu-item td,
+.zpMenuContainer .zpMenuContainer .zpMenu-item-hr .zpMenu-item td .zpMenu-label,
+.zpMenuContainer .zpMenuContainer .zpMenu-item-hr .zpMenu-item .tgb,
+.zpMenuContainer .zpMenuContainer .zpMenu-item-hr .zpMenu-item .icon,
+.zpMenuContainer .zpMenuContainer .zpMenu-item-hr {
+	margin:0;
+	padding:0;
+	border-color:black;
+	background:black;
+	background-color:black;
+}
+
+
+.zpMenuContainer .zpMenuContainer .zpMenu-item-hr hr {    /* for CSS1 browsers */
+	display: none;
+}
+
+
+.zpMenuContainer .zpMenuContainer .zpMenu-item-hr hr * {     /* for CSS2 browsers */
+	display: none;
+}
+
+
+/* End HR style */
+
+/* Start - ICON Alignment */
+/* Controls the behavior of ALL left icons */
+/* Controls the behavior of ALL width_left_sub_menu */
+.zpMenuContainer .zpMenuContainer .icon {	
+	width: 0px;
+	padding-right:0px;
+}
+
+/* If you have an icon column and you want the Label to be left aligned, where the
+   icon would start, then uncomment this section
+.zpMenuContainer .zpMenuContainer  .zpMenu-noicon {
+	background: none;
+	width: 0px;
+}
+*/
+/* End - ICON Alignment */
+
+/* Sub-menu */
+.zpMenuContainer .zpMenuContainer {
+	position: absolute;
+	width: 1em;
+	height: 22px;
+}
+
+/* General items that's not a top menu */
+/* General items that's not a width_right_sub_menu */
+.zpMenuContainer .zpMenuContainer .zpMenu-item {
+	float: left;
+	width: 15em;
+	padding: 0em;
+	height: 20px; text-decoration:none;
+}
+
+/* TOP Menu - Set vertical align to center table */
+.zpMenu-vertical-mode .zpMenu-level-1,
+.zpMenu-horizontal-mode .zpMenu-level-1 {
+	vertical-align:middle;
+}
+
+/* TOP Menu - Have table use 100% of DIV so it can be vertical-align: middle */
+.zpMenu-horizontal-mode .zpMenu-level-1 .zpMenu-table {
+	height:100%;
+}
+
+.zpMenuContainer .zpMenuContainer  .zpMenu-label {
+	/* This scenario is needed when an Arrow image is over a menu item image */
+	/* Make the Menu label FILL the td so the Arrow will be right aligned */
+	/* zpMenu-item-collapsed, zpMenu-item-expanded */
+	width:1000px; 
+}
+
+
+/* Must include this CSS for Animation and Special Effects.  Fixes IE problems */
+.zpMenuContainer .zpMenuContainer .zpMenu {
+	filter: alpha(opacity=100);
+}
+
+.zpMenuContainer .zpMenu-item-visited.font.Menu {
+	background-image:url(../../../../images/ngan_cach_top_menu.gif);
+	background-position:right;
+	background-repeat:no-repeat;
+	padding-right:15px;
+	padding-left:15px;
+	height:21px;	
+	padding-top:0px;
+	text-align:center;
+	color:#000000;	
+}
+
+
+

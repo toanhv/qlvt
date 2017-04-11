@@ -1,0 +1,136 @@
+<?php 
+//$arrPermission = $_SESSION['arrStaffPermission'];
+//if($arrPermission['CAP_NHAT_LOAI_DM'] || $arrPermission['CAP_NHAT_DM_DOI_TUONG'] || $arrPermission['CAP_NHAT_QUYEN'])
+//{?>
+<table>
+<form action="index" method="POST" id="frmAllListType">
+	<table cellpadding="0" cellspacing="0" width="100%" border="0">
+		<!--tao tac hidden!-->
+		<tr>
+			<!--Sinh mot hidden luu list ID ma NSD chon!-->
+			<?php echo $this->formHidden("hdn_object_id_list","",null); ?>	
+			<!--Sinh mot hidden luu gia tri xac dinh so ban ghi / 1 trang!-->	
+			<?php echo $this->formHidden("hdn_record_number_page",$this->NumberRowOnPage,null); ?>				
+			<!--Sinh mot hidden luu gia tri trang hien thoi 1, 2, ...!-->
+			<?php echo $this->formHidden("hdn_page",$this->numCurrentPage,null); ?>				
+			<!--Sinh mot hidden luu gia tri cua so thu tu sap xep lon nhat hien thoi-->
+			<?php echo $this->formHidden("hdn_order",$this->iCountElement + 1,null); ?>	
+			<!--Sinh mot hidden luu gia tri id cua Loai danh muc duoc chon de edit-->
+			<?php echo $this->formHidden("hdn_listtype_id","",null); ?>				
+					
+		</tr>
+	</table>
+	<!--HIen thi tieu de man hinh danh sach!-->
+	<table width='100%'  border='0' cellspacing='0' cellpadding='0' class="table_title">
+		<tr>
+			<td class="large_title" style="padding-left:7px;text-align:left;">
+				<?=$this->bodyTitle;?><br>				
+			</td>
+		</tr>
+	</table>
+	<!--HIen thi cac tieu chi loc!-->
+	<table cellpadding="0" cellspacing="0" width="98%" border="0">
+		<tr>
+			<td width="30%" style="padding-left:8px;" class="normal_label">Lọc theo tên loại danh mục &nbsp;</td>
+			<td>
+				<?=$this->formText('txtSearch',$this->listTypeName,array('size'=>70,'class'=>'normal_textbox','optional'=>false,'message'=>'Ma LOAI DANH MUC khong duoc de trong!','onKeyDown'=>'change_focus(document.forms(0),this)'));?>&nbsp;<?php
+				echo $this->formButton("btn_filter","Tìm kiếm",array("type"=>"button","class"=>"add_large_button","onClick"=>"actionUrl('');")) . "&nbsp;";?>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<div style="text-align:right; width:100%;">
+					<label>
+						<a class="link" onclick="actionUrl('add');">Thêm |</a> 
+						<a class="link" onclick="btn_update_onclick(document.getElementById('hdn_listtype_id').value,'edit');">Sửa |</a> 
+						<a class="link" onclick="btn_delete_onclick(document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id_list'),'delete/');">Xóa</a>
+					</label>
+				</div>	
+			</td>
+		</tr>
+	</table>
+	<!--Hien thi danh sach tieu de code!-->			
+	<table cellpadding="0" cellspacing="0" border="0" width="98%" class="list_table2" align="center" id="table1">	
+		<?php			
+			$delimitor = $this->delimitor;//Lay ky tu phan cach giua cac phan tu
+			//Hien thi cac cot cua bang hien thi du lieu
+			$StrHeader = explode("!~~!",Efy_Library::_GenerateHeaderTable("5%" . $delimitor . "30%" . $delimitor . "40%" . $delimitor . "10%" . $delimitor . "15%"
+											,"#" . $delimitor . "Mã loại danh mục" . $delimitor . "Tên loại danh mục" . $delimitor . "Thứ tự" . $delimitor . "Tình trạng"
+											,$delimitor));
+			echo $StrHeader[0];?>
+		<!--Hien thi du lieu!--><?php
+			echo $StrHeader[1]; //Hien thi <col width = 'xx'><...
+			//Kieu style
+			$v_current_style_name = "round_row";	
+			
+			$arr_result = $this->arrResult;		
+				
+			//var_dump($arr_result);
+			for($index = 0;$index < $this->iCountElement;$index++){	
+				// Pk cua bang
+				$pkListType = $arr_result[$index]['PK_LISTTYPE'];				
+				// Ma Loai Danh muc
+				$codeListType = '&nbsp;' . $arr_result[$index]['C_CODE'] .'&nbsp;';				
+				// Ten ListType
+				$nameListType = '&nbsp;' . $arr_result[$index]['C_NAME'].'&nbsp;';	
+				// So thu tu
+				$orderListType = $arr_result[$index]['C_ORDER'].'&nbsp;';					
+				// Tinh trang
+				$statusListType = $arr_result[$index]['C_STATUS'].'&nbsp;';	
+				
+				
+				// su dung style
+				if ($v_current_style_name == "odd_row"){
+					$v_current_style_name = "round_row";
+				}else{
+					$v_current_style_name = "odd_row";					
+				}?>
+				
+				<tr class="<?=$v_current_style_name?>">	
+					<td align="center" style="padding-left:3px;padding-right:3px;" class="normal_label">						
+						<?=$this->formCheckbox('chk_item_id',$pkListType, array('checked' => false,'onclick' => 'selectrow(this);'));?>					
+					</td>
+					<td align="left" ondblclick="item_onclick('<?=$pkListType?>','edit');" onclick="set_hidden(this,document.getElementsByName('chk_item_id'),document.getElementById('hdn_listtype_id'),'<?=$pkListType?>');"  class="normal_label"><?=$codeListType;?></td>		
+					
+					<!--Hien thi trich yeu!-->					
+					<td align="left" ondblclick="item_onclick('<?=$pkListType?>','edit');" onclick= "set_hidden(this,document.getElementsByName('chk_item_id'),document.getElementById('hdn_listtype_id'),'<?=$pkListType?>');" style="padding-left:3px;padding-right:3px;" class="normal_label"><?=$nameListType;?></td>
+					<!--Hien thi don vi thuc hien!-->					
+					<td align="center" ondblclick="item_onclick('<?=$pkListType?>','edit');" onclick="set_hidden(this,document.getElementsByName('chk_item_id'),document.getElementById('hdn_listtype_id'),'<?=$pkListType?>');"  style="padding-left:3px;padding-right:3px; cursor: pointer;" class="normal_label"><?=$orderListType;?></td>
+					<!--Hien ket qua xu ly!-->	
+					<td align="center" ondblclick="item_onclick('<?=$pkListType?>','edit');" onclick="set_hidden(this,document.getElementsByName('chk_item_id'),document.getElementById('hdn_listtype_id'),'<?=$pkListType?>');"  style="padding-left:3px;padding-right:3px;" class="normal_label"><?=$statusListType?></td>					
+				</tr>
+	
+				<?php
+			}							
+			//Tu dien cac dong trang trong truong hop du lieu tra ve < so row _CONST_NUMBER_OF_ROW_PER_LIST			
+			echo Efy_Library::_addEmptyRow($this->iCountElement,$this->NumberRowOnPage,$v_current_style_name,5);			
+		?>	
+	</table>
+	<table width="98%" align="center" cellpadding="0" cellspacing="0" border="0">				
+		<tr>
+
+			<td align="center" height="10px">			
+			</td>
+		</tr>
+	</table>
+	<table width="98%" align="center" cellpadding="0" cellspacing="0" border="0" class="buton_table">				
+		<tr>
+
+			<td align="center" class="body">
+				
+			<?php
+				//Nut "Them"
+				echo $this->formButton("btn_add","Thêm",array("type"=>"button","class"=>"add_large_button","onClick"=>"actionUrl('add');"));
+				//Nut "Sua"
+			?>	<input type="button" class="add_large_button" value="Sửa" onclick="btn_update_onclick(document.getElementsByName('chk_item_id'),'edit');">
+			<?php	//Nut "Xoa"
+				echo $this->formButton("btn_delete","Xóa",array("type"=>"button","class"=>"add_large_button","onClick"=>"btn_delete_onclick(document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id_list'),'delete/');")). "&nbsp;";													
+			?>		
+			</td>
+		</tr>
+	</table>	
+</form>
+<?php //} 
+//else 
+//	echo 'Bạn không có quyền truy cập chức năng này';
+?>

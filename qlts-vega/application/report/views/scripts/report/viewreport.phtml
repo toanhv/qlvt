@@ -1,0 +1,13 @@
+<form action="index" method="POST" id="frmAll">
+	<body onunload="window.returnValue = document.getElementById('hdn_url_report').value;"><?php
+		$my_report_file = $this->my_report_file;
+		echo $this->formHidden("hdn_url_report",$this->my_report_file ,null);?>
+	</body>
+</form>
+<script type="text/javascript">
+	try{
+		opener.document.getElementById('linkDownload').href = "<?=$this->my_report_file?>";
+		opener.document.getElementById('linkDownload').innerHTML = "<?=$this->fileName?>";
+	}catch(e){;}
+	window.close();
+</script>

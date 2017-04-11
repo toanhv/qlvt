@@ -1,0 +1,18 @@
+
+<FORM name="frm_list" method="post" action="" >
+						<input type="text" name="txt_response_date" size="10" class=textbox_uni> &nbsp;<A HREF="javascript:DoCal(frm_list.txt_response_date)"><IMG SRC="/CPXD/WEB/images/calendar.gif" BORDER=0 WIDTH="16" HEIGHT="16"></A>
+
+						<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+ function DoCal(elTarget) {
+  if (showModalDialog) {
+    var sRtn;
+    sRtn = showModalDialog("Calendar.htm","","dialogWidth=210pt;dialogHeight=180pt;status=no;scroll=no");
+    if (sRtn!="")
+      elTarget.value = sRtn;
+  } else
+    alert("Internet Explorer 4.0 or later is required.")
+ }
+</script>
+ </form>

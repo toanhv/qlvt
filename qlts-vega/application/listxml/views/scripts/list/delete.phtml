@@ -1,0 +1,25 @@
+<?php 
+//$arrPermission = $_SESSION['arrStaffPermission'];
+//if($arrPermission['CAP_NHAT_LOAI_DM'] || $arrPermission['CAP_NHAT_DM_DOI_TUONG'] || $arrPermission['CAP_NHAT_QUYEN'])
+//{?>
+<form action="index" method="POST" id="frmAll">		
+	<table cellpadding="0" cellspacing="0" width="100%" border="0">
+		<!--tao tac hidden!-->
+		<tr>
+			<!--Sinh mot hidden luu ID loai danh muc!-->
+			<?php echo $this->formHidden("hdn_id_listtype",$this->iIdListType,null); ?>				
+			<!--Bien hdn_page dung de luu chi so trang hien thi hien thoi-->			
+			<?php echo $this->formHidden("hdn_current_page",$this->currentPage,null); ?>	
+			<!--Sinh mot hidden luu gia tri xac dinh so ban ghi / 1 trang!-->	
+			<?php echo $this->formHidden("hdn_record_number_page",$this->numRowOnPage,null); ?>	
+			<!--Bien hdn_filter_xml_tag_list dung de luu danh sach cac THE XML tuong ung voi cac tieu thuc loc tren giao dien DANH SACH DOI TUONG-->
+			<?php echo $this->formHidden("hdn_filter_xml_tag_list",$this->filterXmlTagList,null); ?>
+			<!--Bien hdn_filter_xml_tag_list dung de luu gia tri cua cac THE XML tuong ung voi cac tieu thuc loc tren giao dien DANH SACH DOI TUONG-->	
+			<?php echo $this->formHidden("hdn_filter_xml_value_list",$this->filterXmlValueList,null); ?>
+		</tr>
+	</table>	
+</form>
+<?php //} 
+//else 
+//	echo 'Bạn không có quyền truy cập chức năng này';
+?>

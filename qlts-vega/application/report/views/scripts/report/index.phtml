@@ -1,0 +1,187 @@
+
+<form action="index" method="POST" id="frmAll">
+	<table cellpadding="0" cellspacing="0" width="100%" border="0"><?
+		$urlCalendar = $this->urlCalendar;?>
+		<tr>
+			<?php echo $this->formHidden("hdn_Report_id",$this->sCodeList ,null); ?>		
+			<!--Sinh mot hidden luu gia tri xac dinh so ban ghi / 1 trang!-->	
+			<?php echo $this->formHidden("hdn_record_number_page",$this->numRowOnPage,null); ?>				
+			<!--Bien hdn_xml_file dung de luu ten file XML cua loai danh muc hien thoi-->
+			<?php echo $this->formHidden("hdn_xml_file",$this->xmlFileName,null); ?>	
+			<!--Bien hdn_xml_tag_list dung de luu danh sach cac THE XML tuong ung voi cac THUOC TINH cua mot doi tuong dang duoc cap nhat-->			
+			<?php echo $this->formHidden("hdn_xml_tag_list",'',null); ?>			
+			<!--Bien hdn_xml_value_list dung de luu danh sach cac gia tri cua cac THE XML tuong ung voi cac THUOC TINH cua mot doi tuong-->			
+			<?php echo $this->formHidden("hdn_xml_value_list",'',null); ?>	
+			<!--Bien hdn_page dung de luu chi so trang hien thi hien thoi-->			
+			<?php echo $this->formHidden("hdn_current_page",$this->currentPage,null); ?>
+			<!--Bien hdn_filter_xml_tag_list dung de luu danh sach cac THE XML tuong ung voi cac tieu thuc loc tren giao dien DANH SACH DOI TUONG-->
+			<?php echo $this->formHidden("hdn_filter_xml_tag_list",$this->filterXmlTagList,null); ?>
+			<!--Bien hdn_filter_xml_tag_list dung de luu gia tri cua cac THE XML tuong ung voi cac tieu thuc loc tren giao dien DANH SACH DOI TUONG-->	
+			<?php echo $this->formHidden("hdn_filter_xml_value_list",$this->filterXmlValueList,null); ?>					
+				
+			<?php echo $this->formHidden("hdn_exporttype",$this->sExportType ,null); ?>		
+			<?=$this->formHidden("url_report",$this->my_report_file, null);?>
+			
+		</tr>
+	</table>
+	<table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
+		<tr><!--Cemter-->
+			<td style="padding-left:10px;" colspan="2">
+				<!--HIen thi tieu de man hinh danh sach!-->
+				<table width='100%'  border='0' cellspacing='0' cellpadding='0' class="table_title">
+					<tr>
+						<td class="large_title" style="padding-left:7px;text-align:left;">
+							<?=$this->bodyTitle;?><br>								
+						</td>
+					</tr>
+				</table>
+				<!--Hien thi danh sach tieu de code!-->			
+				<table cellpadding="0" cellspacing="0" border="0" width="98%" align="center">	
+					<col width="30%"><col width="20%"><col width="20%"><col width="30%">
+					<!--Hien thi du lieu!-->
+					<tr>
+						<td class="small_title" colspan="4">
+							Bước 1: Chọn Báo Cáo
+						</td>
+					</tr>
+					<tr>
+						<td class="normal_label" colspan="4">
+							<table cellspacing="0" cellpadding="0" align="right" width="99%" class="list_table2">
+								<col width="5%"><col width="95%"><?
+								$arrReportList = $this->arrReportList;
+								$v_current_style_name = "round_row";		
+								for($i =0; $i < sizeof($arrReportList); $i ++){
+									if ($v_current_style_name == "odd_row"){
+										$v_current_style_name = "round_row";
+									}else{
+										$v_current_style_name = "odd_row";					
+									}?>
+									<tr class="odd_row" onclick="btn_rad_onclick('<?=$arrReportList[$i]['C_CODE']?>',document.getElementById('hdn_Report_id'));" value="<?=$arrReportList[$i]['C_CODE']?>">
+										<td align="center" valign="middle">
+											<input type="radio" onclick="btn_rad_onclick('<?=$arrReportList[$i]['C_CODE']?>',document.getElementById('hdn_Report_id'));" value="<?=$arrReportList[$i]['C_CODE']?>" readonly="true" name="opt_reporttype_id" message="Phai chon it nhat mot BAO CAO ">
+										</td>
+										<td colspan="10">
+											&nbsp;<?=$arrReportList[$i]['C_NAME']?>
+										</td>
+									</tr><?
+								}?>								
+							</table>														
+						</td>
+					</tr>
+					<tr>
+						<td class="small_title" colspan="4">
+							Bước 2: Chọn các tiêu thức lọc báo cáo
+						</td>
+					</tr>
+					
+					<tr>
+						<td class="normal_label" colspan="10">							
+							<table style="padding-left:20px;">
+								<col width="20%"><col width="30%"><col width="20%"><col width="30%">
+								<tr id="asset_status">
+									<td>
+										Tình trạng tài sản
+									</td>
+									<td>
+										<select id="C_STATUS" name="C_STATUS" optional = "true" style="width:98%;" class="textbox normal_label">
+											<option id="" name = "" value="">-- chọn tình trạng tài sản --</option><?php
+											$arrStatus = $this->arrStatus;
+											echo Efy_Library::_generateSelectOption($arrStatus,'C_CODE','C_CODE','C_NAME',$this->status);?>
+										</select>
+									</td>
+								</tr>
+								<tr id="asset_unitid">
+									<td>
+										Phòng ban
+									</td>
+									<td>
+										<select id="C_UNIT" name="C_UNIT" optional = "true" style="width:98%;" class="textbox normal_label">
+											<option id="" name = "" value="">-- chọn phòng ban --</option><?php
+											$arrStatus = $_SESSION['arr_all_unit'];
+											echo Efy_Library::_generateSelectOption($arrStatus,'id','id','name',$this->unitid);?>
+										</select>
+									</td>
+								</tr>
+								<tr width="100%">
+									<td>
+										<label>Loại tài sản:
+									</td>
+									<td>
+										<div id="divLeaderID">
+											<select id="C_TYPE" name="C_TYPE" optional = "true" style="width:98%;" class="textbox normal_label">
+												<option id="" name = "" value="">-- chọn loại tài sản --</option><?php						
+												$arrType = $this->arrType;						
+												echo Efy_Library::_generateSelectOption($arrType,'C_CODE','C_CODE','C_NAME',$this->type);?>
+											</select>	
+										</div>
+									</td>
+								</tr>
+								<tr width="100%">
+									<td>
+										<label>Nhóm tài sản:
+									</td>
+									<td>
+										<select id="C_GROUP" name="C_GROUP" optional = "true" style="width:98%;" class="textbox normal_label">
+											<option id="" name = "" value="">-- chọn nhóm tài sản --</option><?php
+											$arrGroup = $this->arrGroup;
+											echo Efy_Library::_generateSelectOption($arrGroup,'C_CODE','C_CODE','C_NAME',$this->group);?>
+										</select>	
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Từ ngày
+									</td>
+									<td colspan="3">
+										<input class="textbox" style="width:20%" id ="begin_from_date" name="begin_from_date" value="<?=$this->begin_from_date?>" onchange="getNowYear(this);" onblur = 'this.value=DatePrompt(this)' type="text" isdate="true" option = "true"  message="<?php echo "Ngay khong dung dinh dang ngay/thang/nam!";?>" onKeyDown="change_focus(document.forms[0],this)">
+										<img src="<?= $this->baseUrl?>images/calendar.gif" border="0" onclick="DoCal('<?=$urlCalendar;?>',document.getElementById('begin_from_date'));" style="cursor:pointer">
+										Đến ngày: <input class="textbox" style="width:20%" id ="begin_to_date" name="begin_to_date" value="<?=$this->begin_to_date?>" onchange="getNowYear(this);" onblur = 'this.value=DatePrompt(this)' type="text" isdate="true" option = "true"  message="<?php echo "Ngay khong dung dinh dang ngay/thang/nam!";?>" onKeyDown="change_focus(document.forms[0],this)">
+										<img src="<?= $this->baseUrl?>images/calendar.gif" border="0" onclick="DoCal('<?=$urlCalendar;?>',document.getElementById('begin_to_date'));" style="cursor:pointer">	 						
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>	
+					
+					<tr>
+						<td class='small_title' align='left' colspan="4">
+							Bước 3: Chọn định dạng báo cáo kết xuất ra 
+						</td>
+					</tr>
+					
+					<tr align="center">
+						<td class="normal_label">
+							<input type='radio' class='normal_radio' id = "rad_exporttype" name = "rad_exporttype" value='31' onClick="btn_rad_onclick('31',document.getElementById('hdn_exporttype'));"> Định dạng pdf
+						</td>
+						<td class="normal_label" colspan="2">
+							<input type='radio' class='normal_radio' id = "rad_exporttype" name="rad_exporttype" value='14' checked onClick="btn_rad_onclick('14',document.getElementById('hdn_exporttype'));"> Định dạng Word
+						</td>	
+						<td class="normal_label">
+							<input type='radio' class='normal_radio' id = "rad_exporttype" name="rad_exporttype" value='29'  onClick="btn_rad_onclick('29',document.getElementById('hdn_exporttype'));"> Định dạng Excel
+						</td>		
+					</tr>
+				</table>						
+				<table width="98%" align="center" cellpadding="0" cellspacing="0" border="0" class="buton_table">	
+					<tr><td height="10"></td></tr>	
+					<tr><td align="center" class="body"><?php
+						echo $this->formButton("btn_add","Kết xuất",array("type"=>"button","class"=>"large_button","onClick"=>"btn_show_report(document.getElementById('hdn_Report_id'),document.getElementById('hdn_filter_xml_tag_list'),document.getElementById('hdn_filter_xml_value_list'),'viewreport');")) . "&nbsp;";?>		
+					</td></tr>	
+					<tr><td height="10"></td></tr>	
+				</table>				
+			</td>			
+		</tr>	
+	</table>	
+	<div align="center" style="display:none;" class="normal_label" id="downloadFileReport">
+		<a href="#" id="linkDownload" name="linkDownload"></a>
+	</div>	
+	<script type="text/javascript">
+	try{
+		if(document.getElementById('begin_from_date').value == ""){
+			document.getElementById('begin_from_date').value = "01/<?=date('m') . '/' . date('Y')?>";
+		}
+		if(document.getElementById('begin_to_date').value == ""){
+			document.getElementById('begin_to_date').value = "<?=date('d/m/Y')?>";
+		}
+	}catch(e){;}
+	</script>		
+</form>

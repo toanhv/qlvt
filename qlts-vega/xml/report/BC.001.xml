@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<common_para_list>
+		<common_para>
+			<report_filter_title>Kết xuất báo cáo Tổng Hợp văn bản đến Bộ Xây Dựng</report_filter_title>
+			<first_col_width>25%</first_col_width>
+			<js_file_name></js_file_name>
+			<php_function></php_function>
+			<js_function></js_function>
+		</common_para>
+	</common_para_list>
+	<table_struct_of_filter_form>   <!--xac dinh cau truc table cua form chua cac tieu thuc loc du lieu-->
+		<filter_row_list> <!--Phan Danh sach tieu thuc loc du lieu-->			
+			<filter_row>
+				<have_line_before></have_line_before>
+				<tag_list>from_date,to_date</tag_list>
+				<row_id>abc</row_id>
+			</filter_row>
+		</filter_row_list>
+	</table_struct_of_filter_form>
+	<filter_formfield_list>  <!-- phan mo ta cac dong cua  form chua cac tieu thuc loc du lieu-->
+			<from_date>
+				<label>Từ ngày: </label>
+				<type>textbox</type>
+				<data_format>isdate</data_format>
+				<width>20%</width>
+				<optional>false</optional>
+				<max></max>
+				<min></min>
+				<max_length></max_length>
+				<message>TU NGAY khong duoc de trong</message>
+				<note></note>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>from_date</xml_tag_in_db>
+				<colume_name></colume_name>
+				<compare_operator></compare_operator> 
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</from_date>
+			<to_date>
+				<label>Đến ngày: </label>
+				<type>textbox</type>
+				<data_format>isdate</data_format>
+				<width>20%</width>
+				<optional>false</optional>
+				<max></max>
+				<min></min>
+				<max_length></max_length>
+				<message>DEN NGAY khong duoc de trong</message>
+				<note></note>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>to_date</xml_tag_in_db>
+				<colume_name></colume_name>
+				<compare_operator></compare_operator>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</to_date>
+	</filter_formfield_list>
+	<report_sql> <!-- phan mo ta cau lenh SQL ket xuat du lieu cho bao cao -->
+		<sql> 
+			Exec Doc_GetAllReceivedDocumentpolitburo '#from_date#','#to_date#'
+		</sql>
+		<xml_data></xml_data> <!--Cot Du lieu duoc nhom co phai nam trong the xml hay khong?-->
+		<group_by></group_by>  <!--The nay xac dinh du lieu da duoc nhom theo cot nao-->
+		<group_name></group_name> <!--Cot chua ten cua nhom khi tinh toan nhom du lieu-->
+		<calculate_total></calculate_total> <!--Nhan gia tri true neu muon tinh tong cuoi cung cua bao cao-->
+	</report_sql>
+	
+	<report_header> <!--Phan dau cua bao cao-->
+		<report_unit_father> </report_unit_father>
+		<report_unit_child></report_unit_child>
+		<report_date></report_date>
+		<large_title>TỔNG HỢP VĂN BẢN ĐẾN BỘ XÂY DỰNG</large_title>
+		<small_title>Ông: </small_title>
+		<table_header_file></table_header_file> <!--Dinh nghia file hien thi tieu de bao cao-->
+	</report_header>
+	
+	<report_footer> <!-- Phan cuoi cua bao cao -->
+		<report_creator>Người lập </report_creator>
+		<report_approver>Người duyệt</report_approver>
+		<report_signer>Người ký</report_signer>
+	</report_footer>
+</root>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<treeview title="Treeview" >
+<custom-parameters>
+<param name="shift-width" value="10"/>
+<param name="opening_node_img_name" value="/isa-user-easyoffice/images/open.bmp"/>
+<param name="closing_node_img_name" value="/isa-user-easyoffice/images/close.bmp"/>
+<param name="leaf_node_img_name" value="/isa-user-easyoffice/images/user.bmp"/>
+<param name="modal_dialog_mode" value="0"/>
+<param name="show_control" value="true"/>
+<param name="select_parent" value="true"/>
+</custom-parameters>
+<folder title="UBND Thành phố Ninh Bình" id="2" value="UBNDTPNB" type="0" parent_id="" level="0" have_children="1">\n<folder title="Lãnh đạo UBND Tp Ninh Bình" id="3" value="LDUBNDTPNB" type="0" parent_id="2" level="0" have_children="0">\n</folder>
+<folder title="Văn phòng HĐND và UBND" id="5" value="VP" type="0" parent_id="2" level="0" have_children="0">\n</folder>
+<folder title="Phòng Quản lý Đô thị" id="4" value="PQLDT" type="0" parent_id="2" level="0" have_children="0">\n</folder>
+<folder title="Phòng Tài nguyên và Môi trường" id="6" value="PTNMT" type="0" parent_id="2" level="0" have_children="0">\n</folder>
+<folder title="Phòng Tài chính Kế hoạch" id="9" value="PTCKH" type="0" parent_id="2" level="0" have_children="0">\n</folder>
+<folder title="Phòng Kinh tế" id="10" value="PKT" type="0" parent_id="2" level="0" have_children="0">\n</folder>
+<folder title="Thanh tra thành phố" id="11" value="TTTP" type="0" parent_id="2" level="0" have_children="0">\n</folder>
+<folder title="Phòng Văn hóa" id="12" value="PVH" type="0" parent_id="2" level="0" have_children="0">\n</folder>
+<folder title="Trung tâm văn hóa" id="13" value="TTVH" type="0" parent_id="2" level="0" have_children="0">\n</folder>
+<folder title="Phòng tư pháp" id="14" value="PTP" type="0" parent_id="2" level="0" have_children="0">\n</folder>
+<folder title="Phòng Y tế" id="15" value="PYT" type="0" parent_id="2" level="0" have_children="0">\n</folder>
+<folder title="Phòng Nội vụ" id="16" value="PNV" type="0" parent_id="2" level="0" have_children="0">\n<folder title="Dương Đức Khanh" id="27" value="DUONGDUCKHANH" type="1" parent_id="16" level="1" have_children="0">\n</folder>
+<folder title="Nguyễn Tư Bảo" id="43" value="NGUYENTUBAO" type="1" parent_id="16" level="1" have_children="0">\n</folder>
+<folder title="Tống Văn Học" id="44" value="TONGVANHOC" type="1" parent_id="16" level="1" have_children="0">\n</folder>
+<folder title="Nguyễn Anh Nguyễn" id="67" value="NGUYEN ANH NGUYEN" type="1" parent_id="16" level="1" have_children="0">\n</folder>
+<folder title="Vũ Thị Ngọc Ánh" id="68" value="VU THI NGOC ANH" type="1" parent_id="16" level="1" have_children="0">\n</folder>
+<folder title="Nguyễn Thị Loan" id="69" value="NGUYEN THI LOAN" type="1" parent_id="16" level="1" have_children="0">\n</folder>
+<folder title="Trịnh Thị Mầu" id="70" value="TRINH THI MAU" type="1" parent_id="16" level="1" have_children="0">\n</folder>
+<folder title="Trịnh Xuân Đạo" id="71" value="TRINH XUAN DAO" type="1" parent_id="16" level="1" have_children="0">\n</folder>
+<folder title="Nguyễn Thị Kim Tuyến" id="72" value="NGUYEN THI KIM TUYEN" type="1" parent_id="16" level="1" have_children="0">\n</folder>
+<folder title="Nguyễn Thị Quế" id="73" value="NGUYEN TH��� QUE" type="1" parent_id="16" level="1" have_children="0">\n</folder>
+</folder>
+<folder title="Đài truyền thanh" id="17" value="DTT" type="0" parent_id="2" level="0" have_children="0">\n</folder>
+<folder title="Phòng thống kê" id="18" value="PTK" type="0" parent_id="2" level="0" have_children="0">\n</folder>
+<folder title="Ban quản lý dự án" id="19" value="BQLDA" type="0" parent_id="2" level="0" have_children="0">\n</folder>
+<folder title="Dự án quỹ đất" id="20" value="DAQD" type="0" parent_id="2" level="0" have_children="0">\n</folder>
+<folder title="Hội chữ thập đỏ" id="22" value="HCTD" type="0" parent_id="2" level="0" have_children="0">\n</folder>
+<folder title="Lưu" id="24" value="LUU" type="0" parent_id="2" level="0" have_children="0">\n</folder>
+</folder>
+</treeview>

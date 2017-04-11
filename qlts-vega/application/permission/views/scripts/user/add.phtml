@@ -1,0 +1,124 @@
+<form action="index" method="POST" id="frmAddPermission">
+	<table cellpadding="0" cellspacing="0" width="100%" border="0">
+		<!--tao tac hidden!-->
+		<tr>
+			<!--Bien hdn_xml_tag_list dung de luu danh sach cac THE XML tuong ung voi cac THUOC TINH cua mot doi tuong dang duoc cap nhat-->			
+			<?php echo $this->formHidden("hdn_xml_tag_list",'',null); ?>			
+			<!--Bien hdn_xml_value_list dung de luu danh sach cac gia tri cua cac THE XML tuong ung voi cac THUOC TINH cua mot doi tuong-->			
+			<?php echo $this->formHidden("hdn_xml_value_list",'',null); ?>			
+			<!--Sinh mot hidden luu list ID ma NSD chon!-->
+			<?php echo $this->formHidden("hdn_object_id_list",$this->iStaffIdList,null); ?>	
+			<!--Sinh mot hidden luu list quyen NSD chon!-->
+			<?php echo $this->formHidden("hdn_permission_id_list",$this->userPermissionIdList,null); ?>	
+			<!--Hidden luu gia tri cua list tag va list value (TagList|{*^*}|ValueList) -->
+			<?php echo $this->formHidden("hdn_XmlTagValueList",$this->XmlTagValueList,null); ?>
+			<!--Bien hdn_page dung de luu chi so trang hien thi hien thoi-->			
+			<?php echo $this->formHidden("hdn_current_page",$this->currentPage,null); ?>	
+			<!--Sinh mot hidden luu gia tri xac dinh so ban ghi / 1 trang!-->	
+			<?php echo $this->formHidden("hdn_record_number_page",$this->numRowOnPage,null); ?>	
+			<!--Bien hdn_filter_xml_tag_list dung de luu danh sach cac THE XML tuong ung voi cac tieu thuc loc tren giao dien DANH SACH DOI TUONG-->
+			<?php echo $this->formHidden("hdn_filter_xml_tag_list",$this->filterXmlTagList,null); ?>
+			<!--Bien hdn_filter_xml_tag_list dung de luu gia tri cua cac THE XML tuong ung voi cac tieu thuc loc tren giao dien DANH SACH DOI TUONG-->	
+			<?php echo $this->formHidden("hdn_filter_xml_value_list",$this->filterXmlValueList,null); ?>	
+			<?php echo $this->formHidden("hdn_is_update","",null); ?>
+		</tr>
+	</table>
+	<!--HIen thi tieu de man hinh danh sach!-->
+	<table width='100%'  border='0' cellspacing='0' cellpadding='0' class="table_title">
+		<tr>
+			<td class="large_title" style="padding-left:7px;text-align:left;">
+				<?=$this->bodyTitle;?><br>				
+			</td>
+		</tr>
+		<tr><td style="height:10px;"></td></tr>
+	</table>
+	
+	<table width='100%'  border='0' cellspacing='0' cellpadding='0' class="table_title" align="center">
+		<tr>			
+			<td style="padding-left:5px;padding-right:5px;"><?php
+					//Hien thi form mo ta thong tin them moi mot doi tuong danh muc
+					echo $this->staffInformation;					
+				?>				
+			</td>			
+		</tr>
+	</table>
+	<table width='100%'  border='0' cellspacing='0' cellpadding='0' class="table_title" align="center">
+		<tr>			
+			<td class="large_title" style="padding-left:7px;text-align:left;"><?php
+					//Hien thi form mo ta thong tin them moi mot doi tuong danh muc
+					echo "NHÓM QUYỀN CHỨC NĂNG";?>				
+			</td>			
+		</tr>
+		<tr>
+			<td style="padding-left:5px;padding-right:5px;"><?php
+					//Hien thi form mo ta thong tin them moi mot doi tuong danh muc
+					echo $this->displayUserPermission;					
+				?>				
+			</td>
+		</tr>
+	</table>	
+	<!--Hien thi nut!-->
+	<table 	width='99%'  border='0' cellspacing='0' cellpadding='0' align="center">
+		<tr><td style="height:20px;"><hr width='100%' color='#3399FF' size='1'></td></tr>				
+		<tr>
+			<td align="center" style="padding-bottom:10px">			
+				<?=$this->formButton("btn_update","Cập nhật",array("type"=>"submit","class"=>"add_large_button","onClick"=>"saveUserPermission(document.getElementsByName('chk_item_id'),document.getElementById('hdn_permission_id_list'),'');"))?>								
+				<?=$this->formsubmit('button','Quay lại',array("onClick"=>"btn_back_onclick('../index/')","class"=>"add_large_button"))?>								
+			</td>
+		</tr>	
+		
+	</table>			
+</form>
+<script type="text/javascript">
+	var obj = document.getElementsByName('chk_item_id');
+	//alert(obj.length)
+	var parent = new Array();
+	var count = 0;
+	for(i = 0; i< obj.length; i++){
+		if(!obj[i].getAttribute('parent')){
+			parent[count] = obj[i].value;
+			count++;
+		}
+	}
+	for(i = 0; i < parent.length; i++){
+		var nume 	 =0;
+		var numcheck = 0;
+		for(j = 0; j< obj.length; j++){
+			if(obj[j].getAttribute('parent') == parent[i])
+				nume++;
+			if(obj[j].getAttribute('parent') == parent[i] && obj[j].checked)
+				numcheck++;
+		}
+		if (nume == numcheck){
+			for(k = 0; k< obj.length; k++){
+				if(obj[k].value == parent[i]){
+					obj[k].checked = true;
+					break;
+				}
+			}
+		}
+	}
+	function onchildclick(obj1){
+		var parentofchil = obj1.getAttribute('parent');
+		var nume 	 = 0;
+		var numcheck = 0;
+		for(i = 0; i < obj.length; i++){
+			if(obj[i].getAttribute('parent') == parentofchil)
+				nume++
+			if(obj[i].getAttribute('parent') == parentofchil && obj[i].checked)
+				numcheck++
+		}
+		if(nume == numcheck && numcheck != 0)
+			for(i = 0; i < obj.length; i++)
+				if(obj[i].value == parentofchil){
+					obj[i].checked = true;
+					break;
+				}
+		if(nume > numcheck)
+			for(i = 0; i < obj.length; i++)
+				if(obj[i].value == parentofchil){
+					obj[i].checked = false;
+					break;
+				}
+	}
+</script>

@@ -1,0 +1,147 @@
+<form action="index" method="POST" id="frmSent">
+<div><?php
+	$urlCalendar = $this->urlCalendar;
+	$arrResul = $this->arrAsset;?>
+	<table width='100%'  border='0' cellspacing='0' cellpadding='0' class="table_title">
+		<tr>
+			<td class="large_title" style="padding-left:7px;text-align:left;">
+				<!--Cac doi tuong hidden tren form-->
+				<?php echo $this->formHidden("hdn_current_page",$this->currentPage,null); ?>
+				<?php echo $this->formHidden("cbo_nuber_record_page",$this->numRowOnPage,null); ?>
+				<?php echo $this->formHidden("hdn_object_id_list","",null); ?>
+				<?php echo $this->formHidden("hdn_filter_xml_tag_list",$this->filterXmlTagList,null); ?>
+				<?php echo $this->formHidden("hdn_filter_xml_value_list",$this->filterXmlValueList,null); ?>
+				<?php echo $this->formHidden("hdn_record_number_page",$this->numRowOnPage,null); ?>	
+				<?php echo $this->formHidden("hdn_object_id","",null); ?>
+				<?php echo $this->formHidden("hdn_asset_id","",null); ?>
+				<?php echo $this->formHidden("hdn_XmlTagValueList",$this->XmlTagValueList,null); ?>
+				<!--Bien hdn_deleted_new_file_id_list dung de luu Id cua nhung doi tuong file dinh kem se xoa-->	
+				<?php echo $this->formHidden("hdn_deleted_new_file_id_list","",null); ?>	
+				<?php echo $this->formHidden("hdn_table","",null); ?>					
+				<?php echo $this->formHidden("hdn_pk","",null); ?>	
+				<?php echo $this->formHidden("hdn_redirect","",null);?>				
+				<!--Bien hdn_deleted_exist_file_id_list dung de ...-->	
+				<?php echo $this->formHidden("hdn_deleted_exist_file_id_list","",null); ?>	
+				<!--Bien hdnStatus dung de lay trang thai van ban tu menu trai ...-->	
+				<?php echo $this->formHidden("hdnStatus","",null);?>
+				<?php echo $this->formHidden("hdn_function_modul",$this->getModulLeft,null);?>				
+				<?php echo $this->formHidden("hdn_action",$this->action,null);?>
+				DANH SÁCH CÁC TÀI SẢN ĐÃ ĐĂNG KÝ MUA	
+			</td>
+		</tr>
+	</table>
+	<div class="box container c1">
+		<div class="pad">			
+			<table cellpadding="0" cellspacing="0" width="98%" border="0">
+				<col width="15%"/><col width="85%"/>
+				<tr>
+					<td class="normal_label">&nbsp;Tìm kiếm</td>
+					<td>
+						<?=$this->formText('textsearch',$this->textsearch,array('class'=>'textbox','optional'=>'true','size'=>'92%'));?>&nbsp;
+						<input type="button" value="Tìm" class="add_large_button" onclick="actionUrl('');">
+					</td>
+				</tr>				
+			</table>
+		</div>
+	</div>
+	<table width='99%'  border='0' cellspacing='0' cellpadding='0' class="table_title">
+		<tr>
+			<td class="large_title" style="padding-left:7px;text-align:left;">
+				<?=$this->bodyTitle;?>	
+			</td>
+			<td style="text-align:right;" valign="bottom"><?php
+			if($this->modul == 'register'){?>
+				<a onclick="actionUrl('../../add/modul/<?=$this->modul?>');">Thêm</a>  
+				<a onclick="btn_update_onclick(document.getElementsByName('chk_item_id'),document.getElementById('hdn_asset_id'),'viewrecord');"> | Cập nhật thành phần</a> 
+				<a style="cursor:pointer;" onclick="btn_update_onclick(document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id'),'../../add/modul/<?=$this->modul?>');"> | Sửa | </a> 
+				<a onclick="btn_report_delete_onclick(document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id_list'),'T_FIXED_ASSETS','PK_FIXED_ASSETS','delete','../../index/modul/<?=$this->modul?>');">Xóa</a><?php
+			}else{?>
+				<a onclick="btn_update_onclick(document.getElementsByName('chk_item_id'),document.getElementById('hdn_asset_id'),'viewrecord');"> Thành phần | </a>
+				<a onclick="btn_update_onclick(document.getElementsByName('chk_item_id'),document.getElementById('hdn_asset_id'),'../../approve/modul/<?=$this->modul?>');">Duyệt</a><?php
+			}?>
+				<a onclick="btn_update_onclick(document.getElementsByName('chk_item_id'),document.getElementById('hdn_asset_id'),'../../progress/modul/<?=$this->modul?>');"> | Tiến độ</a><?php
+			if($this->modul == 'buy'){?>
+				| <a style="cursor:pointer;" onclick="btn_update_onclick(document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id'),'../../../../assets/assets/add');">Cập nhật tài sản</a><?php
+			}?>
+			</td>
+		</tr>
+	</table>
+	<div id="viewAllSentDocument">
+		<table cellpadding="0" cellspacing="0" border="0" width="98%" align="center" class="list_table2" id="table1"><?php			
+			$delimitor = $this->delimitor;//Lay ky tu phan cach giua cac phan tu
+			//Hien thi cac cot cua bang hien thi du lieu
+			$StrHeader = explode("!~~!",Efy_Library::_GenerateHeaderTable("3%" . $delimitor . "73%" . $delimitor . "12%" . $delimitor . "12%"
+											,$this->formCheckbox('all','', array('checked' => false,'onclick'=>'_checkedAll(this,document.getElementsByName(\'chk_item_id\'))')) . $delimitor . "Tên tài sản" . $delimitor . "Ngày đăng ký" . $delimitor . "Trạng thái"
+											,$delimitor));
+			echo $StrHeader[0];				
+			echo $StrHeader[1]; 		
+			//Dinh nghia URL
+			$sUrlEdit  = "../../viewrecord/modul/$this->modul";
+			$v_current_style_name = "round_row";			
+			for($index = 0; $index < sizeof($arrResul); $index++){				
+				$documentId = $arrResul[$index]['PK_FIXED_ASSETS'];
+				$strFileName 				= $arrResul[$index]['C_FILE_NAME'];
+				$sFile = Efy_Library::_getAllFileAttach(substr($strFileName,0,-5),"@!~!@","!~!",$this->baseUrl . "attach-file/");
+				if ($v_current_style_name == "odd_row"){
+					$v_current_style_name = "round_row";
+				}else{
+					$v_current_style_name = "odd_row";					
+				}?>						
+				<tr class="<?=$v_current_style_name?>">	
+					<td align="center" style="padding-left:3px;padding-right:3px;" class="normal_label">
+						<input type="checkbox" id="chk_item_id" name="chk_item_id" value="<?=$documentId?>" optional="true" onclick="selectrow(this);">
+					</td>								
+					<!--Hien thi trich yeu!-->					
+					<td onclick="set_hidden(this,document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id'),'<?=$documentId?>');" ondblclick="row_ondblclick(document.getElementById('hdn_asset_id'),'<?=$documentId?>','<?=$sUrlEdit?>')" style="padding-left:3px;padding-right:3px;" class="normal_label">
+						<?=$arrResul[$index]['C_NAME'] . " " . $sFile?>&nbsp;
+					</td>
+					<!--Hien ket qua xu ly!-->	
+					<td onclick="set_hidden(this,document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id'),'<?=$documentId?>');" align="center" ondblclick="row_ondblclick(document.getElementById('hdn_asset_id'),'<?=$documentId?>','<?=$sUrlEdit?>')" align="center" style="padding-left:3px;padding-right:3px;" class="normal_label">
+						<?=$arrResul[$index]['C_REGISTER_DATE']?>&nbsp;
+					</td>	
+					<td onclick="set_hidden(this,document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id'),'<?=$documentId?>');" ondblclick="row_ondblclick(document.getElementById('hdn_asset_id'),'<?=$documentId?>','<?=$sUrlEdit?>')" align="center" style="padding-left:3px;padding-right:3px;" class="normal_label">
+						<?=($arrResul[$index]['status_assets']=='MS_CHO_DUYET')?'Chờ duyệt': 'Đã duyệt';?>&nbsp;
+					</td>
+				</tr><?php					
+			}				
+			//Tu dien cac dong trang trong truong hop du lieu tra ve < so row _CONST_NUMBER_OF_ROW_PER_LIST	
+			if(sizeof($arrResul) < 15){		
+				echo Efy_Library::_addEmptyRow($this->iCountElement,15 -sizeof($arrResul),$v_current_style_name,4);		
+			}?>
+		</table>					
+		<table width="98%" cellpadding="0" cellspacing="0" border="0">	
+				<tr>
+					<td align="right" style="padding-right:15%;" width="44%">
+						<table width="36%"><?php
+							//Hien thi danh sach so trang
+							echo $this->generateStringNumberPage;?>
+						</table>
+					</td>
+					<td width="14%" align="right" style="font-size:13px; padding-top:3px; font:tahoma" class="normal_label"><?php
+						//Hien thi so trang
+						echo $this->generateHtmlSelectBoxPage;?>
+					</td>
+				</tr>		
+		</table>
+	</div>
+	<table width='98%'  border='0' cellspacing='0' cellpadding='0' align="center">
+		<tr>
+			<td style="padding-top: 5px; padding-bottom: 5px;" align="center" valign="middle"><?php
+			if($this->modul == 'register'){?>
+				<input id="btn_add" name="btn_add" type="button" class="add_large_button" value="Thêm" onclick="actionUrl('../../add/modul/<?=$this->modul?>');"> 
+				<input type="button" class="add_large_button" value="Cập nhật thành phần" onclick="btn_update_onclick(document.getElementsByName('chk_item_id'),document.getElementById('hdn_asset_id'),'../../viewrecord/modul/<?=$this->modul?>');">
+				<input type="button" class="add_large_button" value="Sửa" onclick="btn_update_onclick(document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id'),'../../add/modul/<?=$this->modul?>');"> 
+				<input type="button" class="add_large_button" value="Xóa" onclick="btn_report_delete_onclick(document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id_list'),'T_FIXED_ASSETS','PK_FIXED_ASSETS','delete','../../index/modul/<?=$this->modul?>');"><?php
+			}else{?>
+				<input id="btn_add" name="btn_add" type="button" class="add_large_button" value="Thành phần" onclick="btn_update_onclick(document.getElementsByName('chk_item_id'),document.getElementById('hdn_asset_id'),'viewrecord');">
+				<input id="btn_add" name="btn_add" type="button" class="add_large_button" value="Duyệt" onclick="btn_update_onclick(document.getElementsByName('chk_item_id'),document.getElementById('hdn_asset_id'),'../../approve/modul/<?=$this->modul?>');"><?php
+			}?>
+				<input id="btn_add" name="btn_add" type="button" class="add_large_button" value="Tiến độ" onclick="btn_update_onclick(document.getElementsByName('chk_item_id'),document.getElementById('hdn_asset_id'),'../../progress/modul/<?=$this->modul?>');"><?php
+			if($this->modul == 'buy'){?>
+				<input id="btn_add" name="btn_add" type="button" class="add_large_button" value="Cập nhật tài sản" onclick="btn_update_onclick(document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id'),'../../../../assets/assets/add');"><?php
+			}?>
+			</td>	
+		</tr>
+	</table>
+</div>
+</form>

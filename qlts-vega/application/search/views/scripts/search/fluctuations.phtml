@@ -1,0 +1,112 @@
+<form action="index" method="POST" id="frmAddSent" enctype="multipart/form-data">
+	<table cellpadding="0" cellspacing="0" width="100%" border="0">
+		<!--tao tac hidden!-->
+		<tr>
+			<td class="large_title" style="padding-left:7px;text-align:left;">
+				<?php echo $this->formHidden("hdn_deleted_exist_file_id_list","",null); ?>
+				<?php echo $this->formHidden("hdn_deleted_new_file_id_list","",null); ?>
+				<?php echo $this->formHidden("hdnCode","",null); ?>
+				<?php echo $this->formHidden("hdn_xml_tag_list","",null); ?>
+				<?php echo $this->formHidden("hdn_xml_value_list","",null); ?>
+				<?php echo $this->formHidden("hdn_XmlTagValueList","",null); ?>
+				<?php echo $this->formHidden("hdh_option",$this->option,null); ?>
+				<?php echo $this->formHidden("hdn_object_id",$this->hdn_object_id,null); ?>
+				<?php echo $this->formHidden("hdn_asset_id",$this->hdn_asset_id,null); ?>
+				<?php echo $this->formHidden("hdn_object_id_list","",null); ?>
+				<?php echo $this->formHidden("hdn_table","",null); ?>					
+				<?php echo $this->formHidden("hdn_pk","",null); ?>	
+				<?php echo $this->formHidden("hdn_action",$this->action,null);?>
+				<?php echo $this->formHidden("hdn_redirect","",null);?>			
+				THÔNG TIN BIẾN ĐỘNG TÀI SẢN			
+			</td>
+		</tr>
+	</table><?php
+	$urlCalendar = $this->urlCalendar; 
+	$arrAsset = $this->arrAsset;
+	$arrFluctuations = $this->arrFluctuations;?>	
+	<div class="box container c1">
+		<div class="pad">	
+			<table cellpadding="0" cellspacing="0" width="98%" border="0">
+				<col width="20%"/><col width="80%"/>
+				<tr>
+					<td class="normal_label"><b>Người đứng tên tài sản</b></td>
+					<td class="normal_label"><b><?=$arrAsset[0]['C_REGISTER_USERNAME']?></b>&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="normal_label">Mã</td>
+					<td class="normal_label"><?=$arrAsset[0]['C_CODE']?>&nbsp;</td>
+				</tr>	
+				<tr>
+					<td class="normal_label">Tên</td>
+					<td class="normal_label"><?=$arrAsset[0]['C_NAME']?>&nbsp;</td>
+				</tr>	
+				<tr>
+					<td class="normal_label">Ngày bắt đầu sử dụng</td>
+					<td class="normal_label"><?=$arrAsset[0]['C_BEGIN_DATE']?>&nbsp;</td>
+				</tr>	
+				<tr>
+					<td class="normal_label">Ngày hết khấu hao</td>
+					<td class="normal_label"><?=$arrAsset[0]['C_DEPRECIATION_DATE']?>&nbsp;</td>
+				</tr>	
+				<tr>
+					<td class="normal_label">Tình trạng</td>
+					<td class="normal_label">
+						<?=Efy_Library ::_getNameByCode($this->arrStatus,$arrAsset[0]['C_STATUS'],'C_NAME')?>&nbsp;	
+					</td>
+				</tr>					
+			</table>
+		</div>
+	</div>
+	<table cellpadding="0" cellspacing="0" border="0" width="98%" align="center" class="list_table2"><?php			
+		$delimitor = $this->delimitor;//Lay ky tu phan cach giua cac phan tu
+		//Hien thi cac cot cua bang hien thi du lieu
+		$StrHeader = explode("!~~!",Efy_Library::_GenerateHeaderTable("15%" . $delimitor . "20%" . $delimitor . "45%" . $delimitor . "10%" . $delimitor . "10%"
+										,"Ngày thực hiện" . $delimitor . "Công việc" . $delimitor . "Nội dung công việc" . $delimitor . "Giá trị" . $delimitor . "Tình trạng"
+										,$delimitor));
+		echo $StrHeader[0];				
+		echo $StrHeader[1]; 		
+		//Dinh nghia URL
+		$sUrlEdit  = "viewrecord";
+		$v_current_style_name = "round_row";			
+		for($index = 0; $index < sizeof($arrFluctuations); $index++){				
+			$documentId = $arrFluctuations[$index]['PK_VARIABLE_ASSETS'];
+			$strFileName 				= $arrFluctuations[$index]['C_FILE_NAME'];
+			$sFile = Efy_Library::_getAllFileAttach($strFileName,"@!~!@","!~!",$this->baseUrl . "attach-file/");
+			if ($v_current_style_name == "odd_row"){
+				$v_current_style_name = "round_row";
+			}else{
+				$v_current_style_name = "odd_row";					
+			}?>						
+			<tr class="<?=$v_current_style_name?>">				
+				<td align="center" ondblclick="row_ondblclick(document.getElementById('hdn_asset_id'),'<?=$documentId?>','<?=$sUrlEdit?>')" style="padding-left:3px;padding-right:3px;" class="normal_label">
+					<?=$arrFluctuations[$index]['DATE']?>&nbsp;
+				</td>								
+				<!--Hien thi trich yeu!-->					
+				<td ondblclick="row_ondblclick(document.getElementById('hdn_asset_id'),'<?=$documentId?>','<?=$sUrlEdit?>')" style="padding-left:3px;padding-right:3px;" class="normal_label">
+					<?=Efy_Library ::_getNameByCode($this->arrWorks,$arrFluctuations[$index]['C_WORK'],'C_NAME')?>&nbsp;
+				</td>
+				<!--Hien ket qua xu ly!-->	
+				<td align="left" ondblclick="row_ondblclick(document.getElementById('hdn_asset_id'),'<?=$documentId?>','<?=$sUrlEdit?>')" align="left" style="padding-left:3px;padding-right:3px;" class="normal_label">
+					<?=$arrFluctuations[$index]['C_CONTENT'] . " " . $sFile?>&nbsp;
+				</td>	
+				<td align="center" ondblclick="row_ondblclick(document.getElementById('hdn_asset_id'),'<?=$documentId?>','<?=$sUrlEdit?>')" align="left" style="padding-left:3px;padding-right:3px;" class="normal_label">
+					<?=$arrFluctuations[$index]['C_VALUE']?>&nbsp;
+				</td>
+				<td ondblclick="row_ondblclick(document.getElementById('hdn_asset_id'),'<?=$documentId?>','<?=$sUrlEdit?>')" align="left" style="padding-left:3px;padding-right:3px;" class="normal_label">
+					<?=Efy_Library ::_getNameByCode($this->arrStatus,$arrFluctuations[$index]['C_STATUS'],'C_NAME')?>&nbsp;
+				</td>
+			</tr><?php							
+		}
+		if(sizeof($arrFluctuations) < 15){		
+			echo Efy_Library::_addEmptyRow($this->iCountElement,15 -sizeof($arrFluctuations),$v_current_style_name,5);		
+		}?>
+	</table>	
+	<table 	width='99%'  border='0' cellspacing='0' cellpadding='0' align="center" class="table_title">
+		<tr>
+			<td align="center" style="padding-bottom:10px;">	
+				<?=$this->formsubmit('button','Quay lại',array("onClick"=>"actionUrl('index');","class"=>"add_large_button"))?>
+			</td>
+		</tr>			
+	</table>
+	</div>
+</form>

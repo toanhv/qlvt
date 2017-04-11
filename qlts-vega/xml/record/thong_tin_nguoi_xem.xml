@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<!--Khai báo các thông số chung-->
+	<common_para_list>
+		<common_para>
+			<list_form_title>GIẤY MỜI BỘ XD</list_form_title>
+			<update_form_title>GIẤY MỜI</update_form_title>
+			<first_col_width>0%</first_col_width>
+			<number_of_object_per_page>15</number_of_object_per_page>
+			<js_file_name></js_file_name>
+			<js_function></js_function>
+		</common_para>
+	</common_para_list>
+	
+	<list_of_object>
+		
+	</list_of_object>	
+	<!--Phan mo ta cau truc Form cap nhat doi tuong-->
+	<update_object>
+		<object_sql>
+			Exec Doc_InvitationGetSingle '#invitation_id#' 	<!--Cau lenh lay thong tin ve van ban den (khi hieu chinh)-->
+		</object_sql>
+		<table_struct_of_update_form> 
+			<!--Phan khai bao cac dong cua Form cap nhat doi tuong-->
+			<update_row_list>			
+				<update_row>
+					<have_line_before>false</have_line_before>
+					<tag_list>nguoi_ky</tag_list>
+					<row_id>nguoi_ky_id</row_id>
+				</update_row>						
+				
+			</update_row_list>
+		</table_struct_of_update_form>
+		
+		<!--Phan mo ta chi tiet cac formfield cua Form cap nhat van ban mau-->
+		<update_formfield_list>							
+			<nguoi_ky>
+				<type>treeuser</type>
+				<optional>true</optional>
+				<width>100%</width>
+				<max_length>100</max_length>
+				<message></message>
+				<note></note>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>false</xml_data>
+				<column_name>C_STAFF_ID_LIST</column_name>
+				<xml_tag_in_db>nguoi_ky</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</nguoi_ky>				
+	</update_formfield_list>
+		<!--Phan mo ta cau lenh SQL thuc hien cap nhat doi tuong-->
+		<update_sql>
+			
+		</update_sql>
+	</update_object>	
+</root>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<common_para_list>
+		<common_para>
+			<form_title>TIẾP NHẬN HỒ SƠ MỚI</form_title>
+			<first_col_width>25%</first_col_width>
+			<js_file_name>js_functions_01.js</js_file_name>
+			<js_function>set_input()</js_function>
+		</common_para>
+	</common_para_list>
+	<list_of_object>
+		<list_body> 
+			<col>
+			<label>#</label>
+			<type>checkbox</type>
+			<width>5%</width>
+			<align>left</align>
+			<xml_data>false</xml_data>
+			<column_name>PK_RECORD</column_name>
+			<xml_tag_in_db></xml_tag_in_db>
+		</col>
+		<col>
+			<label>Mã hồ sơ</label>
+			<type>text</type>
+			<width>15%</width>
+			<align>center</align>
+			<xml_data>false</xml_data>
+			<column_name>C_CODE</column_name>
+			<xml_tag_in_db></xml_tag_in_db>
+		</col>
+		<col>
+			<label>Họ và tên</label>
+			<type>text</type>
+			<width>22%</width>
+			<align>left</align>
+			<xml_data>true</xml_data>
+			<column_name></column_name>
+			<xml_tag_in_db>registor_name</xml_tag_in_db>
+		</col>
+		<col>
+			<label>Địa điểm thửa đất</label>
+			<type>text</type>
+			<width>23%</width>
+			<align>left</align>
+			<xml_data>true</xml_data>
+			<column_name></column_name>
+			<xml_tag_in_db>registor_address</xml_tag_in_db>
+		</col>
+		<col>
+			<label>Hình thức</label>
+			<type>text</type>
+			<width>20%</width>
+			<align>left</align>
+			<xml_data>true</xml_data>
+			<column_name>form_type</column_name>
+			<xml_tag_in_db></xml_tag_in_db>
+		</col>
+		<col>
+			<label>Ngày trả kết quả</label>
+			<type>text</type>
+			<width>15%</width>
+			<align>center</align>
+			<xml_data>false</xml_data>
+			<column_name>C_APPOINTED_DATE</column_name>
+			<xml_tag_in_db></xml_tag_in_db>
+		</col>
+		</list_body>
+	</list_of_object>
+</root>

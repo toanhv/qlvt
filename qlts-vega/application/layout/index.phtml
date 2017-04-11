@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><!--
+<META http-equiv=Page-Exit content=progid:DXImageTransform.Microsoft.Fade(duration=.5)>!-->
+<title>PHAN MEM QUAN LY TAI SAN VEGA CORPORATION</title>
+<link rel="stylesheet" type="text/css" href="<?= $this->baseUrl?>efy-style/style.css">
+<!--link rel="stylesheet" type="text/css" href="<?= $this->baseUrl?>efy-style/style.calendar.css"-->
+<!--Dinh nghia hang so dung chung cho JS!-->
+<?=$this->JSPublicConst;?>
+<!--script src="<?= $this->baseUrl?>efy-js/jquere-calendar.js" type="text/javascript"></script-->
+<script src="<?= $this->baseUrl?>efy-js/util.js" type="text/javascript"></script><?php
+	echo $this->LoadAllFileJsCss;?>
+<!--Ket thuc load -->
+
+<!--Doan process-->
+<SCRIPT type=text/javascript>
+var t_id = setInterval(animate,1);
+var pos=0;
+var dir=2;
+var len=0;
+function animate(){
+	var elem = document.getElementById('progress');
+	if(elem != null) {
+	if (pos==0) len += dir;
+	if (len>32 || pos>79) pos += dir;
+	if (pos>79) len -= dir;
+	if (pos>79 && len==0) pos=0;
+	elem.style.left = pos;
+	elem.style.width = len;
+}
+}
+function remove_loading() {
+this.clearInterval(t_id);
+var targelem = document.getElementById('loader_container');
+targelem.style.display='none';
+targelem.style.visibility='hidden';
+
+}
+</SCRIPT>
+
+<STYLE type=text/css>
+	#interface1 {Z-INDEX: 1}
+	#loader_container {WIDTH: 100%; POSITION: absolute; TOP: 40%; left:0%; TEXT-ALIGN: center}
+	#loader {BORDER-RIGHT: #6a6a6a 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: #6a6a6a 1px solid; DISPLAY: block; PADDING-LEFT: 0px; FONT-SIZE: 11px; Z-INDEX: 2; PADDING-BOTTOM: 16px; MARGIN: 0px auto; BORDER-LEFT: #6a6a6a 1px solid; WIDTH: 130px; COLOR: #000000; PADDING-TOP: 10px; BORDER-BOTTOM: #6a6a6a 1px solid; FONT-FAMILY: Tahoma, Helvetica, sans; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: left}
+	#progress {FONT-SIZE: 1px; LEFT: 0px; WIDTH: 1px; POSITION: relative; TOP: 1px; HEIGHT: 5px; BACKGROUND-COLOR: #7B79C7}
+	#loader_bg {FONT-SIZE: 1px; LEFT: 8px; WIDTH: 113px; POSITION: relative; TOP: 8px; HEIGHT: 7px; BACKGROUND-COLOR: #ebebe4}
+</STYLE>
+<DIV id=loader_container>
+<DIV id=loader>
+<DIV align=center id=contentload>&#272;ang x&#7917; l&#253; d&#7919; li&#7879;u...<br>
+	&#7844;n <b><font color="#FF0000">F5</font></b> N&#7871;u x&#7917; l&#253; qu&#225; l&#226;u
+
+</DIV>
+<DIV id=loader_bg>
+<DIV id=progress></DIV></DIV></DIV></DIV>
+<DIV id=interface1 style="DISPLAY: inline; VISIBILITY: visible">
+<DIV style="LEFT: 1px; VISIBILITY: hidden; POSITION: absolute; TOP: 1px"></DIV>
+<DIV style="DISPLAY: none; LEFT: 0px; POSITION: absolute; TOP: 0px">
+</DIV>
+<!--ket thuc-->
+</head>
+<body topmargin="0" leftmargin="0" marginheight="0" marginwidth="0" rightmargin="0" width="100%" bgcolor="#EBEBC4"><?php 
+	if ($this->showModelDialog != 1) {?>	
+		<div class="Banner" style="text-align:center;padding-top:15px;font-size:22px;">QUẢN LÝ TÀI SẢN VEGA CORPORATION</div><?php 
+	}?>
+	<div id="all">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0"  height="100%" align="center">
+        <tr>
+			<td valign="top">
+				<table width="100%" cellpadding="0" cellspacing="0"  align="center" id="header">
+					  <tr><?
+							if ($this->hideDisplayMenuHeader != ""){?>
+		    					<td colspan="10" width="20%" valign="top" bgcolor="#fff8e3" style="display:none">
+									<?=$this->layout()->header;?>								
+								</td><?
+		    				}else{?>
+		    					<td  colspan="10" width="5%" valign="top">
+									<?=$this->layout()->header;?>
+
+								</td><?
+		    				}?>				    				
+					  </tr>
+					  <tr>
+					    <td width="100%" valign="top" >
+					    	<table  width="100%" cellpadding="0" cellspacing="0" class="body1" border="0">
+					    		<tr><?
+				    				$statusLeftMenu = "block";
+				    				if ($this->hideDisplayMeneLeft == ""){
+				    					$statusLeftMenu = "none";
+				    				}?>
+			    					<td width="5%" valign="top" bgcolor="#fff8e3" style="display:<?=$statusLeftMenu;?>;" id="Iddiv_leftmenu">
+										<?=$this->layout()->left;?>
+									</td><?php 
+									if ($this->showModelDialog != 1) {?>	
+				    					<td valign="middle" class="anmenu"><img id="pictureShowHileMenu" src="<?=$this->ShowHideimageUrlPath;?>" onclick="showHideMenuLeft('showHideMenu');" title="Ẩn hoặc hiện menu"></td><?php 
+									}?>
+				    				<td  width="100%" style="background:#fff;" valign="top">
+					    				<?=$this->layout()->content;?>
+					    			</td>
+					    		</tr>						    		
+					    	</table>		    	
+						</td>
+					  </tr>
+					  <tr><?
+						if ($this->hideDisplayMenuFooter != ""){?>
+	    					<td colspan="10" width="20%" valign="top" bgcolor="#fff8e3" style="display:none">
+								<?=$this->layout()->footer;?>
+							</td><?
+	    				}else{?>
+	    					<td  colspan="10" width="5%" valign="top">
+								<?=$this->layout()->footer;?>
+							</td><?
+	    				}?>
+				      </tr>					
+				</table>
+
+			</td>
+		</tr>
+	</table>
+    </div>
+	<SCRIPT type="text/javascript"> 
+		remove_loading();
+	</SCRIPT>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<?php
+$arrPermission = $_SESSION['arrStaffPermission'];
+//var_dump($arrPermission);
+$arrConst =	Efy_Init_Config::_setProjectPublicConst();?>
+<table width="100%" cellpadding="0" cellspacing="0" class="top_menu_table">
+	<tr>
+		<td>
+	    	<ul><?php
+				if($arrPermission['QUYEN_QUAN_LY_TAI_SAN']){
+					$urlRe = $this->baseUrl . "../assets/assets/index"; ?>
+					<li id ="header_assets" align="left" style="cursor:pointer;" onclick="href('<?=$urlRe;?>')"><?=$arrConst['_QLTS']?></li><?php 
+				}	
+				$urlRe = $this->baseUrl . "../shopping/shopping/index/modul/register"; ?>
+				<li id="header_shopping" align="left" style="cursor:pointer;" onclick="href('<?=$urlRe;?>')">MUA SẮM TÀI SẢN</li><?php
+				$urlRe = $this->baseUrl . "../register/register/index/status/register"; ?>
+				<li id="header_register" align="left" style="cursor:pointer;" onclick="href('<?=$urlRe;?>')">MƯỢN TRẢ TÀI SẢN</li><?php
+				$urlRe = $this->baseUrl . "../search/search/index"; ?>
+				<li id="header_search" align="left" style="cursor:pointer;" onclick="href('<?=$urlRe;?>')"><?=$arrConst['_TRA_CUU']?></li><?php
+				if($arrPermission['QUYEN_QUAN_LY_TAI_SAN']){	
+					$urlRe = $this->baseUrl . "../report/report/index"; ?>
+					<li id="header_report" align="left" style="cursor:pointer;" onclick="href('<?=$urlRe;?>')"><?=$arrConst['_BAO_CAO']?></li><?php 
+				}
+				if($arrPermission['QUYEN_QUAN_LY_DANH_MUC']){			
+					$urlRe = $this->baseUrl . "../listxml/list/index";?>	
+					<li  id ="header_list" align="left" style="cursor:pointer;" onclick="href('<?=$urlRe;?>')"><?=$arrConst['_DANH_MUC']?></li><?
+				}?>	
+				<li  id ="header_home" align="left" style="cursor:pointer;" onclick="href('http://vega.com.vn')">TRANG CHỦ</a></li><?php
+				$urlRe = $this->baseUrl . "../logout"; ?>
+				<li id="header_logout" align="left" style="cursor:pointer;" onclick="href('<?=$urlRe;?>')">THOÁT</li>	
+	        </ul>	
+		</td>
+	</tr>
+</table>
+<script type="text/javascript">
+function otab(child_id){
+	document.write('<table class = "pushdown_menu_table"' + 'id="' + child_id +'" border="0" cellspacing="0" cellpadding="0">');
+}
+function submn(submn_label,submn_text){
+	document.write('<tr><td  onclick="window.location.href=\'<?=$this->baseUrl;?>'+submn_label+'/\'" onmouseover="this.className=\'hoverClass\'" onmouseout="this.className=\'outverClass\'" ><img src="<?= $this->baseUrl?>images/anh_menu_level_2.gif"/>'+'  '+submn_text+'</td></tr>');
+}//
+function ctab(){
+	document.write('</table>');
+}<?php 
+	$sCurrentModulCode = $this->currentModulCode;
+	if ($sCurrentModulCode == "shopping"){ ?>
+		document.getElementById('header_shopping').className="visited";<?php
+	}
+	if ($sCurrentModulCode == "ASSETS"){ ?>
+		document.getElementById('header_assets').className="visited";<?php
+	}
+	if ($sCurrentModulCode == "register"){ ?>
+		document.getElementById('header_register').className="visited";<?php
+	}
+	if ($sCurrentModulCode == "SEARCH"){ ?>
+		document.getElementById('header_search').className="visited";<?php
+	}
+	if ($sCurrentModulCode == "REPORT"){ ?>
+		document.getElementById('header_report').className="visited";<?php
+	}
+	if ($sCurrentModulCode == "LIST"){ ?>
+		document.getElementById('header_list').className="visited";<?php
+	}?>
+	function href(url){
+		window.location.href = url;
+	} 
+</script>

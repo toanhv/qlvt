@@ -1,0 +1,251 @@
+<?php
+	$arrConst	=	Efy_Init_Config::_setProjectPublicConst();
+	//Mang quyen cua NSD hien thoi
+	$arrPermission = $_SESSION['arrStaffPermission'];?>	
+<div id="Iddiv_leftmenu">
+
+	<div id ="assets-left" style="display:none;">
+		<table width="100%" cellpadding="0"  cellspacing="0" border="0" class="body3">		
+			<tr>
+				<td valign="top">
+					<table width="98%" cellpadding="0"  cellspacing="0" align="center"  class="left_menu_table">				
+						<tr>  
+							<td id ="left_assets" class="level1" >					
+								<a href="<?=$this->baseUrl;?>../assets/assets/index">Quản lý tài sản</a>
+							</td>
+						</tr>
+						<tr>  
+							<td id ="left_assets_warehouse" class="level1" >						
+								<a href="<?=$this->baseUrl;?>../register/register/index/status/register">Kho tài sản</a>
+							</td>
+						</tr>	
+					</table>
+				</td>						
+			</tr>
+		</table>	
+	</div>	
+
+	<div id ="shopping-left" style="display:none;">
+		<table width="100%" cellpadding="0"  cellspacing="0" border="0" class="body3">		
+			<tr>
+				<td valign="top">
+					<table width="98%" cellpadding="0"  cellspacing="0" align="center"  class="left_menu_table">				
+						<tr>  
+							<td id ="left_shopping_register" class="level1" >						
+								<a href="<?=$this->baseUrl;?>../shopping/shopping/index/modul/register">Tài sản đã đăng ký</a>
+							</td>
+						</tr>
+						<tr>  
+							<td id ="left_shopping_approved" class="level1" >						
+								<a href="<?=$this->baseUrl;?>../shopping/shopping/index/modul/approved">Tài sản đã duyệt</a>
+							</td>
+						</tr>
+						<tr>  
+							<td id ="left_shopping_wait" class="level1" >						
+								<a href="<?=$this->baseUrl;?>../shopping/shopping/index/modul/wait">Tài sản chờ duyệt</a>
+							</td>
+						</tr>
+						<tr>  
+							<td id ="left_shopping_refused" class="level1" >						
+								<a href="<?=$this->baseUrl;?>../shopping/shopping/index/modul/refused">Từ chối duyệt</a>
+							</td>
+						</tr><?php
+						$arr_all_staff = $_SESSION['arr_all_staff'];
+						for($i =0; $i < sizeof($arr_all_staff); $i ++){
+							if($arr_all_staff[$i]['position_code'] == 'QTTS' && $arr_all_staff[$i]['id'] == $_SESSION['staff_id']){?>
+								<tr>  
+									<td id ="left_shopping_buy" class="level1" >						
+										<a href="<?=$this->baseUrl;?>../shopping/shopping/index/modul/buy">Tài sản chờ mua</a>
+									</td>
+								</tr><?php
+							}
+						}?>
+					</table>
+				</td>						
+			</tr>
+		</table>	
+	</div>
+	<div id ="register-left" style="display:none;">
+		<table width="100%" cellpadding="0"  cellspacing="0" border="0" class="body3">		
+			<tr>
+				<td valign="top">
+					<table width="98%" cellpadding="0"  cellspacing="0" align="center"  class="left_menu_table">				
+						<tr>  
+							<td id ="left_register_assets" class="level1" >						
+								<a href="<?=$this->baseUrl;?>../register/register/index/status/register">Đăng ký mượn tài sản</a>
+							</td>
+						</tr>
+						<tr>  
+							<td id ="left_register_wait" class="level1" >						
+								<a href="<?=$this->baseUrl;?>../register/register/index/status/wait">Đăng ký chờ duyệt</a>
+							</td>
+						</tr>
+						<tr>  
+							<td id ="left_register_approved" class="level1" >						
+								<a href="<?=$this->baseUrl;?>../register/register/index/status/approved">Đăng ký đã duyệt</a>
+							</td>
+						</tr>
+						<tr>  
+							<td id ="left_register_refused" class="level1" >						
+								<a href="<?=$this->baseUrl;?>../register/register/index/status/refused">Đăng ký bị từ chối</a>
+							</td>
+						</tr>		
+					</table>
+				</td>						
+			</tr>
+		</table>	
+	</div>	
+	<!--Menu trai cua menu danh muc-->		
+	<div id ="left_list" style="display:none"> 
+		<table width="100%" cellpadding="0"  cellspacing="0" class="body3">	
+			<tr >
+				<td valign="top">
+					<table width="98%" cellpadding="0"  cellspacing="0" align="center"  class="left_menu_table"><?php					
+						if($arrPermission['QUYEN_CAP_NHAT_LOAI_DM']) { ?>
+							<tr>  
+								<td id ="left_list_listtype" class="level1" >
+									<a href="<?=$this->baseUrl;?>../listxml/listtype/"><?=$arrConst['_DM_LOAI']?></a>
+								</td>
+							</tr><? 
+						} 
+						if($arrPermission['QUYEN_CAP_NHAT_LOAI_DM']) {?>
+							<tr>  
+								<td id ="left_list_list" class="level1">
+									<a href="<?=$this->baseUrl;?>../listxml/list/" ><?=$arrConst['_DM_DOITUONG']?></a>
+								</td>
+							</tr><? 
+						}
+						//!----------------------------------------------Danh muc quyen!---------------------------------------------->
+						if($arrPermission['QUYEN_CAP_NHAT_LOAI_DM'])
+							{?>	
+							<tr>
+								<td id ="left_list_permission" class="level1">		
+									<a href="<?=$this->baseUrl;?>../permission/user/index/"><?=$arrConst['_DM_QUYEN']?></a>																	
+								</td>							
+							</tr> 
+							<? } ?>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+	<!-- thong tin nguoi dang nhap -->
+	<div><?=$_SESSION['INFORMATION_STAFF_LOGIN'];?></div>
+</div>	
+
+
+<!--Xu ly JS!-->
+<script type="text/javascript">
+ function showHideMenu(p_id){	 	
+	var objfrm = document.getElementsByTagName('div');
+	for(i=0; i<objfrm.length; i++){
+		e = objfrm[i].getAttribute('id');
+		if (objfrm[i].getAttribute('value') == "true"){
+	 		if(e == p_id){		
+	 			var pStyle	= eval("document.getElementById('" + p_id + "').style.display");	 			
+	 			if (pStyle == "none"){
+	 				eval("document.getElementById('" + p_id + "').style.display = '" + "block'"); 
+	 			}else{
+	 				eval("document.getElementById('" + p_id + "').style.display = '" + "none'"); 
+	 			}				 						 			
+	 		}
+ 		}	
+ 	}
+ }												
+try{<?php
+	// Hien thi menu trai tuong ung voi menu ngang
+	$sCurrentModulCode = $this->currentModulCode;	
+	$getModulLeft = $this->getStatusLeftMenu;
+	$scurrentModulCodeForLeft = $this->currentModulCodeForLeft;	
+	try {
+		if ($sCurrentModulCode == "shopping"){?>
+			document.getElementById('shopping-left').style.display = 'block';
+			<?if($scurrentModulCodeForLeft == "left_shopping_register"){?>
+	 			document.getElementById('left_shopping_register').className = "level1_visited";
+			<?}if($scurrentModulCodeForLeft == "left_shopping_approved"){?>
+				document.getElementById('left_shopping_approved').className = "level1_visited";
+			<?}if($scurrentModulCodeForLeft == "left_shopping_wait"){?>
+				document.getElementById('left_shopping_wait').className = "level1_visited";
+			<?}if($scurrentModulCodeForLeft == "left_shopping_buy"){?>
+				document.getElementById('left_shopping_buy').className = "level1_visited";
+			<?}if($scurrentModulCodeForLeft == "left_shopping_refused"){?>			
+				document.getElementById('left_shopping_refused').className = "level1_visited";			
+			<?}
+		}
+	}catch (Exception $ex){;};
+		try {
+		if ($sCurrentModulCode == "register"){?>
+			document.getElementById('register-left').style.display = 'block';
+			<?if($scurrentModulCodeForLeft == "left_register_assets"){?>
+	 			document.getElementById('left_register_assets').className = "level1_visited";
+			<?}if($scurrentModulCodeForLeft == "left_register_approved"){?>
+				document.getElementById('left_register_approved').className = "level1_visited";
+			<?}if($scurrentModulCodeForLeft == "left_register_wait"){?>
+				document.getElementById('left_register_wait').className = "level1_visited";
+			<?}if($scurrentModulCodeForLeft == "left_register_refused"){?>			
+				document.getElementById('left_register_refused').className = "level1_visited";			
+			<?}
+		}
+	}catch (Exception $ex){;};	
+	try {
+		if ($sCurrentModulCode == "LIST"){?>
+			document.getElementById('left_list').style.display = 'block';
+			<?if($scurrentModulCodeForLeft == "RECORDTYPE"){?>
+	 			document.getElementById('left_list_recordtype').className = "level1_visited";
+			<?}if($scurrentModulCodeForLeft == "LISTTYPE"){ ?>
+				document.getElementById('left_list_listtype').className = "level1_visited";
+			<?}if($scurrentModulCodeForLeft == "LIST"){ ?>			
+				document.getElementById('left_list_list').className = "level1_visited";
+			<?}if($scurrentModulCodeForLeft == "PERMISSION"){ ?>			
+				document.getElementById('left_list_permission').className = "level1_visited";
+			<?}if($scurrentModulCodeForLeft == "BACKUP"){ ?>			
+				document.getElementById('left_list_backup').className = "level1_visited";
+			<?}
+		}
+	}catch (Exception $ex){;};		
+	//TN&TKQ
+	try {
+		if ($sCurrentModulCode == "ASSETS"){?>
+			document.getElementById('assets-left').style.display = 'block';
+			<?if($scurrentModulCodeForLeft == "left_assets"){?>
+	 			document.getElementById('left_assets').className = "level1_visited";
+			<?}if($scurrentModulCodeForLeft == "left_assets_warehouse"){?>
+				document.getElementById('left_assets_warehouse').className = "level1_visited";
+			<?}
+		}
+	}catch (Exception $ex){;};	
+	?>
+}catch(e){;}
+// PHIM TAT
+shortcut.add("Enter",function() {
+	if(document.activeElement.name == 'FullTextSearchLeft'){
+		checkvalue1();
+	}else{
+		var scriptFileName = '<?=$_SERVER['REQUEST_URI']?>';
+		if(scriptFileName.search('index') >= 0){
+			checkvalue();
+		}else
+			shortcut.remove("Enter");
+	}
+});
+function addEnter(){
+	shortcut.add("Enter",function() {
+		if(document.activeElement.name == 'FullTextSearchLeft'){
+			checkvalue1();
+		}else{
+			var scriptFileName = '<?=$_SERVER['REQUEST_URI']?>';
+			if(scriptFileName.search('index') >= 0)
+				checkvalue();
+			else
+				shortcut.remove("Enter");
+		}
+	});
+}
+function checkvalue1(){
+	if(document.getElementById('FullTextSearchLeft').value != ''){
+		var p_Url = '<?=$this->baseUrl?>' + '../fulltextsearch/fulltextsearch/index/?FullTextSearch=' + document.getElementById('FullTextSearchLeft').value;
+		actionUrl(p_Url);
+	}
+}
+</script>

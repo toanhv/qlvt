@@ -1,0 +1,91 @@
+@import url("layout/3d.css");
+
+
+/* Top and Sub menus */
+.zpMenu a,
+.zpMenu .zpMenu-label {
+    font-family: Arial, Heltvetica, Verdana, sans-serif;
+	color:  black;
+	font-weight: normal;
+    font-size: 11px;
+
+}
+
+.zpMenuContainer .zpMenu-item {
+  background: url("zebra_red/bg2.gif");
+    height:20px
+}
+
+
+/* Top and Sub menus */
+.zpMenu .zpMenu-item-selected .zpMenu-label,
+.zpMenu .zpMenu-item-selected a {
+	color:  white;
+/*    text-decoration: underline;  */
+}
+
+
+/* Vertical border, 1st level */
+.zpMenu-vertical-mode .zpMenu-level-1 {
+  background: url("zebra_red/bg2.gif");
+}
+
+.zpMenuContainer .zpMenuContainer .zpMenuContainer{
+    margin-top: 0px;
+    margin-left:1px;
+}
+
+/* Sub menu */
+.zpMenuContainer .zpMenuContainer .zpMenu-item {
+	margin-top:0px;
+	padding-top: 0px;
+	border: 1px solid rgb(104,104,104);
+/*	border-bottom: 1px solid rgb(104,104,104);
+	border-right: 1px solid rgb(104,104,104);    */
+	padding:0px;
+	color: #00008B;
+	color:  black;
+    width: 12.5em;
+}
+
+/* Top and Sub, Selected */
+.zpMenuContainer .zpMenu-item-selected,
+.zpMenuContainer .zpMenuContainer .zpMenu-item-selected {
+	
+}
+
+/* Sub, HR */
+.zpMenuContainer .zpMenuContainer .zpMenu-item-hr {
+	background: #ffaaaa;
+	border-top:1px solid #ffaaaa;
+    height:2px
+}
+
+/* Odd item */
+.zpMenuContainer .zpMenuContainer .zpMenu-item-odd {
+  background: url("zebra_red/bg1_gray.gif") repeat-x 100%;
+}
+
+/* Even item */
+.zpMenuContainer .zpMenuContainer .zpMenu-item-even {
+  background: url("zebra_red/bg2.gif") repeat-x 100%;
+}
+
+
+.zpMenuContainer .zpMenuContainer {
+    margin-top: 1px;
+    width: 12.5em;
+}
+
+.zpMenu-vertical-mode .zpMenuContainer {
+    margin-top: 0px;
+}
+
+
+.zpMenuContainer .zpMenuContainer .zpMenu-item-collapsed .zpMenu-label{
+	background: url("zebra_red/arrow1.gif")  transparent no-repeat right center;
+}
+
+.zpMenuContainer .zpMenuContainer .zpMenu-item-expanded .zpMenu-label{
+	background: url("zebra_red/arrow2.gif")  transparent no-repeat right center;
+}

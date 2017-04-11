@@ -1,0 +1,183 @@
+<form action="index" method="POST" id="frmSent">
+<div><?php
+	$urlCalendar = $this->urlCalendar;
+	$arrResul = $this->arrAsset;?>
+	<table width='100%'  border='0' cellspacing='0' cellpadding='0' class="table_title">
+		<tr>
+			<td class="large_title" style="padding-left:7px;text-align:left;">
+				<!--Cac doi tuong hidden tren form-->
+				<?php echo $this->formHidden("hdn_current_page",$this->currentPage,null); ?>
+				<?php echo $this->formHidden("cbo_nuber_record_page",$this->numRowOnPage,null); ?>
+				<?php echo $this->formHidden("hdn_object_id_list","",null); ?>
+				<?php echo $this->formHidden("hdn_filter_xml_tag_list",$this->filterXmlTagList,null); ?>
+				<?php echo $this->formHidden("hdn_filter_xml_value_list",$this->filterXmlValueList,null); ?>
+				<?php echo $this->formHidden("hdn_record_number_page",$this->numRowOnPage,null); ?>	
+				<?php echo $this->formHidden("hdn_object_id",$this->hdn_object_id,null); ?>
+				<?php echo $this->formHidden("hdn_asset_id","",null); ?>
+				<?php echo $this->formHidden("hdn_XmlTagValueList",$this->XmlTagValueList,null); ?>
+				<!--Bien hdn_deleted_new_file_id_list dung de luu Id cua nhung doi tuong file dinh kem se xoa-->	
+				<?php echo $this->formHidden("hdn_deleted_new_file_id_list","",null); ?>	
+				<?php echo $this->formHidden("hdn_table","",null); ?>					
+				<?php echo $this->formHidden("hdn_pk","",null); ?>	
+				<?php echo $this->formHidden("hdn_redirect","",null);?>				
+				<!--Bien hdn_deleted_exist_file_id_list dung de ...-->	
+				<?php echo $this->formHidden("hdn_deleted_exist_file_id_list","",null); ?>	
+				<!--Bien hdnStatus dung de lay trang thai van ban tu menu trai ...-->	
+				<?php echo $this->formHidden("hdnStatus","",null);?>
+				<?php echo $this->formHidden("hdn_function_modul",$this->getModulLeft,null);?>
+				
+				<?php echo $this->formHidden("hdn_action",$this->action,null);?>
+				<!--Cac doi tuong hidden tren form-->
+				THÔNG TIN TÀI SẢN		
+			</td>
+		</tr>
+	</table>
+	<div class="box container c1">
+		<div class="pad">			
+			<table cellpadding="0" cellspacing="0" width="98%" border="0">
+				<col width="10%"/><col width="35%"/><col width="15%"/><col width="35%"/>
+				<tr>
+					<td class="normal_label">&nbsp;Phòng ban</td>
+					<td>
+						<select id="arr_all_unit" name="arr_all_unit" optional = "true" style="width:96%;" class="textbox normal_label" onchange="actionUrl('');">
+							<option id="" name = "" value="">-- chọn phòng ban --</option><?php						
+							$arrDepartment = $_SESSION['arr_all_unit'];						
+							echo Efy_Library::_generateSelectOption($arrDepartment,'id','id','name',$this->arr_all_unit);?>
+						</select>
+					</td>
+					<td class="normal_label">&nbsp;Người sử dụng</td>
+					<td>
+						<select id="arr_all_staff" name="arr_all_staff" optional = "true" style="width:96%;" class="textbox normal_label" onchange="actionUrl('');">
+							<option id="" name = "" value="">-- chọn người sử dụng --</option><?php						
+							$arr_all_staff = $_SESSION['arr_all_staff'];
+							$arrStaff = array();
+							$k = 0;
+							for($i =0; $i < sizeof($arr_all_staff); $i ++){
+								if($this->arr_all_unit != ""){
+									if($arr_all_staff[$i]['unit_id'] == $this->arr_all_unit){
+										$arrStaff[$k]['id'] = $arr_all_staff[$i]['id'];
+										$arrStaff[$k]['name'] = $arr_all_staff[$i]['position_code'] . ' - ' . $arr_all_staff[$i]['name'];
+										$k ++;
+									}
+								}else{
+									$arrStaff[$k]['id'] = $arr_all_staff[$i]['id'];
+									$arrStaff[$k]['name'] = $arr_all_staff[$i]['position_code'] . ' - ' . $arr_all_staff[$i]['name'];
+									$k ++;
+								}
+							}
+							echo Efy_Library::_generateSelectOption($arrStaff,'id','id','name',$this->arr_all_staff);?>
+						</select>
+					</td>
+				</tr>	
+				<tr>
+					<td class="normal_label">&nbsp;Nhóm tài sản</td>
+					<td>
+						<select id="C_GROUP" name="C_GROUP" optional = "true" style="width:96%;" class="textbox normal_label" onchange="actionUrl('');">
+							<option id="" name = "" value="">-- chọn nhóm tài sản --</option><?php						
+							$arrGroup = $this->arrGroup;		
+							echo Efy_Library::_generateSelectOption($arrGroup,'C_CODE','C_CODE','C_NAME',$this->C_GROUP);?>
+						</select>
+					</td>
+					<td class="normal_label">&nbsp;Loại tài sản</td>
+					<td>
+						<select id="C_TYPE" name="C_TYPE" optional = "true" style="width:96%;" class="textbox normal_label" onchange="actionUrl('');">
+							<option id="" name = "" value="">-- chọn loại tài sản --</option><?php					
+							$arrType = $this->arrType;
+							echo Efy_Library::_generateSelectOption($arrType,'C_CODE','C_CODE','C_NAME',$this->C_TYPE);?>
+						</select>
+					</td>
+				</tr>	
+				<tr>
+					<td class="normal_label">&nbsp;Tìm kiếm</td>
+					<td colspan="4">
+						<?=$this->formText('textsearch',$this->textsearch,array('class'=>'textbox','optional'=>'true','size'=>'98%','onblue'=>'_search(event)'));?>&nbsp;
+						<input type="button" value="Tìm" class="add_large_button" onclick="actionUrl('');">
+					</td>					
+				</tr>				
+			</table>
+		</div>
+	</div>
+	<table width='99%'  border='0' cellspacing='0' cellpadding='0' class="table_title">
+		<tr>
+			<td class="large_title" style="padding-left:7px;text-align:left;">
+				<?=$this->bodyTitle;?>	
+			</td>
+			<td style="text-align:right;" valign="bottom">
+				<a style="cursor:pointer;" onclick="btn_update_onclick(document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id'),'fluctuations');">Thông tin biến động</a> 
+			</td>
+		</tr>
+	</table>
+	<div id="viewAllSentDocument">
+		<table cellpadding="0" cellspacing="0" border="0" width="98%" align="center" class="list_table2" id="table1"><?php			
+			$delimitor = $this->delimitor;//Lay ky tu phan cach giua cac phan tu
+			//Hien thi cac cot cua bang hien thi du lieu
+			$StrHeader = explode("!~~!",Efy_Library::_GenerateHeaderTable("3%" . $delimitor . "10%" . $delimitor . "30%" . $delimitor . "8%" . $delimitor . "20%" . $delimitor . "17%" . $delimitor . "12%"
+											,"#" . $delimitor . "Mã" . $delimitor . "Tên tài sản" . $delimitor . "SL" . $delimitor . "Ngày bắt đầu sử dụng" . $delimitor . "Ngày hết khấu hao" . $delimitor . "Tình trạng"
+											,$delimitor));
+			echo $StrHeader[0];				
+			echo $StrHeader[1]; 		
+			//Dinh nghia URL
+			$sUrlEdit  = "view";
+			$v_current_style_name = "round_row";			
+			for($index = 0; $index < sizeof($arrResul); $index++){				
+				$documentId = $arrResul[$index]['FK_ASSETS'];
+				$strFileName 				= $arrResul[$index]['C_FILE_NAME'];
+				$sFile = Efy_Library::_getAllFileAttach(substr($strFileName,0,-5),"@!~!@","!~!",$this->baseUrl . "attach-file/");
+				if ($v_current_style_name == "odd_row"){
+					$v_current_style_name = "round_row";
+				}else{
+					$v_current_style_name = "odd_row";					
+				}?>						
+				<tr class="<?=$v_current_style_name?>">	
+					<td align="center" style="padding-left:3px;padding-right:3px;" class="normal_label">
+						<input type="checkbox" id="chk_item_id" name="chk_item_id" value="<?=$documentId?>" optional="true" onclick="selectrow(this);">
+					</td>
+					<td align="center" onclick="set_hidden(this,document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id'),'<?=$documentId?>');" ondblclick="row_ondblclick(document.getElementById('hdn_asset_id'),'<?=$documentId?>','<?=$sUrlEdit?>')" style="padding-left:3px;padding-right:3px;" class="normal_label">
+						<?=$arrResul[$index]['C_CODE']?>&nbsp;
+					</td>								
+					<!--Hien thi trich yeu!-->					
+					<td onclick="set_hidden(this,document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id'),'<?=$documentId?>');" ondblclick="row_ondblclick(document.getElementById('hdn_asset_id'),'<?=$documentId?>','<?=$sUrlEdit?>')" style="padding-left:3px;padding-right:3px;" class="normal_label">
+						<?=$arrResul[$index]['C_NAME'] . " " . $sFile?>&nbsp;
+					</td>
+					<td align="center" onclick="set_hidden(this,document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id'),'<?=$documentId?>');" ondblclick="row_ondblclick(document.getElementById('hdn_asset_id'),'<?=$documentId?>','<?=$sUrlEdit?>')" style="padding-left:3px;padding-right:3px;" class="normal_label">
+						<?=$arrResul[$index]['C_NUMBER']?>&nbsp;
+					</td>	
+					<!--Hien ket qua xu ly!-->	
+					<td onclick="set_hidden(this,document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id'),'<?=$documentId?>');" align="center" ondblclick="row_ondblclick(document.getElementById('hdn_asset_id'),'<?=$documentId?>','<?=$sUrlEdit?>')" align="left" style="padding-left:3px;padding-right:3px;" class="normal_label"><?=$arrResul[$index]['C_BEGIN_DATE']?>&nbsp;</td>	
+					<td onclick="set_hidden(this,document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id'),'<?=$documentId?>');" align="center" ondblclick="row_ondblclick(document.getElementById('hdn_asset_id'),'<?=$documentId?>','<?=$sUrlEdit?>')" align="left" style="padding-left:3px;padding-right:3px;" class="normal_label">
+						<?=$arrResul[$index]['C_DEPRECIATION_DATE']?>&nbsp;
+					</td>
+					<td onclick="set_hidden(this,document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id'),'<?=$documentId?>');" ondblclick="row_ondblclick(document.getElementById('hdn_asset_id'),'<?=$documentId?>','<?=$sUrlEdit?>')" align="left" style="padding-left:3px;padding-right:3px;" class="normal_label">
+						<?=Efy_Library ::_getNameByCode($this->arrStatus,$arrResul[$index]['C_STATUS'],'C_NAME')?>&nbsp;
+					</td>
+				</tr><?php					
+			}				
+			//Tu dien cac dong trang trong truong hop du lieu tra ve < so row _CONST_NUMBER_OF_ROW_PER_LIST	
+			if(sizeof($arrResul) < 15){		
+				echo Efy_Library::_addEmptyRow($this->iCountElement,15 -sizeof($arrResul),$v_current_style_name,7);		
+			}?>
+		</table>					
+		<table width="98%" cellpadding="0" cellspacing="0" border="0">				
+				<tr>
+					<td align="right" style="padding-right:15%;" width="44%">
+						<table width="36%"><?php
+							//Hien thi danh sach so trang
+							echo $this->generateStringNumberPage;?>
+						</table>
+					</td>
+					<td width="14%" align="right" style="font-size:13px; padding-top:3px; font:tahoma" class="normal_label"><?php
+						//Hien thi so trang
+						echo $this->generateHtmlSelectBoxPage;?>
+					</td>
+				</tr>		
+		</table>
+	</div>
+	<table width='98%'  border='0' cellspacing='0' cellpadding='0' align="center">
+		<tr>
+			<td style="padding-top: 5px; padding-bottom: 5px;" align="center" valign="middle">			
+				<input type="button" class="add_large_button" value="Thông tin biến động" onclick="btn_update_onclick(document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id'),'fluctuations');">
+			</td>	
+		</tr>
+	</table>
+</div>
+</form>

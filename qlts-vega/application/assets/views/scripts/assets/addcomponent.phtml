@@ -1,0 +1,178 @@
+<form action="index" method="POST" id="frmAddSent" enctype="multipart/form-data">
+	<table cellpadding="0" cellspacing="0" width="100%" border="0">
+		<!--tao tac hidden!-->
+		<tr>
+			<td class="large_title" style="padding-left:7px;text-align:left;">
+				<?php echo $this->formHidden("hdn_deleted_exist_file_id_list","",null); ?>
+				<?php echo $this->formHidden("hdn_deleted_new_file_id_list","",null); ?>
+				<?php echo $this->formHidden("hdnCode","",null); ?>
+				<?php echo $this->formHidden("hdn_xml_tag_list","",null); ?>
+				<?php echo $this->formHidden("hdn_xml_value_list","",null); ?>
+				<?php echo $this->formHidden("hdn_XmlTagValueList","",null); ?>
+				<?php echo $this->formHidden("hdh_option",$this->option,null); ?>
+				<?php echo $this->formHidden("hdn_object_id",$this->hdn_object_id,null); ?>
+				<?php echo $this->formHidden("hdn_asset_id",$this->hdn_asset_id,null); ?>
+				<!--Bien hdn_deleted_new_file_id_list dung de luu Id cua nhung doi tuong file dinh kem se xoa-->	
+				<?php echo $this->formHidden("hdn_deleted_new_file_id_list","",null); ?>	
+				<!--Bien hdn_deleted_exist_file_id_list dung de ...-->	
+				<?php echo $this->formHidden("hdn_deleted_exist_file_id_list","",null); ?>	
+				<?php echo $this->formHidden("hdnListId","",null); ?>	
+				<?php echo $this->formHidden("number",'',null); ?>
+				<?php echo $this->formHidden("hdnNhomChinh","",null);?>	
+				CẬP NHẬT THÀNH PHẦN CHO TÀI SẢN			
+			</td>
+		</tr>
+	</table><?php
+	$urlCalendar = $this->urlCalendar; 
+	$arrResul = $this->arrResul;
+	$arrAsset = $this->arrAsset;?>	
+	<div class="box container c1">
+		<div class="pad">	
+			<table cellpadding="0" cellspacing="0" width="98%" border="0">
+				<col width="20%"/><col width="80%"/>
+				<tr>
+					<td class="normal_label">Mã</td>
+					<td class="normal_label"><?=$arrAsset[0]['C_CODE']?></td>
+				</tr>	
+				<tr>
+					<td class="normal_label">Tên</td>
+					<td class="normal_label"><?=$arrAsset[0]['C_NAME']?></td>
+				</tr>	
+				<tr>
+					<td class="normal_label">Ngày bắt đầu sử dụng</td>
+					<td class="normal_label"><?=$arrAsset[0]['C_BEGIN_DATE']?></td>
+				</tr>	
+				<tr>
+					<td class="normal_label">Ngày hết khấu hao</td>
+					<td class="normal_label"><?=$arrAsset[0]['C_DEPRECIATION_DATE']?></td>
+				</tr>	
+				<tr>
+					<td class="normal_label">Tình trạng</td>
+					<td class="normal_label">
+						<?=Efy_Library ::_getNameByCode($this->arrStatus,$arrAsset[0]['C_STATUS'],'C_NAME')?>&nbsp;	
+					</td>
+				</tr>					
+			</table>
+		</div>
+	</div>
+	<table width='99%'  border='0' cellspacing='0' cellpadding='0' align="center" class="normal_label">
+		<col width="20%"><col width="80%">
+		<tr width="100%">
+			<td><br/>
+				<label>Loại tài sản:
+			</td>
+			<td>
+				<div id="divLeaderID">
+					<select id="C_TYPE" name="C_TYPE" optional = "true" style="width:50%;" class="textbox normal_label">
+						<option id="" name = "" value="">-- chọn loại tài sản --</option><?php						
+						$arrType = $this->arrType;						
+						echo Efy_Library::_generateSelectOption($arrType,'C_CODE','C_CODE','C_NAME',$arrResul[0]['C_TYPE']);?>
+					</select>	
+				</div>
+			</td>
+		</tr>
+		<tr width="100%">
+			<td>
+				<label>Nhóm tài sản:
+			</td>
+			<td>
+				<select id="C_GROUP" name="C_GROUP" optional = "true" style="width:50%;" class="textbox normal_label">
+					<option id="" name = "" value="">-- chọn nhóm tài sản --</option><?php
+					$arrGroup = $this->arrGroup;
+					echo Efy_Library::_generateSelectOption($arrGroup,'C_CODE','C_CODE','C_NAME',$arrResul[0]['C_GROUP']);?>
+				</select>	
+			</td>
+		</tr>
+		<tr width="100%">
+			<td>
+				<label>Mã tài sản:<font color="Red" size="2px;">*</font> </label>
+			</td>
+			<td>
+				<input type="text" id="C_CODE" name="C_CODE" value="<?=$arrResul[0]['C_CODE']?>" class="normal_label" option = "true" style="width:50%" message="Ma tai san khong duoc de trong!">
+			</td>
+		</tr>
+		<tr width="100%">
+			<td>
+				<label>Tên tài sản:<font color="Red" size="2px;">*</font> </label>
+			</td>
+			<td>
+				<input type="text" id="C_NAME" name="C_NAME" value="<?=$arrResul[0]['C_NAME']?>" class="normal_label" option = "true" style="width:50%" message="Ten tai san khong duoc de trong!">
+			</td>
+		</tr>
+		<tr width="100%">
+			<td>
+				<label>Thông tin về tài sản: </label>
+			</td>
+			<td>
+				<textarea class="textbox normal_textarea" id="C_INFO" style="width:99%;" optional = "true" rows="2" name="C_INFO"><?=$arrResul[0]['C_INFO']?></textarea>
+			</td>
+		</tr>
+		<tr width="100%">
+			<td>
+				<label>Giá trị tài sản:
+			</td>
+			<td>
+				<input type="text" id="C_VALUE" name="C_VALUE" value="<?=$arrResul[0]['C_VALUE']?>" class="normal_label" optional = "true" style="width:50%">
+			</td>
+		</tr>
+		<tr width="100%">
+			<td>
+				<label>Tình trạng tài sản:
+			</td>
+			<td>
+				<select id="C_STATUS" name="C_STATUS" optional = "true" style="width:50%;" class="textbox normal_label">
+					<option id="" name = "" value="">-- chọn tình trạng tài sản --</option><?php
+					$arrStatus = $this->arrStatus;
+					echo Efy_Library::_generateSelectOption($arrStatus,'C_CODE','C_CODE','C_NAME',$arrResul[0]['C_STATUS']);?>
+				</select>
+			</td>
+		</tr>
+		<tr width="100%">
+			<td>
+				<label>Số lượng:
+			</td>
+			<td>
+				<input type="text" id="C_NUMBER" name="C_NUMBER" value="<?=$arrResul[0]['C_NUMBER']?>" class="normal_label" optional = "true" style="width:50%">
+			</td>
+		</tr>
+		<tr width="100%">
+			<td>
+				<label>Ngày bắt đầu sử dụng:<font color="Red" size="2px;">*</font> </label>
+			</td>
+			<td>
+				<input class="textbox" style="width:10%" id ="C_BEGIN_DATE" name="C_BEGIN_DATE" value="<?=$arrResul[0]['C_BEGIN_DATE']?>" onchange="getNowYear(this);" onblur = 'this.value=DatePrompt(this)' type="text" isdate="true" option = "true"  message="<?php echo "Ngay khong dung dinh dang ngay/thang/nam!";?>" onKeyDown="change_focus(document.forms[0],this)">
+				<img src="<?= $this->baseUrl?>images/calendar.gif" border="0" onclick="DoCal('<?=$urlCalendar;?>',document.getElementById('C_BEGIN_DATE'));" style="cursor:pointer">	 						
+				<label style="padding-left:60px;">Ngày hết khấu hao</label>
+				<input class="textbox" style="width:10%" id ="C_DEPRECIATION_DATE" name="C_DEPRECIATION_DATE" value="<?=$arrResul[0]['C_DEPRECIATION_DATE']?>" onchange="getNowYear(this);" onblur = 'this.value=DatePrompt(this)' type="text" isdate="true" optional = "true"  message="<?php echo "Ngay khong dung dinh dang ngay/thang/nam!";?>" onKeyDown="change_focus(document.forms[0],this)">
+				<img src="<?= $this->baseUrl?>images/calendar.gif" border="0" onclick="DoCal('<?= $urlCalendar;?>',document.getElementById('C_DEPRECIATION_DATE'));" style="cursor:pointer">
+			</td>
+		</tr>
+		<tr width="100%">
+			<td>
+				<label>Ghi chú: </label>
+			</td>
+			<td>
+				<textarea class="textbox normal_textarea" id="ghi_chu" style="width:99%;" optional = "true" rows="2" name="ghi_chu" xml_tag_in_db="ghi_chu" xml_data="true"><?=$arrResul[0]['GHI_CHU']?></textarea>
+			</td>
+		</tr>
+		<tr style="width:100%">
+			<td>
+				<label>Hình ảnh/File đính kèm: </label>
+			</td>
+			<td>
+				<?php echo $this->AttachFile;?>
+			</td>
+		</tr>
+	</table>
+	<!--Hien thi nut!-->			
+	<table 	width='99%'  border='0' cellspacing='0' cellpadding='0' align="center" class="table_title">	
+		<tr>
+			<td align="center" style="padding-bottom:10px;">			
+				<button name="btn_ghivathemmoi" id="btn_ghivathemmoi" type="button" class="add_large_button" onClick="btn_save_asset(document.getElementById('hdn_xml_tag_list'),document.getElementById('hdn_xml_value_list'),'addcomponent');">Cập nhật</button>
+				<?=$this->formsubmit('button','Quay lại',array("onClick"=>"actionUrl('viewrecord');","class"=>"add_large_button"))?>
+			</td>
+		</tr>			
+	</table>
+	<div id="getSysbolforNowYear" style="display:none;"></div>
+</form>
+<?=$this->search_textselectbox_received_place; ?>

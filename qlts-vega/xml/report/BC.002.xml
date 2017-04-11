@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<common_para_list>
+		<common_para>
+			<report_filter_title>Kết xuất báo tổng hợp văn bản do bộ ban hành</report_filter_title>
+			<first_col_width>20%</first_col_width>
+			<js_file_name></js_file_name>
+			<php_function></php_function>
+			<js_function></js_function>
+		</common_para>
+	</common_para_list>
+	<table_struct_of_filter_form>   <!--xac dinh cau truc table cua form chua cac tieu thuc loc du lieu-->
+		<filter_row_list> <!--Phan Danh sach tieu thuc loc du lieu-->
+			<filter_row>
+				<have_line_before></have_line_before>
+				<tag_list>from_date,to_date</tag_list>
+				<row_id></row_id>
+			</filter_row>
+		</filter_row_list>
+	</table_struct_of_filter_form>
+	
+	<filter_formfield_list>  <!-- phan mo ta cac dong cua  form chua cac tieu thuc loc du lieu-->
+		<from_date>
+			<label>Từ ngày </label>
+			<type>textbox</type>
+			<data_format>isdate</data_format>
+			<width>25%</width>
+			<optional>false</optional>
+			<max></max>
+			<min></min>
+			<max_length></max_length>
+			<message>TU NGAY khong duoc de trong</message>
+			<note></note>
+			<js_function_list></js_function_list>
+			<js_action_list></js_action_list>
+			<xml_data>true</xml_data>
+			<xml_tag_in_db>from_date</xml_tag_in_db>
+			<colume_name></colume_name>
+			<compare_operator></compare_operator> 
+			<readonly_in_edit_mode>false</readonly_in_edit_mode>
+			<disabled_in_edit_mode>false</disabled_in_edit_mode>
+		</from_date>
+		<to_date>
+			<label>Đến ngày </label>
+			<type>textbox</type>
+			<data_format>isdate</data_format>
+			<width>25%</width>
+			<optional>false</optional>
+			<max></max>
+			<min></min>
+			<max_length></max_length>
+			<message>DEN NGAY khong duoc de trong</message>
+			<note></note>
+			<js_function_list></js_function_list>
+			<js_action_list></js_action_list>
+			<xml_data>true</xml_data>
+			<xml_tag_in_db>to_date</xml_tag_in_db>
+			<colume_name></colume_name>
+			<compare_operator></compare_operator>
+			<readonly_in_edit_mode>false</readonly_in_edit_mode>
+			<disabled_in_edit_mode>false</disabled_in_edit_mode>
+		</to_date>
+	</filter_formfield_list>
+
+	<report_sql> <!-- phan mo ta cau lenh SQL ket xuat du lieu cho bao cao -->
+		<sql>
+			Exec Doc_SentDocumentGetAllReportNameDoc '#from_date#','#to_date#'
+		</sql>
+		<xml_data></xml_data> <!--Cot Du lieu duoc nhom co phai nam trong the xml hay khong?-->
+		<group_by>C_DOC_TYPE</group_by>  <!--The nay xac dinh du lieu da duoc nhom theo cot nao-->
+		<group_name>LOAI_VAN_BAN</group_name> <!--Cot chua ten cua nhom khi tinh toan nhom du lieu-->
+		<calculate_group></calculate_group> 
+		<calculate_total></calculate_total> <!--Nhan gia tri true neu muon tinh tong cuoi cung cua bao cao-->
+	</report_sql>
+	
+	<report_header> <!--Phan dau cua bao cao-->
+		<report_unit_father></report_unit_father>
+		<report_unit_child></report_unit_child>
+		<report_date></report_date>
+		<large_title>BÁO CÁO TỔNG HỢP VĂN BẢN ĐI DO BỘ BAN HÀNH </large_title>
+		<small_title></small_title>
+		<table_header_file></table_header_file> <!--Dinh nghia file hien thi tieu de bao cao-->
+	</report_header>
+	<report_body> <!-- Phan than cua bao cao-->
+		<col_list>
+			<col>
+				<label>Stt</label>
+				<type>identity</type>
+				<width>3%</width>
+				<align>center</align>
+				<calculate></calculate>
+				<compare_value></compare_value>
+				<xml_data>false</xml_data>
+				<column_name></column_name>
+				<xml_tag_in_db_list></xml_tag_in_db_list>
+				<recordtype_code_list></recordtype_code_list>
+			</col>
+			
+			<col>
+				<label>Tên Đơn Vị</label>
+				<type>text</type>
+				<width>10%</width>
+				<align>center</align>
+				<calculate></calculate>   <!--Co the khai bao cach tinh count(dem so pt) sum(Tinh tong cac phan tu)-->
+				<compare_value></compare_value> <!--Gia tri so sanh ma cac phan tu can dem phai thoa man-->
+				<xml_data>false</xml_data>
+				<column_name>C_NAME_DV</column_name>
+				<xml_tag_in_db_list></xml_tag_in_db_list>
+				<recordtype_code_list></recordtype_code_list>
+				<selectbox_option_sql></selectbox_option_sql>
+			</col>
+			
+			<col>
+				<label>Lãnh Đạo Bộ Ký</label>
+				<type>text</type>
+				<width>10%</width>
+				<align>left</align>
+				<calculate></calculate>   <!--Co the khai bao cach tinh count(dem so pt) sum(Tinh tong cac phan tu)-->
+				<compare_value></compare_value> <!--Gia tri so sanh ma cac phan tu can dem phai thoa man-->
+				<xml_data>false</xml_data>
+				<column_name>C_LDB</column_name>
+				<xml_tag_in_db_list></xml_tag_in_db_list>
+			</col>
+			<col>
+				<label>Lãnh Đạo Đơn Vị Ký</label>
+				<type>text</type>
+				<width>10%</width>
+				<align>left</align>
+				<calculate></calculate>   <!--Co the khai bao cach tinh count(dem so pt) sum(Tinh tong cac phan tu)-->
+				<compare_value></compare_value> <!--Gia tri so sanh ma cac phan tu can dem phai thoa man-->
+				<xml_data>false</xml_data>
+				<column_name>C_LDDV</column_name>
+				<xml_tag_in_db_list></xml_tag_in_db_list>
+			</col>
+			<col>
+				<label>Tổng Số Văn Bản</label>
+				<type>text</type>
+				<width>10%</width>
+				<align>left</align>
+				<calculate></calculate>   <!--Co the khai bao cach tinh count(dem so pt) sum(Tinh tong cac phan tu)-->
+				<compare_value></compare_value> <!--Gia tri so sanh ma cac phan tu can dem phai thoa man-->
+				<xml_data>false</xml_data>
+				<column_name>C_TOTAL_VB</column_name>
+				<xml_tag_in_db_list></xml_tag_in_db_list>
+			</col>		
+		</col_list>
+	</report_body>
+	<report_footer> <!--Ket thuc bao cao-->
+		<report_creator></report_creator>
+		<report_approver></report_approver>
+		<report_signer></report_signer>
+	</report_footer>
+
+</root>

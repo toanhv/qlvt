@@ -1,0 +1,48 @@
+<form action="index" method="POST" id="frmAddReceived" enctype="multipart/form-data">
+<table cellpadding="0" cellspacing="0" width="100%" border="0">
+		<!--tao tac hidden!-->
+		<tr>			
+			<!--Bien hdn_xml_tag_list dung de luu danh sach cac THE XML tuong ung voi cac THUOC TINH cua mot doi tuong dang duoc cap nhat-->			
+			<?php echo $this->formHidden("hdn_xml_tag_list",'',null); ?>			
+			<!--Bien hdn_xml_value_list dung de luu danh sach cac gia tri cua cac THE XML tuong ung voi cac THUOC TINH cua mot doi tuong-->			
+			<?php echo $this->formHidden("hdn_xml_value_list",'',null); ?>			
+			<!--Hidden luu gia tri cua list tag va list value (TagList|{*^*}|ValueList) -->
+			<?php echo $this->formHidden("hdn_XmlTagValueList",$this->XmlTagValueList,null); ?>
+				
+		</tr>
+	</table>
+<body OnUnload="window.returnValue = document.getElementById('infor_invite').value;">
+<INPUT id="infor_invite" type="hidden" name="infor_invite" value="">
+<INPUT id="kinh_moi" type="hidden" name="kinh_moi" value="">
+	<!--HIen thi tieu de man hinh danh sach!-->	
+	<div STYLE='overflow: auto; height: 400px;padding-left:0px;margin:0px; width:100%;'>
+	<table width='99%'  border='0' cellspacing='0' cellpadding='0' class="table_title">
+		<tr>
+			<td class="large_title" style="padding-left:7px;text-align:left;">
+				<?=$this->bodyTitle;?>
+			</td>
+		</tr>
+	</table>
+	<div><!--<hr width='99%' color='#3399FF' size='1'>--></div>
+	<table width='99%'  border='0' cellspacing='0' cellpadding='0' align='center' class='normal_label'>
+		<tr width="100%">
+			<td style="padding-left:5px;padding-right:5px;"><?php
+				//Hien thi form mo ta thong tin NOI NHAN giay moi
+				echo $this->generateFormHtml;?>				
+			</td>
+		</tr>
+	</table>
+	</div>	
+	<!--Hien thi nut!-->		
+	<table width='99%'  border='0' cellspacing='0' cellpadding='0' align='center' class='normal_label'>
+		<tr><td style="height:20px;"><!--<hr width='100%' color='#3399FF' size='1'>--></td></tr>		
+		<tr>
+			<td align="center" style="padding-bottom:10px;">						
+				<?=$this->formButton("btn_update","Chọn",array("type"=>"button","class"=>"add_large_button","onClick"=>"btn_sent_invitation_unit_list('staff');"))?>								
+				<input type="button" value="Đóng" onClick="window.close();" class="add_large_button">
+			</td>
+		</tr>			
+	</table>
+</body>			
+</form>
+

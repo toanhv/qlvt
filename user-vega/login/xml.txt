@@ -1,0 +1,1 @@
+18-06-2007 18:53:49:<?xml version="1.0" encoding="UTF-8"?><enduser_group_list><enduser_group><id></id><name></name><username></username><password></password><app_code></app_code></enduser_group></enduser_group_list>

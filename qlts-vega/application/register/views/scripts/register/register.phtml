@@ -1,0 +1,147 @@
+<form action="index" method="POST" id="frmAddSent" enctype="multipart/form-data">
+	<table cellpadding="0" cellspacing="0" width="100%" border="0">
+		<!--tao tac hidden!-->
+		<tr>
+			<td class="large_title" style="padding-left:7px;text-align:left;">
+				<?php echo $this->formHidden("hdn_deleted_exist_file_id_list","",null); ?>
+				<?php echo $this->formHidden("hdn_deleted_new_file_id_list","",null); ?>
+				<?php echo $this->formHidden("hdnCode","",null); ?>
+				<?php echo $this->formHidden("hdn_xml_tag_list","",null); ?>
+				<?php echo $this->formHidden("hdn_xml_value_list","",null); ?>
+				<?php echo $this->formHidden("hdn_XmlTagValueList","",null); ?>
+				<?php echo $this->formHidden("hdh_option",$this->option,null); ?>
+				<?php echo $this->formHidden("hdn_object_id",$this->hdn_object_id,null); ?>
+				<?php echo $this->formHidden("hdn_asset_id",$this->hdn_asset_id,null); ?>
+				<?php echo $this->formHidden("hdn_object_id_list","",null); ?>
+				<?php echo $this->formHidden("hdn_table","",null); ?>					
+				<?php echo $this->formHidden("hdn_pk","",null); ?>	
+				<?php echo $this->formHidden("hdn_action",$this->action,null);?>
+				<?php echo $this->formHidden("hdn_redirect","",null);?>			
+				CẬP NHẬT THÔNG TIN ĐĂNG KÝ MƯỢN TÀI SẢN			
+			</td>
+		</tr>
+	</table><?php
+	$sStaffPositionName = $this->sStaffPositionName;
+	$sUnitName = $this->sUnitName;
+	$urlCalendar = $this->urlCalendar; 
+	$arrAsset = $this->arrAsset;?>	
+	<div class="box container c1">
+		<div class="pad">	
+			<table cellpadding="0" cellspacing="0" width="98%" border="0">
+				<col width="20%"/><col width="80%"/>
+				<tr>
+					<td class="normal_label"><b>Người đứng tên tài sản</b></td>
+					<td class="normal_label"><b><?=$arrAsset[0]['C_REGISTER_USERNAME']?></b>&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="normal_label">Mã</td>
+					<td class="normal_label"><?=$arrAsset[0]['C_CODE']?>&nbsp;</td>
+				</tr>	
+				<tr>
+					<td class="normal_label">Tên</td>
+					<td class="normal_label"><?=$arrAsset[0]['C_NAME']?>&nbsp;</td>
+				</tr>	
+				<tr>
+					<td class="normal_label">Ngày bắt đầu sử dụng</td>
+					<td class="normal_label"><?=$arrAsset[0]['C_BEGIN_DATE']?>&nbsp;</td>
+				</tr>	
+				<tr>
+					<td class="normal_label">Ngày hết khấu hao</td>
+					<td class="normal_label"><?=$arrAsset[0]['C_DEPRECIATION_DATE']?>&nbsp;</td>
+				</tr>	
+				<tr>
+					<td class="normal_label">Tình trạng</td>
+					<td class="normal_label">
+						<?=Efy_Library ::_getNameByCode($this->arrStatus,$arrAsset[0]['C_STATUS'],'C_NAME')?>&nbsp;	
+					</td>
+				</tr>					
+			</table>
+		</div>
+	</div>	
+	<table width='98%'  border='0' cellspacing='0' cellpadding='0' align="center" class="normal_label">
+		<col width="20%"><col width="80%">
+		<tr><td style="height:20px;" colspan="2"><!--<hr width='100%' color='#' size='0'>--></td></tr>
+		<tr width="100%">
+			<td>
+				Tên người mượn: 
+			</td>
+			<td>
+				<?=$sStaffPositionName;?>
+			</td>
+		</tr>
+		<tr width="100%">
+			<td>
+				Phòng ban: 
+			</td>
+			<td>
+				<?=$sUnitName;?>
+			</td>
+		</tr>
+		<tr><td style="height:10px;" colspan="2"><!--<hr width='100%' color='#' size='0'>--></td></tr>
+		<tr width="100%">
+			<td>
+				<label>Ngày mượn:
+			</td>
+			<td>
+				<input class="textbox" style="width:10%" id ="C_DATE" name="C_DATE" value="" onchange="getNowYear(this);" onblur = 'this.value=DatePrompt(this)' type="text" isdate="true" optional = "true"  message="<?php echo "Ngay khong dung dinh dang ngay/thang/nam!";?>" onKeyDown="change_focus(document.forms[0],this)">
+				<img src="<?= $this->baseUrl?>images/calendar.gif" border="0" onclick="DoCal('<?=$urlCalendar;?>',document.getElementById('C_DATE'));" style="cursor:pointer">	 						
+			</td>
+		</tr>
+		<tr width="100%">
+				<td>
+					Nội dung:
+				</td>
+				<td>
+					<textarea id="C_CONTENT" name="C_CONTENT" option="true" style="width:98%" class="normal_label" message="Ban phai cap nhat noi dung cong viec"></textarea>
+				</td>
+		</tr>
+		<tr width="100%">
+			<td>
+				Trình duyệt:
+			</td>
+			<td><?php
+				if(empty($arrAsset[0]['C_REGISTER_USERID'])){
+					$arrWorks = $this->arrWorks;
+					$arr_all_staff = $_SESSION['arr_all_staff'];
+					$count = sizeof($arr_all_staff);
+					for($i =0; $i < sizeof($arrWorks); $i ++){					
+						if($arrWorks[$i]['staff_process'] != ''){
+							$staffId = $arrWorks[$i]['staff_process'];
+							$staffName = Efy_Library ::_getItemAttrById($arr_all_staff, $staffId, 'name');
+						}else{	
+							for($j =0; $j < $count; $j ++){
+								if($arr_all_staff[$j]['unit_id'] == $this->unitId && $arr_all_staff[$j]['position_code'] == $arrWorks[$i]['position_group']){
+									$staffId = $arr_all_staff[$j]['id'];
+									$staffName = Efy_Library ::_getItemAttrById($arr_all_staff, $staffId, 'name');
+								}
+							}
+						}?>
+						<div>
+							<input onclick="document.getElementById('work_type').value = '<?=$arrWorks[$i]['C_CODE']?>';" type="radio" name="approve_id" value="<?=$staffId;?>" work_type="<?=$arrWorks[$i]['C_CODE']?>"/><?=$arrWorks[$i]['C_NAME'] . '  - ' . $staffName;?>
+						</div><?
+					}
+				}else{?>
+					<div>
+						<input onclick="document.getElementById('work_type').value ='TRIMH_CB_QLTS'"; type="radio" name="approve_id" value="<?=$arrAsset[0]['C_REGISTER_USERID'];?>" work_type="TRINH_CB_QLTS"/>Trình cán bộ QLTS - <?=$arrAsset[0]['C_REGISTER_USERNAME'];?>
+					</div><?
+				}?>		
+			</td>
+		</tr>
+	</table>
+	
+	<!--Hien thi nut!-->			
+	<table 	width='99%'  border='0' cellspacing='0' cellpadding='0' align="center" class="table_title">
+		<tr><td style="height:20px;"><!--<hr width='100%' color='#3399FF' size='1'>--></td></tr>		
+		<tr>
+			<td align="center" style="padding-bottom:10px;">			
+				<button name="btn_ghivathemmoi" id="btn_ghivathemmoi" type="button" class="add_large_button" onClick="actionUrl('register');document.getElementById('C_CONTENT').value = '';this.disabled=true;">Cập nhật</button>
+				<?=$this->formsubmit('button','Quay lại',array("onClick"=>"actionUrl('index');","class"=>"add_large_button"))?>
+			</td>
+		</tr>			
+	</table>
+</form>
+<script type="text/javascript"> 
+if(document.getElementById('C_DATE').value == ''){
+	document.getElementById('C_DATE').value = '<?=date("d/m/Y");?>';		
+}
+</script>

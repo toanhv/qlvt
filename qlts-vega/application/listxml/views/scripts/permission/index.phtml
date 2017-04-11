@@ -1,0 +1,172 @@
+<?php 
+$arrPermission = $_SESSION['arrStaffPermission'];
+if($arrPermission['CAP_NHAT_LOAI_DM'] || $arrPermission['CAP_NHAT_DM_DOI_TUONG'] || $arrPermission['CAP_NHAT_QUYEN'])
+{?>
+<script src="/efy-doc-boxd/public/efy-js/jquery-1.4.2.min.js" type="text/javascript"></script>
+<form action="index" method="POST" id="frmReceived">
+<div>
+	<table width='100%'  border='0' cellspacing='0' cellpadding='0' class="table_title">
+		<tr>
+			<td class="large_title" style="padding-left:7px;text-align:left;">
+				<!--Cac doi tuong hidden tren form-->
+				<?php echo $this->formHidden("hdn_current_page",$this->currentPage,null); ?>
+				<?php echo $this->formHidden("cbo_nuber_record_page",$this->numRowOnPage,null); ?>
+				<?php echo $this->formHidden("hdn_record_number_page",$this->numRowOnPage,null); ?>
+				<?php echo $this->formHidden("hdn_object_id_list","",null); ?>
+				<?php echo $this->formHidden("hdn_filter_xml_tag_list",$this->filterXmlTagList,null); ?>
+				<?php echo $this->formHidden("hdn_filter_xml_value_list",$this->filterXmlValueList,null); ?>
+				<?php echo $this->formHidden("hdn_object_id",$this->pReceiveDocumentId,null); ?>
+				<?php echo $this->formHidden("hdn_XmlTagValueList",$this->XmlTagValueList,null); ?>
+				<!--Bien hdn_deleted_new_file_id_list dung de luu Id cua nhung doi tuong file dinh kem se xoa-->	
+				<?php echo $this->formHidden("hdn_deleted_new_file_id_list","",null); ?>	
+				<!--Bien hdn_deleted_exist_file_id_list dung de ...-->	
+				<?php echo $this->formHidden("hdn_deleted_exist_file_id_list","",null);?>
+				<?=$this->bodyTitleSearch;?>	
+				
+			</td>
+		</tr>
+	</table>
+	<div class="box container c1">
+		<div class="pad">			
+			<table cellpadding="0" cellspacing="0" width="98%" border="0">
+				<col width="30%"/><col width="58%" align="left"/><col width="10%"/>
+				<tr>
+					<td class="normal_label">&nbsp;Tìm số, ký hiệu văn bản</td>
+					<td>
+						<input id="txtNumSymbol" name="txtNumSymbol" class="textbox c2">
+					</td>
+					<td rowspan="3" style="padding-left:10px;">
+						<input type="button" value="Tìm kiếm" class="search_large_button" size="100%" onclick="actionUrl('');">
+					</td>
+				</tr>
+				<tr>
+					<td class="normal_label">&nbsp;Tìm tóm tắt nội dung văn bản</td>
+					<td>
+						<input id="txtSubject" name="txtSubject" class="textbox c4"> 
+					</td>
+				</tr>
+				<tr>
+					<td class="normal_label">
+						&nbsp;Tìm từ ngày
+					</td>
+					<td class="normal_label">
+						<input class="textbox c3" id ="fromDate" name="fromDate" type="text" isdate="true" option = "false" message="<?php echo "NGAY THANG NAM khong dung dinh dang";?>" onKeyDown="change_focus(document.forms[0],this)">
+						<img src="<?= $this->baseUrl?>images/calendar.gif" border="0" onclick="DoCal('../../../public/efy-calendar/',document.getElementById('fromDate'));" style="cursor:pointer">
+						&nbsp;&nbsp;Đến ngày: &nbsp;&nbsp;
+						<input class="textbox c3" id ="toDate" name="toDate" type="text" isdate="true" option = "false" message="<?php echo "NGAY THANG NAM khong dung dinh dang";?>" onKeyDown="change_focus(document.forms[0],this)">
+						<img src="<?= $this->baseUrl?>images/calendar.gif" border="0" onclick="DoCal('../../../public/efy-calendar/',document.getElementById('toDate'));" style="cursor:pointer">
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<table width='98%'  border='0' cellspacing='0' cellpadding='0' class="table_title">
+		<col width="85%" align="left"/><col width="15%" align="right"/>
+		<tr>
+			<td class="large_title" style="padding-left:7px;text-align:left;">
+				<?=$this->bodyTitle;?>				
+			</td>
+			<td align="right">
+				<div style="text-align:right; width:98%;">
+					<label>
+						<a class="link" onclick="actionUrl('../add/');">Thêm |</a> 
+						<a class="link" onclick="btn_update_onclick(document.getElementById('hdn_object_id').value,'../edit/');">Sửa |</a> 
+						<a class="link" onclick="btn_delete_onclick(document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id_list'),'../delete');">Xóa</a>
+					</label>
+				</div>	
+			</td>
+		</tr>
+	</table>
+	<table cellpadding="0" cellspacing="0" border="0" width="98%" align="center" class="list_table2" id="table1">
+		<?php			
+		$delimitor = $this->delimitor;//Lay ky tu phan cach giua cac phan tu
+		//Hien thi cac cot cua bang hien thi du lieu
+		$StrHeader = explode("!~~!",$this->GenerateHeaderTable("5%" . $delimitor ."10%". $delimitor . "11%" . $delimitor . "13%" . $delimitor . "37%" . $delimitor . "25%"
+										,"#" . $delimitor . "Số đến". $delimitor . "Ngày nhận" . $delimitor . "Số/ký hiệu" . $delimitor . "Tóm tắt nội dung" . $delimitor . "Đơn vị xử lý"
+										,$delimitor));
+		echo $StrHeader[0];	
+									
+		echo $StrHeader[1]; //Hien thi <col width = 'xx'><...		
+			//Dinh nghia URL
+			$sUrlEdit  = "../edit/";
+			$v_current_style_name = "round_row";
+			$arrResul = $this->arrResul;
+			for($index = 0;$index < sizeof($arrResul);$index++){
+				//Lay file dinh kem
+				$strFileName 				= $arrResul[$index]['C_FILE_NAME'];
+				$sFile 	= Efy_Library::_getAllFileAttach($strFileName,"@!~!@","!~!",$this->baseUrl . "attach-file/");
+				//ID VB
+				$documentId 				= $arrResul[$index]['PK_RECEIVED_DOC'];				
+				// Ngay den
+				$date						= $arrResul[$index]['C_RECEIVED_DATE'] .'&nbsp;';								
+				// So, ky hieu VB
+				$numSymbol					= $arrResul[$index]['C_SYMBOL'] .'&nbsp;';	
+				// So den
+				$iNumberDocument			= $arrResul[$index]['C_NUM_DOCUMENT'] .'&nbsp;';								
+				//Trich yeu 
+				if($strFileName == '' || $strFileName == null){
+					$subject				= $arrResul[$index]['C_SUBJECT'] .'&nbsp;';
+				}else {
+					$subject				= $arrResul[$index]['C_SUBJECT'] . $sFile;
+					$sFile = "";
+				}
+				//DON VI xu ly
+				$unitName 					= $arrResul[$index]['C_PROCESS_UNIT_NAME'] .'&nbsp;';				
+				
+				if ($v_current_style_name == "odd_row"){
+					$v_current_style_name = "round_row";
+				}else{
+					$v_current_style_name = "odd_row";					
+				}?>
+				
+				<tr class="<?=$v_current_style_name?>">	
+					<td align="center" style="padding-left:3px;padding-right:3px;" class="normal_label">						
+						<?=$this->formCheckbox('chk_item_id',$arrResul[$index]['PK_RECEIVED_DOC'], array('checked' => false));?>					
+					</td>
+					<td ondblclick="item_onclick('<?=$documentId?>','<?=$sUrlEdit?>')" onclick="set_hidden(this,document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id'),'<?=$documentId?>');" align="center"  style="padding-left:3px;padding-right:3px;" class="normal_label" ><?=$iNumberDocument?></td>													
+					<td ondblclick="item_onclick('<?=$documentId?>','<?=$sUrlEdit?>')" onclick="set_hidden(this,document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id'),'<?=$documentId?>');" align="center"  style="padding-left:3px;padding-right:3px;" class="normal_label"><?=$date;?></td>
+					<td ondblclick="item_onclick('<?=$documentId?>','<?=$sUrlEdit?>')" onclick="set_hidden(this,document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id'),'<?=$documentId?>');" align="center"  style="padding-left:3px;padding-right:3px;" class="normal_label"><?=$numSymbol;?></td>
+					<td ondblclick="item_onclick('<?=$documentId?>','<?=$sUrlEdit?>')" onclick="set_hidden(this,document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id'),'<?=$documentId?>');" align="left" style="padding-left:3px;padding-right:3px;" class="normal_label"><?=$subject?></td>	
+					<td ondblclick="item_onclick('<?=$documentId?>','<?=$sUrlEdit?>')" onclick="set_hidden(this,document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id'),'<?=$documentId?>');" align="left" style="padding-left:3px;padding-right:3px;" class="normal_label"><?=$unitName?></td>	
+				</tr><?php
+			}					
+			//Tu dien cac dong trang trong truong hop du lieu tra ve < so row _CONST_NUMBER_OF_ROW_PER_LIST		
+			if(sizeof($arrResul) < 15){	
+				echo $this->addEmptyRow($this->iCountElement,15 - sizeof($arrResul),$v_current_style_name,6);		
+			}	
+		?>			
+	</table>	
+	<!--Hien thi trang can xem!-->
+	
+	<?=$this->SelectDeselectAll;?>
+		
+	<table width="100%" cellpadding="0" cellspacing="0" border="0">
+		<tr>
+			<td align="right" style="padding-right:15%;" width="44%">
+				<table width="36%"><?php
+					//Hien thi danh sach so trang
+					echo $this->generateStringNumberPage;?>
+				</table>
+			</td>
+			<td width="14%" align="right" style="font-size:13px; padding-right:0px; font:tahoma" class="normal_label"><?php
+				//Hien thi so trang
+				echo $this->generateHtmlSelectBoxPage;?>
+			</td>
+		</tr>
+	</table>
+	
+	<table width='100%'  border='0' cellspacing='0' cellpadding='0' align="center">
+		<tr>
+			<td style="padding-top: 10px; padding-bottom: 10px;" align="center" valign="middle">
+				<input id="btn_add" name="btn_add" type="button" class="add_large_button" value="Thêm" onclick="actionUrl('../add/');">
+				<input type="button" class="update_small_button" value="Sửa" onclick="btn_update_onclick(document.getElementById('hdn_object_id').value,'../edit/');">
+				<input type="button" class="delete_large_button" value="Xóa" onclick="btn_delete_onclick(document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id_list'),'../delete/');">
+			</td>	
+		</tr>
+	</table>
+</div>
+</form>
+<?php } 
+else 
+	echo 'Bạn không có quyền truy cập chức năng này';
+?>

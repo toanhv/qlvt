@@ -1,0 +1,164 @@
+<form action="index" method="POST" id="frmSent">
+<div><?php
+	$urlCalendar = $this->urlCalendar;
+	$arrAsset = $this->arrAsset;
+	$arrUser = $this->arrUser;
+	$arrStaffRegister = $this->arrStaffRegister;
+	$arrResul = $this->arrResult;?>
+	<table width='100%'  border='0' cellspacing='0' cellpadding='0' class="table_title">
+		<tr>
+			<td class="large_title" style="padding-left:7px;text-align:left;">
+				<!--Cac doi tuong hidden tren form-->
+				<?php echo $this->formHidden("hdn_current_page",$this->currentPage,null); ?>
+				<?php echo $this->formHidden("cbo_nuber_record_page",$this->numRowOnPage,null); ?>
+				<?php echo $this->formHidden("hdn_object_id_list","",null); ?>
+				<?php echo $this->formHidden("hdn_filter_xml_tag_list",$this->filterXmlTagList,null); ?>
+				<?php echo $this->formHidden("hdn_filter_xml_value_list",$this->filterXmlValueList,null); ?>
+				<?php echo $this->formHidden("hdn_record_number_page",$this->numRowOnPage,null); ?>	
+				<?php echo $this->formHidden("hdn_object_id",$this->hdn_object_id,null); ?>
+				<?php echo $this->formHidden("hdn_asset_id",$this->hdn_asset_id,null); ?>
+				<?php echo $this->formHidden("hdn_XmlTagValueList",$this->XmlTagValueList,null); ?>
+				<!--Bien hdn_deleted_new_file_id_list dung de luu Id cua nhung doi tuong file dinh kem se xoa-->	
+				<?php echo $this->formHidden("hdn_deleted_new_file_id_list","",null); ?>	
+				<?php echo $this->formHidden("hdn_table","",null); ?>					
+				<?php echo $this->formHidden("hdn_pk","",null); ?>	
+				<?php echo $this->formHidden("hdn_redirect","",null);?>	
+				<?=$this->formHidden("work_type", "", null);?>					
+				<?=$this->formHidden("hdn_xml_tag_list","",null); ?>
+				<?=$this->formHidden("hdn_xml_value_list","",null); ?>
+				<?=$this->formHidden("hdn_XmlTagValueList","",null); ?>
+				<!--Cac doi tuong hidden tren form-->
+				THÔNG TIN TÀI SẢN		
+			</td>
+		</tr>
+	</table>
+	<div class="box container c1">
+		<div class="pad">	
+			<table cellpadding="0" cellspacing="0" width="98%" border="0">
+				<col width="20%"/><col width="80%"/>
+				<tr>
+					<td class="normal_label">Tên tài sản</td>
+					<td class="normal_label"><?=$arrAsset[0]['C_NAME']?></td>
+				</tr>	
+				<tr>
+					<td class="normal_label">Ngày đăng ký</td>
+					<td class="normal_label"><?=$arrAsset[0]['C_REGISTER_DATE']?></td>
+				</tr>	
+				<tr>
+					<td class="normal_label">Mô tả</td>
+					<td class="normal_label"><?=$arrAsset[0]['C_INFO']?></td>
+				</tr>	
+				<tr>
+					<td class="normal_label">Lý do mua tài sản</td>
+					<td class="normal_label"><?=$arrAsset[0]['GHI_CHU']?></td>
+				</tr>		
+			</table>
+		</div>
+	</div><?
+	if (sizeof($arrResul) >= 1){?>
+	<div id="viewAllSentDocument">
+		<div class="tieu_de">
+			&nbsp;&nbsp;<b>THÀNH PHẦN TÀI SẢN</b>
+		</div>
+		<table cellpadding="0" cellspacing="0" border="0" width="98%" align="center" class="list_table2" id="table1"><?php			
+			$delimitor = $this->delimitor;//Lay ky tu phan cach giua cac phan tu
+			//Hien thi cac cot cua bang hien thi du lieu
+			$StrHeader = explode("!~~!",Efy_Library::_GenerateHeaderTable("10%" . $delimitor . "40%" . $delimitor . "10%"  . $delimitor . "15%" . $delimitor . "15%" . $delimitor . "10%"
+											,"Mã" . $delimitor . "Tên tài sản" . $delimitor . "Giá trị" . $delimitor . "Ngày sử dụng" . $delimitor . "Hết khấu hao" . $delimitor . "Tình trạng"
+											,$delimitor));
+			echo $StrHeader[0];				
+			echo $StrHeader[1]; 		
+			//Dinh nghia URL
+			$sUrlEdit  = "addcomponent";
+			$v_current_style_name = "round_row";			
+			for($index = 0; $index < sizeof($arrResul); $index++){				
+				$documentId = $arrResul[$index]['PK_SUB_ASSETS'];
+				$strFileName 				= $arrResul[$index]['C_FILE_NAME'];
+				$sFile = Efy_Library::_getAllFileAttach($strFileName,"@!~!@","!~!",$this->baseUrl . "attach-file/");
+				if ($v_current_style_name == "odd_row"){
+					$v_current_style_name = "round_row";
+				}else{
+					$v_current_style_name = "odd_row";					
+				}?>						
+				<tr class="<?=$v_current_style_name?>">	
+					<td align="center" style="padding-left:3px;padding-right:3px;" class="normal_label">
+						<?=$arrResul[$index]['C_CODE']?>&nbsp;
+					</td>								
+					<!--Hien thi trich yeu!-->					
+					<td style="padding-left:3px;padding-right:3px;" class="normal_label">
+						<?=$arrResul[$index]['C_NAME'] . " " . $sFile?>&nbsp;
+					</td>
+					<td style="padding-left:3px;padding-right:3px;" class="normal_label">
+						<?=$arrResul[$index]['C_VALUE']?>&nbsp;
+					</td>
+					<!--Hien ket qua xu ly!-->	
+					<td align="center" align="left" style="padding-left:3px;padding-right:3px;" class="normal_label"><?=$arrResul[$index]['C_BEGIN_DATE']?>&nbsp;</td>	
+					<td align="center" align="left" style="padding-left:3px;padding-right:3px;" class="normal_label"><?=$arrResul[$index]['C_DEPRECIATION_DATE']?>&nbsp;</td>
+					<td align="left" style="padding-left:3px;padding-right:3px;" class="normal_label">
+						<?=Efy_Library ::_getNameByCode($this->arrStatus,$arrResul[$index]['C_STATUS'],'C_NAME')?>&nbsp;
+					</td>
+				</tr><?php					
+			}
+			if(sizeof($arrResul) < 5){		
+				echo Efy_Library::_addEmptyRow($this->iCountElement,6 -sizeof($arrResul),$v_current_style_name,6);		
+			}?>
+		</table>		
+	</div><?
+	}?>
+	<div class="normal_label">
+		<div class="tieu_de">
+			&nbsp;&nbsp;<b>NỘI DUNG CÔNG VIỆC</b>
+		</div>
+		<div style="padding-left:10px;" class="normal_label">
+			<textarea id="content" name="content" rows="3" style="width:98%" option="true" message="Ban phai nhap vao noi dung cong viec!"></textarea>
+		</div>
+	</div>	
+	<table width='99%'  border='0' cellspacing='0' cellpadding='0' align="center" class="normal_label">
+		<col width="20%"><col width="80%">
+		<tr width="100%">
+			<td>
+				<label>Ngày thực hiện:<font color="Red" size="2px;">*</font> </label>
+			</td>
+			<td>
+				<input class="textbox" style="width:15%" id ="C_DATE" name="C_DATE" value="<?=date("d/m/Y")?>" onblur = "this.value=DatePrompt(this)" type="text" isdate="true" option = "true"  message="<?="Ngay khong dung dinh dang ngay/thang/nam!";?>">
+				<img src="<?= $this->baseUrl?>images/calendar.gif" border="0" onclick="DoCal('<?=$urlCalendar;?>',document.getElementById('C_DATE'));" style="cursor:pointer">
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Trình duyệt:<font color="Red" size="2px;">*</font>
+			</td>
+			<td><?php
+				$arrWorks = $this->arrWorks;
+				$arr_all_staff = $_SESSION['arr_all_staff'];
+				$count = sizeof($arr_all_staff);
+				for($i =0; $i < sizeof($arrWorks); $i ++){					
+					if($arrWorks[$i]['staff_process'] != ''){
+						$staffId = $arrWorks[$i]['staff_process'];
+						$staffName = Efy_Library ::_getItemAttrById($arr_all_staff, $staffId, 'name');
+					}else{	
+						for($j =0; $j < $count; $j ++){
+							if($arr_all_staff[$j]['unit_id'] == $this->unitId && $arr_all_staff[$j]['position_code'] == $arrWorks[$i]['position_group']){
+								$staffId = $arr_all_staff[$j]['id'];
+								$staffName = Efy_Library ::_getItemAttrById($arr_all_staff, $staffId, 'name');
+							}
+						}
+					}
+					if($staffName != ''){?>
+						<div>
+							<input onclick="document.getElementById('work_type').value = '<?=$arrWorks[$i]['C_CODE']?>';" type="radio" name="approve_id" option="true" value="<?=$staffId;?>" work_type="<?=$arrWorks[$i]['C_CODE']?>" message="Ban chua chon nguoi duyet!"/><?=$arrWorks[$i]['C_NAME'] . '  - ' . $staffName;?>
+						</div><?
+					}
+				}?>		
+				<div>
+					<input onclick="document.getElementById('work_type').value = 'TCD';" type="radio" name="approve_id" option="true" value="<?=$arrStaffRegister[0]['C_ID']?>" work_type="TCD" message="Ban chua chon nguoi duyet!"/><font color='red'>Từ chối duyệt</font> 
+				</div>
+			</td>
+		</tr>
+	</table>
+	<div align="center">
+		<?=$this->formsubmit('button','Cập nhật',array("onClick"=>"btn_save_asset(document.getElementById('hdn_xml_tag_list'),document.getElementById('hdn_xml_value_list'),'../../approve/modul/<?=$this->modul?>');","class"=>"add_large_button"))?>
+		<?=$this->formsubmit('button','Quay lại',array("onClick"=>"actionUrl('../../index/modul/<?=$this->modul?>');","class"=>"add_large_button"))?>
+	</div>
+</div>
+</form>

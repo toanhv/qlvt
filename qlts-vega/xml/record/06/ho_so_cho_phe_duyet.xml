@@ -1,0 +1,1029 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<common_para_list>
+		<common_para>
+			<form_title>TIẾP NHẬN HỒ SƠ MỚI</form_title>
+			<first_col_width>25%</first_col_width>
+			<js_file_name>js_functions_01.js</js_file_name>
+			<js_function>set_input()</js_function>
+			<list_tag_giay_bien_nhan>ghi_chu,include_document,registor_name,registor_address,registor_tel</list_tag_giay_bien_nhan>
+		</common_para>
+	</common_para_list>
+	<list_of_object>
+		<list_body> 
+			<col>
+			<label>&lt;input type="checkbox" name="chk_all_item_id" value="" onclick="checkbox_all_item_id(document.forms[0].chk_item_id);"&gt;</label>
+			<type>checkbox</type>
+			<width>5%</width>
+			<align>center</align>
+			<xml_data>false</xml_data>
+			<column_name>PK_RECORD</column_name>
+			<xml_tag_in_db></xml_tag_in_db>
+		</col>
+		<col>
+			<label>Mã hồ sơ</label>
+			<type>text</type>
+			<width>15%</width>
+			<align>left</align>
+			<xml_data>false</xml_data>
+			<column_name>C_CODE</column_name>
+			<xml_tag_in_db></xml_tag_in_db>
+		</col>
+		<col>
+			<label>Tên tổ chức/cá nhân</label>
+			<type>text</type>
+			<width>30%</width>
+			<align>left</align>
+			<xml_data>true</xml_data>
+			<column_name></column_name>
+			<xml_tag_in_db>ho_ten_nk</xml_tag_in_db>
+		</col>
+		<col>
+			<label>Địa điểm kinh doanh</label>
+			<type>text</type>
+			<width>35%</width>
+			<align>left</align>
+			<xml_data>true</xml_data>
+			<column_name></column_name>
+			<xml_tag_in_db>registor_address</xml_tag_in_db>
+		</col>
+		<col>
+			<label>Ngày trả kết quả</label>
+			<type>date</type>
+			<width>15%</width>
+			<align>CENTER</align>
+			<xml_data>false</xml_data>
+			<column_name>C_APPOINTED_DATE</column_name>
+			<xml_tag_in_db></xml_tag_in_db>
+		</col>
+		</list_body>
+	</list_of_object>
+	<update_object>
+		<table_struct_of_update_form> 
+			<update_row_list>	<!--Phan mo ta cac dong Form cap nhat doi tuong-->
+				<update_row>
+					<have_line_before>true</have_line_before>
+					<tag_list>record_form</tag_list>
+					<row_id>record_form</row_id>
+					<view_position>both</view_position>
+				</update_row>
+				<update_row>
+					<have_line_before>false</have_line_before>
+					<tag_list>record_number</tag_list>
+					<row_id>record_license</row_id>
+					<view_position>both</view_position>
+				</update_row>
+				<update_row>
+					<have_line_before>false</have_line_before>
+					<tag_list>ho_ten_nk</tag_list>
+					<row_id>id_ht_gt_nk</row_id>
+					<view_position>both</view_position>
+				</update_row>
+				<update_row>
+					<have_line_before>false</have_line_before>
+					<tag_list>ngay_sinh_nk,gioi_tinh_nk</tag_list>
+					<row_id>id_ngaysinh_dantoc_nk</row_id>
+					<view_position>both</view_position>
+				</update_row>
+				<update_row>
+					<have_line_before>false</have_line_before>
+					<tag_list>dan_toc_nk,quoc_tich</tag_list>
+					<row_id>id_dan_toc_nk</row_id>
+					<view_position>both</view_position>
+				</update_row>
+				
+				<update_row>
+					<have_line_before>false</have_line_before>
+					<tag_list>so_cmnd_nk</tag_list>
+					<row_id>id_so_cmnd_nk</row_id>
+					<view_position>both</view_position>
+				</update_row>	
+				<update_row>
+					<have_line_before>false</have_line_before>
+					<tag_list>ngay_cap_socmnd_nk,noi_cap_socmnd_nk</tag_list>
+					<row_id>id_ngaycap_noicap_nk</row_id>
+					<view_position>both</view_position>
+				</update_row>	
+				<update_row>
+					<have_line_before>false</have_line_before>
+					<tag_list>gctcn_nk</tag_list>
+					<row_id>id_gctcn_nk</row_id>
+					<view_position>both</view_position>
+				</update_row>	
+				<update_row>
+					<have_line_before>false</have_line_before>
+					<tag_list>so_gct_nk</tag_list>
+					<row_id>id_so_gct_nk</row_id>
+					<view_position>both</view_position>
+				</update_row>	
+				<update_row>
+					<have_line_before>false</have_line_before>
+					<tag_list>ngay_cap_sogct_nk,noi_cap_gct_nk</tag_list>
+					<row_id>id_ngay_cap_sogct_nk</row_id>
+					<view_position>both</view_position>
+				</update_row>	
+				<update_row>
+					<have_line_before>false</have_line_before>
+					<tag_list>dc_tt_nk</tag_list>
+					<row_id>id_dc_tt_nk</row_id>
+					<view_position>both</view_position>
+				</update_row>	
+				<update_row>
+					<have_line_before>false</have_line_before>
+					<tag_list>cho_o_hien_tai_nk</tag_list>
+					<row_id>id_cho_o_hien_tai_nk</row_id>
+					<view_position>both</view_position>
+				</update_row>	
+					
+				<update_row>
+					<have_line_before>false</have_line_before>
+					<tag_list>dien_thoai_nk,so_fax_nk</tag_list>
+					<row_id>id_dienthoai_fax_nk</row_id>
+					<view_position>both</view_position>
+				</update_row>
+				<update_row>
+					<have_line_before>false</have_line_before>
+					<tag_list>email_nk,website_nk</tag_list>
+					<row_id>id_email_website_nk</row_id>
+					<view_position>both</view_position>
+				</update_row>	
+				<!--Het thong tin nguoi khai-->		
+				
+				<!--Bat dau thong tin nguoi dung ten trong giay chung nhan-->							
+				<update_row>
+					<have_line_before>true</have_line_before>
+					<first_col_width>90%</first_col_width>
+					<tag_list>label_noi_dung_dkkd</tag_list>
+					<row_id>id_label_noi_dung_dkkd</row_id>
+					<view_position>both</view_position>
+				</update_row>	
+				<update_row>
+					<have_line_before>false</have_line_before>
+					<first_col_width>25%</first_col_width>
+					<tag_list>registor_name</tag_list>
+					<row_id>id_registor_name</row_id>
+					<view_position>both</view_position>
+				</update_row>			
+				<update_row>
+					<have_line_before>false</have_line_before>
+					<tag_list>registor_address</tag_list>
+					<row_id>id_registor_address</row_id>
+					<view_position>both</view_position>
+				</update_row>
+				
+				<update_row>
+					<have_line_before>false</have_line_before>
+					<tag_list>registor_province</tag_list>
+					<row_id>id_registor_province</row_id>
+					<view_position>both</view_position>
+				</update_row>		
+				<update_row>
+					<have_line_before>false</have_line_before>
+					<tag_list>registor_tel,registor_fax</tag_list>
+					<row_id>id_place_phone</row_id>
+					<view_position>both</view_position>
+				</update_row>					
+				
+				<update_row>
+					<have_line_before>false</have_line_before>
+					<tag_list>registor_email,registor_website</tag_list>
+					<row_id>id_email_website_registor</row_id>
+					<view_position>both</view_position>
+				</update_row>		
+				
+				<update_row>
+					<have_line_before>false</have_line_before>
+					<tag_list>business_note</tag_list>
+					<row_id>id_business_note</row_id>
+					<view_position>both</view_position>
+				</update_row>		
+				
+				<update_row>
+					<have_line_before>false</have_line_before>
+					<tag_list>business_capital</tag_list>
+					<row_id>business_capital</row_id>
+					<view_position>both</view_position>
+				</update_row>
+				<update_row>
+					<have_line_before>false</have_line_before>
+					<tag_list>business_capital_string</tag_list>
+					<row_id>business_capital_string</row_id>
+					<view_position>both</view_position>
+				</update_row>
+				<update_row>
+					<have_line_before>true</have_line_before>
+					<tag_list>include_document</tag_list>
+					<row_id>id_include_document</row_id>
+					<view_position>both</view_position>
+				</update_row>
+				<update_row>
+					<have_line_before>false</have_line_before>
+					<tag_list>doc_another</tag_list>
+					<row_id>doc_another</row_id>
+					<view_position>both</view_position>
+				</update_row>				
+				<update_row>
+					<have_line_before>false</have_line_before>
+					<tag_list>money_provisionally</tag_list>
+					<row_id>money_provisionally</row_id>
+					<view_position>both</view_position>
+				</update_row>
+				<update_row>
+					<have_line_before>false</have_line_before>
+					<tag_list>ghi_chu</tag_list>
+					<row_id>ghi_chu</row_id>
+					<view_position>both</view_position>
+				</update_row>					
+			</update_row_list>
+		</table_struct_of_update_form>
+		<update_formfield_list>
+			<record_number>
+				<label>Số ĐKKD</label>
+				<type>textbox</type>
+				<data_format>text</data_format>
+				<width>60%</width>
+				<optional>true</optional>
+				<max_length>50</max_length>
+				<message>Phai xac dinh SO DANG KY KINH DOANH!</message>
+				<note></note>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_tag_in_db>record_number</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+				<xml_data>true</xml_data>
+			</record_number>
+			<record_date>
+				<label>Ngày ban hành</label>
+				<type>textbox</type>
+				<data_format>isdate</data_format>
+				<width>15%</width>
+				<optional>true</optional>
+				<max></max>
+				<min></min>
+				<max_length></max_length>
+				<message>Phai xac dinh ngay cap giay dang ky kinh doanh</message>
+				<note></note>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_tag_in_db>record_date</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+				<xml_data>true</xml_data>
+			</record_date>
+			<record_form>
+				<label>Hình thức hồ sơ</label>
+				<type>selectbox</type>
+				<selectbox_option_sql>EfyLib_ListGetAllbyListtypeCode '#OWNER_CODE#', 'DM_HT_DKKD'</selectbox_option_sql>
+				<selectbox_option_id_column>0</selectbox_option_id_column>
+				<selectbox_option_name_column>1</selectbox_option_name_column>
+				<selectbox_option_value_column>1</selectbox_option_value_column>
+				<data_format></data_format>
+				<width>60%</width>
+				<optional>true</optional>
+				<max_length></max_length>
+				<message>Phai xac dinh HINH THUC HO SO</message>
+				<note></note>
+				<js_function_list>show_hide_row()</js_function_list>
+				<js_action_list>onChange</js_action_list>
+				<xml_tag_in_db>record_form</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+				<xml_data>true</xml_data>
+			</record_form>
+			
+			<ngay_dk_lan_dau>
+				<label>Ngày đăng ký lần đầu</label>
+				<type>textbox</type>
+				<data_format>isdate</data_format>
+				<width>20%</width>
+				<optional>true</optional>
+				<max></max>
+				<min></min>
+				<max_length></max_length>
+				<message>Phai xac dinh ngay dang ky kinh doanh lan dau</message>
+				<note></note>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>ngay_dk_lan_dau</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</ngay_dk_lan_dau>		
+			<ngay_dk_thay_doi>
+				<label>Ngày đăng ký thay đổi</label>
+				<type>textbox</type>
+				<data_format>isdate</data_format>
+				<width>20%</width>
+				<optional>true</optional>
+				<max></max>
+				<min></min>
+				<max_length></max_length>
+				<message>Phai xac dinh ngay dang ky kinh doanh lan dau</message>
+				<note></note>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>ngay_dk_thay_doi</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</ngay_dk_thay_doi>		
+			<ngay_dk_cap_lai>
+				<label>Ngày đăng ký cấp lại</label>
+				<type>textbox</type>
+				<data_format>isdate</data_format>
+				<width>20%</width>
+				<optional>true</optional>
+				<max></max>
+				<min></min>
+				<max_length></max_length>
+				<message>Phai xac dinh ngay dang ky kinh doanh lan dau</message>
+				<note></note>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>ngay_dk_cap_lai</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</ngay_dk_cap_lai>		
+			<co_gia_tri_den_ngay>
+				<label>Có giá trị đến ngày</label>
+				<type>textbox</type>
+				<data_format>isdate</data_format>
+				<width>20%</width>
+				<optional>true</optional>
+				<max></max>
+				<min></min>
+				<max_length></max_length>
+				<message>Phai xac dinh ngay dang ky kinh doanh lan dau</message>
+				<note></note>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>co_gia_tri_den_ngay</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</co_gia_tri_den_ngay>		
+	
+			<dang_ky_thay_doi>
+				<label>Đăng ký thay đổi lần thứ</label>
+				<type>textbox</type>
+				<data_format>text</data_format>
+				<optional>true</optional>
+				<width>20%</width>
+				<max_length>100</max_length>
+				<message>Phai xac dinh LAN THU bao nhieu</message>
+				<note></note>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>dang_ky_thay_doi</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</dang_ky_thay_doi>
+			<dang_ky_cap_lai>
+				<label>Đăng ký cấp lại lần thứ</label>
+				<type>textbox</type>
+				<data_format>text</data_format>
+				<optional>true</optional>
+				<width>21%</width>
+				<max_length>100</max_length>
+				<message>Phai xac dinh LAN THU bao nhieu</message>
+				<note></note>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>dang_ky_cap_lai</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</dang_ky_cap_lai>
+	<!--Thong tin nguoi di khai!-->
+			<ho_ten_nk>
+				<label>Tên tôi là &lt;i&gt; </label>
+				<type>textbox</type>
+				<data_format>text</data_format>
+				<optional>true</optional>
+				<width>70%</width>
+				<max_length>100</max_length>
+				<message>Phai xac dinh HO TEN nguoi dang ky</message>
+				<note></note>
+				<js_function_list>set_upcase_value(this)</js_function_list>
+				<js_action_list>onChange</js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>ho_ten_nk</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</ho_ten_nk>
+			
+			<gioi_tinh_nk>
+				<label>Giới tính</label>
+				<width_label>10%</width_label>
+				<type>selectbox</type>
+				<selectbox_option_sql>EfyLib_ListGetAllbyListtypeCode '#OWNER_CODE#', 'DM_GT'</selectbox_option_sql>
+				<selectbox_option_id_column>0</selectbox_option_id_column>
+				<selectbox_option_name_column>1</selectbox_option_name_column>
+				<selectbox_option_value_column>1</selectbox_option_value_column>
+				<data_format></data_format>
+				<width>15%</width>
+				<optional>true</optional>
+				<max_length></max_length>
+				<message>Phai xac dinh GIOI TINH</message>
+				<note></note>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>gioi_tinh_nk</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</gioi_tinh_nk>
+			
+			<ngay_sinh_nk>
+				<label>Ngày sinh</label>
+				<type>textbox</type>
+				<data_format>isdate_new</data_format>
+				<width>30%</width>
+				<optional>true</optional>
+				<max></max>
+				<min></min>
+				<max_length></max_length>
+				<message>NGAY SINH khong dung dinh dang ngay/thang/nam!</message>
+				<note></note>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>ngay_sinh_nk</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</ngay_sinh_nk>
+			
+			<dan_toc_nk>
+				<label>Dân tộc</label>
+				<type>textbox</type>
+				<data_format>text</data_format>
+				<optional>true</optional>
+				<width>30%</width>
+				<max_length>100</max_length>
+				<message>Phai xac dinh DAN TOC nguoi dang ky</message>
+				<note></note>
+				<default_value>Kinh</default_value>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>dan_toc_nk</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</dan_toc_nk>
+			<quoc_tich>
+				<label>Quốc tịch</label>
+				<width_label>10%</width_label>
+				<type>textbox</type>
+				<data_format>text</data_format>
+				<optional>true</optional>
+				<width>20%</width>
+				<max_length>100</max_length>
+				<message>Phai xac dinh QUOC TICH nguoi dang ky</message>
+				<note></note>
+				<default_value>Việt Nam</default_value>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>quoc_tich</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</quoc_tich>
+		
+			
+			<so_cmnd_nk>
+				<label>Số CMND</label>
+				<type>textbox</type>
+				<data_format>text</data_format>
+				<optional>true</optional>
+				<width>40%</width>
+				<max_length>12</max_length>
+				<message>SO CMND khong duoc de trong!</message>
+				<note></note>
+				<default_value></default_value>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>so_cmnd_nk</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</so_cmnd_nk>
+			
+			<ngay_cap_socmnd_nk>
+				<label>Ngày cấp</label>
+				<type>textbox</type>
+				<data_format>isdate_new</data_format>
+				<width>30%</width>
+				<optional>true</optional>
+				<max></max>
+				<min></min>
+				<max_length></max_length>
+				<message>NGAY CAP khong dung dinh dang ngay/thang/nam!</message>
+				<note></note>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>ngay_cap_socmnd_nk</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</ngay_cap_socmnd_nk>
+			
+			<noi_cap_socmnd_nk>
+				<label>Nơi cấp</label>
+				<width_label>10%</width_label>
+				<type>textbox</type>
+				<data_format>text</data_format>
+				<optional>true</optional>
+				<width>20%</width>
+				<max_length>100</max_length>
+				<message>NOI CAP khong duoc de trang!</message>
+				<note></note>
+				<default_value></default_value>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>noi_cap_socmnd_nk</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</noi_cap_socmnd_nk>	
+			<gctcn_nk>
+				<label>Giấy tờ chứng thực cá nhân khác (nếu không có CMND)</label>
+				<type>textbox</type>
+				<data_format>text</data_format>
+				<optional>true</optional>
+				<width>70%</width>
+				<max_length>12</max_length>
+				<message></message>
+				<note></note>
+				<default_value></default_value>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>gctcn_nk</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</gctcn_nk>	
+			<so_gct_nk>
+				<label>Số giấy chứng thực cá nhân</label>
+				<type>textbox</type>
+				<data_format>text</data_format>
+				<optional>true</optional>
+				<width>40%</width>
+				<max_length>12</max_length>
+				<message></message>
+				<note></note>
+				<default_value></default_value>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>so_gct_nk</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</so_gct_nk>	
+			<ngay_cap_sogct_nk>
+				<label>Ngày cấp</label>
+				<type>textbox</type>
+				<data_format>isdate_new</data_format>
+				<width>30%</width>
+				<optional>true</optional>
+				<max></max>
+				<min></min>
+				<max_length></max_length>
+				<message>NGAY CAP khong dung dinh dang ngay/thang/nam!</message>
+				<note></note>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>ngay_cap_sogct_nk</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</ngay_cap_sogct_nk>	
+			<noi_cap_gct_nk>
+				<label>Nơi cấp</label>
+				<type>textbox</type>
+				<width_label>10%</width_label>
+				<data_format>text</data_format>
+				<optional>true</optional>
+				<width>20%</width>
+				<max_length>100</max_length>
+				<message>NOI CAP khong duoc de trang!</message>
+				<note></note>
+				<default_value></default_value>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>noi_cap_gct_nk</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</noi_cap_gct_nk>	
+			<dc_tt_nk>
+				<label>Nơi đăng ký hộ khẩu thường trú:</label>
+				<type>textbox</type>
+				<data_format>text</data_format>
+				<optional>true</optional>
+				<width>70%</width>
+				<max_length></max_length>
+				<message>Phai xach dinh NOI DANG KY HO KHAU THUONG TRU !</message>
+				<note></note>
+				<default_value></default_value>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>dc_tt_nk</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</dc_tt_nk>	
+	
+			<cho_o_hien_tai_nk>
+				<label>Chỗ ở hiện tại</label>
+				<type>textbox</type>
+				<data_format>text</data_format>
+				<optional>true</optional>
+				<width>70%</width>
+				<max_length></max_length>
+				<message>CHO O HIEN TAI khong duoc de trang!</message>
+				<note></note>
+				<default_value></default_value>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>cho_o_hien_tai_nk</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</cho_o_hien_tai_nk>	
+	
+			<dien_thoai_nk>
+				<label>Điện thoại</label>
+				<type>textbox</type>
+				<data_format>text</data_format>
+				<optional>true</optional>
+				<width>30%</width>
+				<max_length>100</max_length>
+				<message>DIEN THOAI khong dung dinh dang!</message>
+				<note></note>
+				<default_value></default_value>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>dien_thoai_nk</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</dien_thoai_nk>
+	
+			<so_fax_nk>
+				<label>Fax</label>
+				<type>textbox</type>
+				<width_label>10%</width_label>
+				<data_format>text</data_format>
+				<optional>true</optional>
+				<width>20%</width>
+				<max_length></max_length>
+				<message>SO FAX khong dung dinh dang!</message>
+				<note></note>
+				<default_value></default_value>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>so_fax_nk</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</so_fax_nk>
+	
+			<email_nk>
+				<label>Địa chỉ e-mail</label>
+				<type>textbox</type>
+				<data_format>isemail</data_format>
+				<width>30%</width>
+				<optional>true</optional>
+				<max_length>200</max_length>
+				<message>Dia chi EMAIL khong hop le!</message>
+				<note></note>
+				<tooltip>Địa chỉ E-mail phải nhập theo định dạng tên_người_dụng@tên_máy_chủ_email (ví dụ:tennguoidung@yahoo.com)</tooltip>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>email_nk</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</email_nk>
+	
+			<website_nk>
+				<label>Website</label>
+				<type>textbox</type>
+				<data_format>text</data_format>
+				<width_label>10%</width_label>
+				<optional>true</optional>
+				<width>30%</width>
+				<max_length></max_length>
+				<message>WEBSITE khong hop le!</message>
+				<note></note>
+				<default_value></default_value>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>website_nk</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</website_nk>
+			<!--Het thong tin nguoi khai-->
+			
+			<label_noi_dung_dkkd>
+				<label>&lt;center&gt; &lt;B&gt;ĐĂNG KÝ KINH DOANH HỘ KINH DOANH CÁ THỂ VỚI NỘI DUNG SAU&lt;/B&gt; &lt;/center&gt;</label>
+				<type>label</type>
+			</label_noi_dung_dkkd>		
+			
+			<registor_name>
+				<label>Tên hộ kinh doanh</label>
+				<type>textbox</type>
+				<data_format>text</data_format>
+				<width>70%</width>
+				<optional>true</optional>
+				<max_length>200</max_length>
+				<message>Phai xach dinh TEN HO KINH DOANH!</message>
+				<note></note>
+				<js_function_list>set_upcase_value(this)</js_function_list>
+				<js_action_list>onChange</js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>registor_name</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</registor_name>	
+			<!--<shop_name>
+				<label>Tên cửa hàng</label>
+				<type>textbox</type>
+				<data_format>text</data_format>
+				<width>70%</width>
+				<optional>true</optional>
+				<max_length>200</max_length>
+				<message>Phai xac dinh TEN CUA HANG</message>
+				<note></note>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_tag_in_db>shop_name</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</shop_name>-->
+			<registor_address>
+				<label>Địa điểm kinh doanh</label>
+				<type>textbox</type>
+				<data_format>text</data_format>
+				<width>70%</width>
+				<optional>true</optional>
+				<max_length>200</max_length>
+				<message>Phai xac dinh DIA DIEM KINH DOANH!</message>
+				<note></note>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>registor_address</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</registor_address>		
+			
+			<registor_province>
+				<label>Thuộc xã</label>
+				<type>selectbox</type>
+				<selectbox_option_sql>EfyLib_ListGetAllbyListtypeCode '#OWNER_CODE#', 'DM_GT'</selectbox_option_sql>
+				<selectbox_option_id_column>0</selectbox_option_id_column>
+				<selectbox_option_name_column>1</selectbox_option_name_column>
+				<selectbox_option_value_column>1</selectbox_option_value_column>
+				<data_format></data_format>
+				<width>56%</width>
+				<optional>true</optional>
+				<max_length></max_length>
+				<message>Phai xac dinh thong tin PHUONG!</message>
+				<note></note>
+				<tooltip>Dia chi PHUONG</tooltip>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>registor_province</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</registor_province>	
+				
+			<registor_tel>
+				<label>Điện thoại</label>
+				<type>textbox</type>
+				<data_format>text</data_format>
+				<optional>true</optional>
+				<width>30%</width>
+				<max_length>100</max_length>
+				<message>DIEN THOAI khong dung dinh dang!</message>
+				<note></note>
+				<default_value></default_value>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>registor_tel</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</registor_tel>
+	
+			<registor_fax>
+				<label>Fax   </label>
+				<type>textbox</type>
+				<width_label>10%</width_label>
+				<data_format>text</data_format>
+				<optional>true</optional>
+				<width>20%</width>
+				<max_length></max_length>
+				<message>SO FAX khong dung dinh dang!</message>
+				<note></note>
+				<default_value></default_value>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>registor_fax</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</registor_fax>
+	
+			<registor_email>
+				<label>Địa chỉ e-mail</label>
+				<type>textbox</type>
+				<data_format>isemail</data_format>
+				<width>30%</width>
+				<optional>true</optional>
+				<max_length>200</max_length>
+				<message>Dia chi EMAIL khong hop le!</message>
+				<note></note>
+				<tooltip>Địa chỉ E-mail phải nhập theo định dạng tên_người_dụng@tên_máy_chủ_email (ví dụ:tennguoidung@yahoo.com)</tooltip>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>registor_email</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</registor_email>
+	
+			<registor_website>
+				<label>Website</label>
+				<width_label>10%</width_label>
+				<type>textbox</type>
+				<data_format>text</data_format>
+				<optional>true</optional>
+				<width>20%</width>
+				<max_length></max_length>
+				<message>WEBSITE khong hop le!</message>
+				<note></note>
+				<default_value></default_value>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>registor_website</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</registor_website>
+	
+			<business_note>
+				<label>Ngành nghề kinh doanh</label>
+				<type>textarea</type>
+				<data_format></data_format>
+				<width>70%</width>
+				<row>2</row>
+				<optional>true</optional>
+				<max_length>200</max_length>
+				<message>NGANH NGHE KINH DOANH khong duoc de trong!</message>
+				<note></note>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>business_note</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</business_note>	
+			<business_capital>
+				<label>Vốn kinh doanh</label>
+				<type>textbox</type>
+				<data_format>ismoney</data_format>
+				<width>30%</width>
+				<row>3</row>
+				<optional>true</optional>
+				<max_length>13</max_length>
+				<message>VON KINH DOANH khong hop le</message>
+				<note> (Đồng)</note>
+				<js_function_list>business_capital_onchange(this)</js_function_list>
+				<js_action_list>OnBlur</js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>business_capital</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</business_capital>
+			
+			<business_capital_string>
+				<label>Vốn kinh doanh(bằng chữ)</label>
+				<type>textbox</type>
+				<data_format>text</data_format>
+				<width>70%</width>
+				<row>3</row>
+				<optional>true</optional>
+				<max_length>1000</max_length>
+				<message>VON KINH DOANH khong hop le</message>
+				<note></note>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>business_capital_string</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</business_capital_string>		
+	
+			<!--Het thong tin nguoi khai-->
+			<time_business>
+				<label>Thời hạn được phép kinh doanh</label>
+				<type>textarea</type>
+				<data_format></data_format>
+				<width>70%</width>
+				<row>3</row>
+				<optional>true</optional>
+				<max_length>500</max_length>
+				<message>Phai nhap thoi han duoc phep kinh doanh</message>
+				<note></note>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>time_business</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</time_business>
+			<include_document>
+				<label>Tài liệu kèm theo đơn</label>
+				<type>multiplecheckbox</type>
+				<checkbox_multiple_sql>EfyLib_ListGetAllbyListtypeCode '#OWNER_CODE#','06_TLKT'</checkbox_multiple_sql>
+				<checkbox_multiple_id_column>0</checkbox_multiple_id_column>
+				<checkbox_multiple_name_column>1</checkbox_multiple_name_column>
+				<checkbox_multiple_value_list>0</checkbox_multiple_value_list>
+				<dsp_div>0</dsp_div><!-- = 1 thi hien thi DIV; = 0 thi khong hien thi-->
+				<data_format></data_format>
+				<optional>true</optional>
+				<only>false</only>
+				<width>70%</width>
+				<max_length>100</max_length>
+				<message>Chưa chọn TÀI LIỆU KÈM THEO!</message>
+				<note></note>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<column_name></column_name>
+				<xml_tag_in_db>include_document</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>	
+			</include_document>
+			<doc_another>
+				<label>Nội dung tài liệu khác</label>
+				<type>textarea</type>
+				<data_format>text</data_format>
+				<width>70%</width>
+				<optional>true</optional>
+				<max_length>1000</max_length>			
+				<message>Ban phai nhap danh sach tai lieu ho so khac</message>
+				<note></note>
+				<row>2</row>
+				<js_function_list>get_minus_document()</js_function_list>
+				<js_action_list>OnFocus</js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>doc_another</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</doc_another>					
+			<money_provisionally>
+				<label>Lệ phí tạm thu</label>
+				<type>textbox</type>
+				<data_format>ismoney</data_format>
+				<width>30%</width>
+				<row>3</row>
+				<optional>true</optional>
+				<max_length>10</max_length>
+				<message>LE PHI TAM THU khong hop le!</message>
+				<note> đồng</note>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>money_provisionally</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</money_provisionally>	
+			<ghi_chu>
+				<label>Ghi chú</label>
+				<type>textarea</type>
+				<data_format></data_format>
+				<width>70%</width>
+				<row>2</row>
+				<optional>true</optional>
+				<max_length>200</max_length>
+				<message></message>
+				<note></note>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<xml_tag_in_db>ghi_chu</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</ghi_chu>	
+		</update_formfield_list>
+		<update_sql>Exec EfyLib_ListUpdate #list_id#, #listtype_id#, '#list_code#', '#list_name#', #list_order#, '#list_status#', '#xml_data#', '#deleted_exist_file_id_list#', '#new_file_id_list#','#p_owner_code_list#'</update_sql>
+	</update_object>
+</root>

@@ -1,0 +1,134 @@
+<?php 
+	$arrPermission = $_SESSION['arrStaffPermission'];
+?>
+<form action="index" method="POST" id="frmUser">
+<div>
+	<table width='100%'  border='0' cellspacing='0' cellpadding='0' class="table_title">
+		<tr>
+			<td class="large_title" style="padding-left:7px;text-align:left;">
+				<!--Sinh mot hidden luu list ID ma NSD chon!-->
+				<?php echo $this->formHidden("hdn_object_id_list",$this->iStaffIdList,null); ?>
+				<!--Sinh mot hidden luu ID loai danh muc!-->
+				<?php echo $this->formHidden("hdn_object_id",$this->iDUser,null); ?>	
+				<!--Sinh mot hidden luu gia tri xac dinh so ban ghi / 1 trang!-->	
+				<?php echo $this->formHidden("hdn_record_number_page",$this->numRowOnPage,null); ?>				
+				<!--Cac doi tuong hidden tren form-->
+				<?=$this->bodyTitle;?><br>		
+				<?php 
+					$arrUnit = $this->arrUnit;
+				?>		
+			</td>
+		</tr>
+	</table>
+	<div class="box container c1">
+		<div class="pad">			
+			<table cellpadding="0" cellspacing="0" width="98%" border="0">
+				<col width="5%"/><col width="30%"/><col width="10%"/><col width="30%"/><col width="25%"/>
+				<tr>
+					<td class="normal_label">Đơn vị</td>
+					<td><input autocomplete="off" id="C_OWNER" name="C_OWNER" class="textbox c2" style="width:99%;" onblur="getunitbyowner(this);" value="<?=$this->sOwnerName?>"></td>
+					<td class="normal_label" align="center">Phòng ban</td>
+					<td id="unit">
+						<select class="textbox normal_label" style="width: 95%;" option="true" name="C_UNIT" id="C_UNIT" onchange="actionUrl('')">
+							<option value="" name="" id="">-- Chọn phòng ban--</option><?
+							echo Efy_Library::_generateSelectOption($arrUnit,'id','id','name',$this->sUnitId);?>
+						</select>
+					</td>
+					<td><input type="button" value="Tìm kiếm" class="add_large_button1" size="100%" onclick="actionUrl('');"></td>
+				</tr>				
+			</table>
+		</div>
+	</div>
+	
+	
+	
+	<div style="text-align:right; width:99%; padding-left:0px;">
+		<label>
+			<a style="cursor:pointer;padding-left:5px;" onClick="iTemOnclick(document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id_list'),'../add/');">Ban quyền NSD</a>
+		</label>
+	</div>
+	<!--Hien thi danh sach tieu de code!-->			
+	<table cellpadding="0" cellspacing="0" border="0" width="98%" class="list_table2" align="center" id="table1">	
+		<?php			
+			$objFunction =	new	Efy_Function_RecordFunctions()	;
+			$delimitor = $this->delimitor;//Lay ky tu phan cach giua cac phan tu
+			//Hien thi cac cot cua bang hien thi du lieu
+			$StrHeader = explode("!~~!",Efy_Library::_GenerateHeaderTable("5%" . $delimitor . "40%" . $delimitor . "30%" . $delimitor . "25%"
+											,"<input type='checkbox' name='chk_all_item_id' value='' onclick='checkbox_all_item_id(document.forms[0].chk_item_id);'>" . $delimitor . "Tên người sử dụng" . $delimitor . "Chức vụ" . $delimitor . "Phòng ban"
+											,$delimitor));
+			echo $StrHeader[0];
+			echo $StrHeader[1]; 
+			//Kieu style
+			$v_current_style_name = "round_row";	
+			$arrAllStaff = $this->arrAllStaff;
+			foreach ($arrAllStaff as $objStaff){
+				$iStaffId 				=	$objStaff['id'];
+				$sStaffName				=	$objStaff['position_code'].' - '.$objStaff['name'];
+				$sStaffPositionName		= 	$objStaff['position_name'];
+				$sUnitName				= 	$objFunction->getNameUnitByIdUnitList($objStaff['unit_id'],'');
+				if ($v_current_style_name == "odd_row"){
+					$v_current_style_name = "round_row";
+				}else{
+					$v_current_style_name = "odd_row";					
+				}?>
+				<tr class="<?=$v_current_style_name?>">	
+					<td align="center" style="padding-left:3px;padding-right:3px;" class="normal_label">
+						<?=$this->formCheckbox('chk_item_id',$iStaffId, array('checked' => false,'onclick' =>'selectrow(this)'));?>					
+					</td>
+					<td onclick="set_hidden(this,document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id'),'<?=$iStaffId?>')" ondblclick="iTemOnclick(document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id_list'),'../add/');" align="left"  style="padding-left:3px;padding-right:3px;" class="normal_label"><?=$sStaffName?></td>
+					<td onclick="set_hidden(this,document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id'),'<?=$iStaffId?>')" ondblclick="iTemOnclick(document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id_list'),'../add/');" align="left" valign="middle"  style="padding-left:3px;padding-right:3px;" class="normal_label"><?=$sStaffPositionName;?></td>
+					<td onclick="set_hidden(this,document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id'),'<?=$iStaffId?>')" ondblclick="iTemOnclick(document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id_list'),'../add/');" align="left" style="padding-left:3px;padding-right:3px;" class="normal_label"><?=$sUnitName?></td>
+				</tr>
+				<?php			
+			}
+			//Tu dien cac dong trang trong truong hop du lieu tra ve < so row _CONST_NUMBER_OF_ROW_PER_LIST		
+			if(sizeof($arrAllStaff) < 15){	
+				echo Efy_Library::_addEmptyRow($this->iCountElement,15 - sizeof($arrAllStaff),$v_current_style_name,4);		
+			}	
+			?>			
+	</table>
+</div>
+<div>
+<?php echo $this->search_textselectbox_unit_name;?>
+</div>
+<!--Table chua cac nut Show_all va Hide_all-->
+<table width="100%" cellpadding="0" cellspacing="0">
+	<tr><?php 
+		if ($v_count>0){?>
+		<td class="small_radiobutton" colspan="10" width="50%" height="25">
+			<input type="radio" id="rad_show_enduser" value="1" checked onClick="show_or_hide_all_enduser('SHOW_ALL',document.all.tr_enduser,document.all.img_unit,document.all.rad_show_enduser)" ><?php echo "Hiện tất cả";?>
+		</td>
+		<td class="small_radiobutton" colspan="10" width="50%" height="25">
+			<input type="radio" id="rad_show_enduser" value="2" onClick="show_or_hide_all_enduser('HIDE_ALL',document.all.tr_enduser,document.all.img_unit,document.all.rad_show_enduser)"><?php echo "Ẩn tất cả ";?>
+		</td><?php
+		}else{?>
+			
+		<?php
+		}?>
+	</tr>
+</table>
+<table width="98%" align="center" cellpadding="0" cellspacing="0" border="0" class="buton_table">				
+	<tr>
+		<td align="center" class="body">
+		<?php
+			echo $this->formButton("btn_add","Ban quyền NSD",array("type"=>"button","class"=>"add_large_button","onClick"=>"iTemOnclick(document.getElementsByName('chk_item_id'),document.getElementById('hdn_object_id_list'),'../add/');")) . "&nbsp;";					
+		?>	
+		</td>
+	</tr>
+</table>
+<script type="text/javascript">
+	$(document).ready(function() {
+		//getunitbyowner();	
+		setTimeout("document.getElementById('C_UNIT').value = '<?=$this->sUnitId?>'",200);
+		//document.getElementById('C_UNIT').value = '232';
+		//alert(document.getElementById('C_UNIT').value)
+});
+	function getunitbyowner(obj){
+		var key = 'sOwnerName=' + document.getElementById('C_OWNER').value;
+		postAJAXHTTPText('<?=$this->UrlAjax?>' + 'permission/generatehtml/user/getunitbyowner.php',key, document.getElementById('unit'), null);
+	}
+	function checkvalue(){
+		actionUrl('');
+	}
+</script>
+</form>

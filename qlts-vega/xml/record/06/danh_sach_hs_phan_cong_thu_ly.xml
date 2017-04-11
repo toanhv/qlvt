@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<common_para_list>
+		<common_para>
+			<form_title>TIẾP NHẬN HỒ SƠ MỚI</form_title>
+			<first_col_width>25%</first_col_width>
+			<js_file_name>js_functions_01.js</js_file_name>
+			<js_function>set_input()</js_function>
+		</common_para>
+	</common_para_list>
+	<list_of_object>
+		<list_body> 
+			<col>
+			<label>&lt;input type="checkbox" name="chk_all_item_id" value="" onclick="checkbox_all_item_id(document.forms[0].chk_item_id);"&gt;</label>
+			<type>checkbox</type>
+			<width>5%</width>
+			<align>center</align>
+			<xml_data>false</xml_data>
+			<column_name>PK_RECORD</column_name>
+			<xml_tag_in_db></xml_tag_in_db>
+		</col>
+		<col>
+			<label>Mã hồ sơ</label>
+			<type>text</type>
+			<width>15%</width>
+			<align>center</align>
+			<xml_data>false</xml_data>
+			<column_name>C_CODE</column_name>
+			<xml_tag_in_db></xml_tag_in_db>
+		</col>
+		<col>
+			<label>Tên tổ chức/cá nhân</label>
+			<type>text</type>
+			<width>30%</width>
+			<align>left</align>
+			<xml_data>true</xml_data>
+			<column_name></column_name>
+			<xml_tag_in_db>ho_ten_nk</xml_tag_in_db>
+		</col>
+		<col>
+			<label>Địa điểm kinh doanh</label>
+			<type>text</type>
+			<width>35%</width>
+			<align>left</align>
+			<xml_data>true</xml_data>
+			<column_name></column_name>
+			<xml_tag_in_db>registor_address</xml_tag_in_db>
+		</col>
+		<col>
+			<label>Ngày trả kết quả</label>
+			<type>date</type>
+			<width>15%</width>
+			<align>CENTER</align>
+			<xml_data>false</xml_data>
+			<column_name>C_APPOINTED_DATE</column_name>
+			<xml_tag_in_db></xml_tag_in_db>
+		</col>
+		</list_body>
+	</list_of_object>
+</root>

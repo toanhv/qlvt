@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<!--Khai báo các thông số chung-->
+	<common_para_list>
+		<common_para>
+			<list_form_title>GIẤY MỜI BỘ XD</list_form_title>
+			<update_form_title>GIẤY MỜI</update_form_title>
+			<first_col_width>20%</first_col_width>
+			<number_of_object_per_page>15</number_of_object_per_page>
+			<js_file_name></js_file_name>
+			<js_function></js_function>
+		</common_para>
+	</common_para_list>
+	
+	<list_of_object>
+		
+	</list_of_object>	
+	<!--Phan mo ta cau truc Form cap nhat doi tuong-->
+	<update_object>
+		<object_sql>
+			
+		</object_sql>
+		<table_struct_of_update_form> 
+			<!--Phan khai bao cac dong cua Form cap nhat doi tuong-->
+			<update_row_list>			
+					
+				<update_row>
+					<have_line_before>false</have_line_before>
+					<tag_list>don_vi_nhan</tag_list>
+					<row_id>don_vi_nhan_id</row_id>
+					<view_position>both</view_position>
+				</update_row>	
+				
+				<update_row>
+					<have_line_before>true</have_line_before>
+					<tag_list>can_bo</tag_list>
+					<row_id>can_bo_id</row_id>
+					<view_position>both</view_position>
+				</update_row>						
+				
+			</update_row_list>
+		</table_struct_of_update_form>
+		
+		<!--Phan mo ta chi tiet cac formfield cua Form cap nhat van ban mau-->
+		<update_formfield_list>				
+			<don_vi_nhan>
+				<label>&lt;B&gt;Đơn vị sử dụng:&lt;/B&gt;</label>
+				<type>multiplecheckbox</type>			
+				<input_data>session</input_data>
+				<session_name>arr_all_unit</session_name>
+				<session_id_index>id</session_id_index>
+				<session_name_index>name</session_name_index>
+				<session_value_index>id</session_value_index>
+				<dsp_div>1</dsp_div><!-- = 1 thi hien thi DIV; = 0 thi khong hien thi-->
+				<data_format></data_format>		
+				<optional>true</optional>
+				<only>false</only>
+				<width>45%</width>
+				<max_length>100</max_length>
+				<message>Chua chon DON VI NHAN!</message>
+				<note></note>
+				<xml_data>true</xml_data>
+				<column_name></column_name>
+				<xml_tag_in_db>don_vi_nhan</xml_tag_in_db>						
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>			
+			</don_vi_nhan>
+			<can_bo>
+				<label>&lt;B&gt;Tên cán bộ sử dụng:&lt;/B&gt;</label>
+				<type>treeuser</type>
+				<optional>true</optional>
+				<width>100%</width>
+				<max_length>100</max_length>
+				<message></message>
+				<note></note>
+				<js_function_list></js_function_list>
+				<js_action_list></js_action_list>
+				<xml_data>true</xml_data>
+				<column_name>FK_OWNER_CODE_LIST</column_name>
+				<xml_tag_in_db>can_bo</xml_tag_in_db>
+				<readonly_in_edit_mode>false</readonly_in_edit_mode>
+				<disabled_in_edit_mode>false</disabled_in_edit_mode>
+			</can_bo>	
+				
+	</update_formfield_list>
+		<!--Phan mo ta cau lenh SQL thuc hien cap nhat doi tuong-->
+		<update_sql>
+			
+		</update_sql>
+	</update_object>	
+</root>

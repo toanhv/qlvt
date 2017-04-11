@@ -1,0 +1,126 @@
+<?php 
+//$arrPermission = $_SESSION['arrStaffPermission'];
+//if($arrPermission['CAP_NHAT_LOAI_DM'] || $arrPermission['CAP_NHAT_DM_DOI_TUONG'] || $arrPermission['CAP_NHAT_QUYEN'])
+//{?>
+<form action="index" method="POST" id="frmAddListType" enctype="multipart/form-data">
+	<table cellpadding="0" cellspacing="0" width="100%" border="0">
+		<!--tao tac hidden!-->
+		<tr>
+			<td>
+			<!--ID cua ListType-->
+			<?php echo $this->formHidden("hdn_listtype_id",$this->iListTypeId,null); ?>	
+			<!--Sinh mot hidden luu list ID ma NSD chon!-->
+			<?php echo $this->formHidden("hdn_object_id_list","",null); ?>	
+			<!--Sinh mot hidden luu gia tri xac dinh so ban ghi / 1 trang!-->	
+			<?php echo $this->formHidden("hdn_record_number_page",$this->NumberRowOnPage,null); ?>				
+			<!--Sinh mot hidden luu gia tri trang hien thoi 1, 2, ...!-->
+			<?php echo $this->formHidden("hdn_page",$this->numCurrentPage,null); ?>	
+			<!--Luu gia tri kiem tra cho cap nhat -->
+			<?php echo $this->formHidden("hdn_update",'OK',null); ?>	
+			
+			<?php echo $this->formHidden("hdn_xml_tag_list",'',null); ?>			
+			<!--Bien hdn_xml_value_list dung de luu danh sach cac gia tri cua cac THE XML tuong ung voi cac THUOC TINH cua mot doi tuong-->			
+			<?php echo $this->formHidden("hdn_xml_value_list",'',null); ?>				
+			<?php echo $this->formHidden("hdn_owner_code_list",'',null); ?>			
+			
+			</td>
+		</tr>
+	</table>
+	
+
+	
+	<!--HIen thi tieu de man hinh danh sach!-->
+	<table width='98%'  border='0' cellspacing='0' cellpadding='0' class="table_title">
+		<tr>
+			<td class="large_title" style="padding-left:7px;text-align:left;">
+				<?=$this->bodyTitle;?><br>				
+			</td>
+		</tr>
+	</table>	<br />
+	<div id="content" style="border-bottom:0px solid #3399FF;padding-bottom:5px;margin-bottom:10px;border-top:0px solid #3399FF;">
+		
+		<div id="body_content">
+			<div>
+				<label class="lbl_title normal_label">Mã loại danh mục<small class="normal_starmark">*</small></label>
+				<?=$this->formText('C_CODE',$this->arrInput['C_CODE'],array('size'=>50,'class'=>'normal_textbox','optional'=>false,'message'=>'Ma LOAI DANH MUC khong duoc de trong!','onKeyDown'=>'change_focus(document.forms(0),this)'));?>	
+			</div>
+			<div>
+				<label class="lbl_title normal_label">Tên loại danh mục	<small class="normal_starmark">*</small></label>
+				<?=$this->formText('C_NAME',$this->arrInput['C_NAME'],array('size'=>90,'class'=>'normal_textbox','optional'=>false,'message'=>'TEN LOAI DANH MUC khong duoc de trong!','onKeyDown'=>'change_focus(document.forms(0),this)'));?>
+			</div>
+			<div>
+				<label class="lbl_title normal_label">Thứ tự hiền thị</label>
+				<?=$this->formText('C_ORDER',$this->arrInput['C_ORDER'],array('size'=>10));?>
+			</div>
+			<div>
+				<div><label class="lbl_title normal_label">File XML</label></div>
+				<div>
+					<dd id = "file_from_server">
+						<?=$this->formText('txt_xml_file_name',$this->arrInput['C_XML_FILE_NAME'],array('type'=>'text','style'=>'display:inline;','size'=>77, 'class'=>'normal_textbox', 'optional'=>true,'onKeyDown'=>'change_focus(document.forms(0),this)', ));?>
+						<?=$this->formButton("popupDialog","Browse",array("type"=>"button",'style'=>'display:inline;',"class"=>"add_large_button","onClick"=>"openmypage(); return false"))?>	
+					</dd>
+					<dd id = "file_form_clien" style = "display:none;"><?=$this->formFile('C_XML_FILE_NAME',$this->arrInput['C_XML_FILE_NAME'],array('size'=>50));?></dd>
+				</div>	
+			</div>
+			<div>						
+				<!--Goi mot Digloa bang javascript-->				
+			 	 <div id="somediv" style="display:none">
+					<?php echo $this->divDialog;?>
+				 </div>	
+			</div>
+			<div>
+				<label class="lbl_title normal_label">Đơn vị sử dụng<small class="normal_starmark">*</small></label>
+				<table width="90%" cellspacing="0" cellpadding="0" class = "table_detail_doc" style = "width:85%;" border = "1">
+				<col width = "2%"><col width = "48%"><col width = "2%"><col width = "48%">
+					<?php 
+						$sHtml = "<tr>";
+						$i = 0;
+						foreach ($_SESSION['SesGetAllOwner'] as $owner){
+							$i++;
+							$sHtml .= "<td><input type = 'checkbox' name = 'chk_onwer_code_list[]' value = '" . $owner['code'] . "'/></td>";
+							$sHtml .= "<td>" . $owner["name"] . "</td>";
+							if($i == 2){
+								$sHtml .= "</tr><tr>";
+								$i = 0;
+							}
+						}
+						echo $sHtml;
+					?>
+				<tr>
+					<td colspan = "4" align = "right" class="small_radiobutton">
+						<input type="radio" onclick="_select_all_multiple_checkbox(document.getElementsByName('chk_onwer_code_list[]'),this,0);" hide="true" value="1" optional="true" name="rad_owner_code_list">Chọn tất cả
+						<input type="radio" onclick="_select_all_multiple_checkbox(document.getElementsByName('chk_onwer_code_list[]'),this,1);" hide="true" value="2" optional="true" name="rad_owner_code_list">Bỏ chọn tất cả
+					</td>
+				</tr>
+				</table>
+			</div>
+			<div>
+				<label class="lbl_title normal_label">Trạng thái</label>
+				<div>
+					<?=$this->formCheckbox('C_CLIENT',1, array('checked' => false,'onClick'=>'show_hide_div()'));?><font class = "lbl_title normal_label">Chọn từ Client </font>
+					<?=$this->formCheckbox('C_STATUS',1, array('checked' => true));?><font class = "lbl_title normal_label">Hoạt động</font>	
+					<?=$this->formCheckbox('C_SAVE_AND_ADD_NEW',1, array('checked' => false));?><font class = "lbl_title normal_label">Ghi và thêm mới</font>
+				</div>
+			</div>
+		</div>
+		<div id = "button">
+			<?=$this->formButton("btn_update","Cập nhật",array("type"=>"button","class"=>"add_large_button","onClick"=>"btn_save_list(document.getElementsByName('hdn_xml_tag_list'),document.getElementsByName('hdn_xml_value_list'),'');"))?>								
+			<?=$this->formsubmit('button','Quay lại',array("onClick"=>"actionUrl('index')","class"=>"add_large_button"))?>	
+		</div>
+</div>
+</form>
+<script type="text/javascript">
+	function openmypage(){ 
+		divwin=dhtmlwindow.open("divbox", "div", "somediv", "VEGA.COM.VN", "width=450px,height=300px,left=300px,top=100px,resize=1,scrolling=1")
+	}
+</script>
+<?php //} 
+//else 
+//	echo 'Bạn không có quyền truy cập chức năng này';
+?>
+					
+
+
+
+
+							

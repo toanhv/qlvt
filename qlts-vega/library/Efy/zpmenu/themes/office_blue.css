@@ -1,0 +1,93 @@
+@import url("layout/2d.css");
+
+/* Default Border for top and sub menus */
+.zpMenuContainer {
+	border: 0px solid #002C94;
+	/*BACKGROUND-COLOR: #F3F3F3; */
+	background-image:url(../../../images/nen_top_menu.gif);	
+	background-position:center;
+	background-repeat:repeat-x;
+	width:100%;
+	height:20px;
+	
+}
+/* Dinh dang menu nen*/
+/* Default Background Color of ALL menu items */
+.zpMenuContainer .zpMenu-item {
+	/*BACKGROUND-COLOR: #F3F3F3; */
+	background-image:url(../../../images/nen_top_menu.gif);	
+	background-position:center;
+	background-repeat:repeat-x;
+	height:20px;
+	font-family:Tahoma, Arial, Helvetica, sans-serif;
+	font-size:11px;
+	font-weight:bold;
+	COLOR: #000000
+	border-bottom:#000000 0 solid;
+}
+/* Update:N.Ð.Trong */
+.zpMenu-item a:link{
+	font-weight:none;
+	COLOR: #FF0000
+	border-bottom:#000000 0 solid;	
+}
+.zpMenu-item a:hover{	
+	font-weight:none;
+	COLOR: #FF0000
+	border-bottom:#000000 0 solid
+}
+.zpMenu-item a:visited{
+	font-weight:none;
+	COLOR: #FF0000
+	border-bottom:#000000 0 solid
+}
+
+/* TOP Menu - covers icons also */
+.zpMenuContainer .zpMenu-item-selected {
+	font-family:Tahoma, Arial, Helvetica, sans-serif;
+	BORDER-BOTTOM: #000000 0px solid;
+	HEIGHT:20px; 
+	/*BACKGROUND-COLOR: #CBEDFE; */
+	TEXT-ALIGN: center;
+	COLOR: #000000
+}
+
+.zpMenuContainer .zpMenu-item-visited {
+	/*BACKGROUND-COLOR: #FFEFC6; */
+	background-image:url(../../../images/nen_top_menu_visited.gif);	
+	background-position:center;
+	background-repeat:repeat-x;
+	COLOR: #FF0000;
+	height:20px;
+	border-bottom:#000000 0 solid	
+}
+
+
+/* SUB Menu - NOT Top menu */
+/* Sub, Selected, Background for icons */
+.zpMenuContainer .zpMenuContainer .zpMenu-item-selected .icon,
+/* Sub, Selected, Background for menu label */
+.zpMenuContainer .zpMenuContainer .zpMenu-item-selected {	
+	/*BACKGROUND-COLOR: #FFEFC6; */
+	background-image:url(../../../images/nen_top_menu_visited.gif);	
+	background-position:center;
+	background-repeat:repeat-x;
+	height:20px;
+	border-bottom:#000000 0 solid	 
+	
+}
+
+/* Sub, Has Sub Arrow, NOT Selected */
+.zpMenuContainer .zpMenuContainer .zpMenu-item-collapsed {
+	background: url("icon/arrow_right_black.gif") #F3F3F3  no-repeat center right;
+}
+
+/* Sub, Has Sub Arrow, Selected */
+.zpMenuContainer .zpMenuContainer .zpMenu-item-expanded {
+	background: url("icon/arrow_right_black.gif") #FFEFC6 no-repeat center right;
+}
+
+/* Sub, Left ICON */
+.zpMenuContainer .zpMenuContainer  .icon {
+	BACKGROUND-COLOR: #F3F3F3;
+}

@@ -1,0 +1,532 @@
+<?php 
+$arrPermission = $_SESSION['arrStaffPermission'];
+if($arrPermission['CAP_NHAT_LOAI_DM'] || $arrPermission['CAP_NHAT_DM_DOI_TUONG'] || $arrPermission['CAP_NHAT_QUYEN'])
+{?>
+<form action="index" method="POST" id="frmAddReceived" enctype="multipart/form-data"><?php 	
+	$urlCalendar = $this->urlCalendar; 
+	$arrReceived = $this->arrReceived;
+	$sOwnerCode  = $this ->Owner;
+	if($arrReceived[0]['C_NUM_DOCUMENT'] =='' || $arrReceived[0]['C_NUM_DOCUMENT'] == null){
+		$arrReceived[0]['C_RECEIVE_BOOK'] = '';
+	}?>
+	<table cellpadding="0" cellspacing="0" width="100%" border="0">
+		<!--tao tac hidden!-->
+		<tr>
+			<td>
+				<?php echo $this->formHidden("hdnCode","",null); ?>
+				<!--Sinh mot hidden luu ID loai danh muc!-->
+				<?php echo $this->formHidden("hdn_object_id",$this->pReceiveDocumentId,null); ?>		
+				<!--Bien hdn_xml_tag_list dung de luu danh sach cac THE XML tuong ung voi cac THUOC TINH cua mot doi tuong dang duoc cap nhat-->			
+				<?php echo $this->formHidden("hdn_xml_tag_list",'',null); ?>			
+				<!--Bien hdn_xml_value_list dung de luu danh sach cac gia tri cua cac THE XML tuong ung voi cac THUOC TINH cua mot doi tuong-->			
+				<?php echo $this->formHidden("hdn_xml_value_list",'',null); ?>			
+				<!--Sinh mot hidden luu list ID ma NSD chon!-->
+				<?php echo $this->formHidden("hdn_object_id_list","",null); ?>	
+				<!--Hidden luu gia tri cua list tag va list value (TagList|{*^*}|ValueList) -->
+				<?php echo $this->formHidden("hdn_XmlTagValueList",$this->XmlTagValueList,null); ?>
+				<!--Bien hdn_page dung de luu chi so trang hien thi hien thoi-->			
+				<?php echo $this->formHidden("hdn_current_page",$this->currentPage,null); ?>	
+				<!--Sinh mot hidden luu gia tri xac dinh so ban ghi / 1 trang!-->	
+				<?php echo $this->formHidden("hdn_record_number_page",$this->numRowOnPage,null); ?>	
+				<!--Bien hdn_filter_xml_tag_list dung de luu danh sach cac THE XML tuong ung voi cac tieu thuc loc tren giao dien DANH SACH DOI TUONG-->
+				<?php echo $this->formHidden("hdn_filter_xml_tag_list",$this->filterXmlTagList,null); ?>
+				<!--Bien hdn_filter_xml_tag_list dung de luu gia tri cua cac THE XML tuong ung voi cac tieu thuc loc tren giao dien DANH SACH DOI TUONG-->	
+				<?php echo $this->formHidden("hdn_filter_xml_value_list",$this->filterXmlValueList,null); ?>
+				<!--Bien hdn_deleted_new_file_id_list dung de luu Id cua nhung doi tuong file dinh kem se xoa-->	
+				<?php echo $this->formHidden("hdn_deleted_new_file_id_list","",null); ?>	
+				<!--Bien hdn_deleted_exist_file_id_list dung de ...-->	
+				<?php echo $this->formHidden("hdn_deleted_exist_file_id_list","",null); ?>	
+				<?php echo $this->formHidden("hdh_option",$this->option,null); ?>	
+			</td>
+		</tr>
+	</table>
+
+	<!--HIen thi tieu de man hinh danh sach!-->
+	<table width='99%'  border='0' cellspacing='0' cellpadding='0' class="table_title">
+		<tr>
+			<td class="large_title" style="padding-left:7px;text-align:center;">
+				<?=$this->bodyTitle;?><br>		
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				<label class="normal_label">Tính chất văn bản:<font color="Red" size="2px;">*</font> </label>
+				<select id="tinh_chat" name="tinh_chat" option = "true" style="width:150px;" class="textbox normal_label"  xml_tag_in_db="tinh_chat" xml_data="true" column_name="" message="<?php echo "Phai xac dinh TINH CHAT van ban!";?>">
+					<option id="" name = "" value="">-- Chọn tính chất--</option><?php
+						$arrSel = $this->arrSel;
+						echo Efy_Library::_generateSelectOption($arrSel,'C_CODE','C_CODE','C_NAME',$arrReceived[0]['C_TC_VB']);?>
+				</select>
+			</td>			
+		</tr>
+	</table>
+	<div><hr width='99%' color='#3399FF' size='1'></div>
+	<table width='99%'  border='0' cellspacing='0' cellpadding='0' align="center">	 	
+		<col width="50%"><col width="50%">
+	 	<tr>
+	 		<td class="box normal_label" valign="top" style="width:50%;">
+	 			<table width="100%">
+	 				<col width="35%"><col width="65%">
+	 				<tr width="100%">
+	 					<td>
+	 						<label>1. Số, ký hiệu:<font color="Red" size="2px;">*</font> </label>
+	 					</td>
+	 					<td>							
+							<input class="textbox" style="width:196px;" type="text" id="C_SYMBOL" name="C_SYMBOL" value="<?=$arrReceived[0]['C_SYMBOL'];?>" align="right" option = "false" xml_tag_in_db="" xml_data="false" column_name="C_SYMBOL" message="<?php echo "Phai xac dinh SO, KY HIEU van ban!";?>">
+	 					</td>
+	 				</tr>
+	 				<tr width="100%">
+	 					<td>
+	 						<label>2. Ngày phát hành:<font color="Red" size="2px;">* </label>
+	 					</td>
+	 					<td>
+	 						<input class="textbox c2" id ="ngay_phat_hanh" name="ngay_phat_hanh"  value="<?=$arrReceived[0]['C_SEN_DATE'];?>" "type="text" isdate="true" option = "false"  xml_tag_in_db="ngay_phat_hanh" xml_data="true" column_name="" message="<?php echo "NGAY PHAT HANH khong dung dinh dang ngay/thang/nam!";?>" onKeyDown="change_focus(document.forms[0],this)">
+							<img src="<?= $this->baseUrl?>images/calendar.gif" border="0" onclick="DoCal('<?= $urlCalendar;?>',document.getElementById('ngay_phat_hanh'));" style="cursor:pointer">	 						
+	 					</td>
+	 				</tr>
+					<tr width="100%">
+	 					<td colspan="2">
+	 						<label>3. Cơ quan ban hanh văn bản: </label>
+	 					</td>
+	 					<td></td>
+	 				</tr>
+	 				<tr width="100%">
+	 					<td>
+	 						<label style="padding-left:20px;"> Nhóm cơ quan: <font color="Red" size="2px;">* </label>
+	 					</td>
+	 					<td>
+	 						<select id="C_SEND_LEVEL" name="C_SEND_LEVEL" onchange="getNhomChinh(document.getElementById('ten_co_quan'),this,'cap_noi_gui_van_ban');" option = "false" style="width:99%;" class="textbox normal_label" xml_tag_in_db="" xml_data="false" column_name="C_SEND_LEVEL" message="<?php echo "Phai xac dinh thong tin NHOM CO QUAN!";?>">
+								<option id="" name = "" value="">-- Chọn nhóm cơ quan --</option><?php
+								$arrSentLevel = $this->arrSentLevel;
+								echo Efy_Library::_generateSelectOption($arrSentLevel,'C_CODE','C_CODE','C_NAME',$arrReceived[0]['C_SEND_LEVEL']);?>
+							</select>
+	 					</td>
+	 				</tr>
+	 				<tr width="100%">
+	 					<td>
+	 						<label style="padding-left:20px;"> Tên cơ quan: </label>
+	 					</td>
+	 					<td>
+		 					<div id = "ten_co_quan">
+		 						<select id="cap_noi_gui_van_ban" name="cap_noi_gui_van_ban" optional = "true" style="width:99%;" class="textbox normal_label" xml_tag_in_db="" xml_data="false" column_name="cap_noi_gui_van_ban" message="<?php echo "Phai xac dinh thong tin TEN CO QUAN!";?>">
+									<option id="" name = "" value="">-- Chọn tên cơ quan --</option><?php
+									$arrSentPlace = $this->arrSentPlace;
+									echo Efy_Library::_generateSelectOption($arrSentPlace,'C_CODE','C_CODE','C_NAME',$arrReceived[0]['C_SENDING_PLACE']);?>
+								</select>
+							</div>	
+	 					</td>
+	 				</tr>	 				
+
+	 				<tr width="100%">
+	 					<td colspan="2">
+	 						<label>4. Phân loại: </label>
+	 					</td>
+	 					<td></td>
+	 				</tr>
+	 				<tr width="100%">
+	 					<td>
+	 						<label style="padding-left:20px;"> Nhóm chính: </label>
+	 					</td>
+	 					<td>
+	 						<select id="C_DOC_CATE" name="C_DOC_CATE" onchange="getNhomChinh(document.getElementById('DivDetail'),this,'nhom_loai_vb');" optional = "true" style="width:99%;" class="textbox normal_label" message="<?php echo "Phai xac dinh NHOM CHINH van ban!";?>">
+								<option id="" name = "" value="">-- Chọn nhóm chính --</option><?php
+								$arrNhomVB = $this->arrNhomVB;
+								echo Efy_Library::_generateSelectOption($arrNhomVB,'C_CODE','C_CODE','C_NAME',$arrReceived[0]['C_DOC_CATE']);?>
+							</select>
+	 					</td>
+	 				</tr>
+	 				<tr width="100%">
+	 					<td>
+	 						<label style="padding-left:20px;"> Chi tiết:<font color="Red" size="2px;">*</label>
+	 					</td>
+	 					<td>
+	 						<div id="DivDetail">
+		 						<select id="nhom_loai_vb" name="nhom_loai_vb" onchange="_getInvitation(this, document.getElementById('divMoiHop'))" option = "true" style="width:99%;" class="textbox normal_label" message="<?php echo "Phai xac dinh CHI TIET van ban!";?>">
+									<option id="" name = "" value="">-- Chọn nhóm chính --</option><?php
+									$arrLoaiVB = $this->arrLoaiVB;
+									echo Efy_Library::_generateSelectOption($arrLoaiVB,'C_CODE','C_CODE','C_NAME',$arrReceived[0]['C_DOC_TYPE']);?>
+								</select>
+							</div>
+	 					</td>
+	 				</tr>
+					<tr  width="100%">
+	 					<td>
+	 						<label>5. Tóm tắt nội dung:<font color="Red" size="2px;">*</font> </label>
+	 					</td>
+	 					<td>
+	 						<textarea class="textbox normal_textarea" id="C_SUBJECT" style="width:99%;" option = "true" rows="2" name="C_SUBJECT"  xml_tag_in_db="" xml_data="false" column_name="C_SUBJECT" message="<?php echo "TRICH YEU khong duoc de trong!";?>"><?=$arrReceived[0]['C_SUBJECT'];?></textarea>
+	 					</td>
+	 				</tr>	 					 				
+	 			</table>
+	 		</td>
+			<td class="box normal_label" valign="top" style="width:50%;">
+	 			<table width="100%"> 
+	 				<col width="35%"><col width="65%">				
+	 				<tr width="100%">
+	 					<td >
+	 						<label>6. Sổ văn bản đến:<font color="Red" size="2px;">*</font> </label>
+	 					</td>
+	 					<td >
+							<select id="C_DOCUMENT_BOOKS" name="C_DOCUMENT_BOOKS" onchange="getDocNumber(document.getElementById('docNumber'),this,'<?= $this->Owner ?>');" option = "true" style="width:200px;" class="textbox normal_label"  xml_tag_in_db="" xml_data="false" column_name="C_DOCUMENT_BOOKS" message="<?php echo "Phai xac dinh thong tin SO VAN BAN DEN!";?>">
+								<option id="" name = "" value="">-- Chọn sổ văn bản --</option><?php
+								$arrInputBooks = $this->arrInputBooks;
+								echo Efy_Library::_generateSelectOption($arrInputBooks,'C_CODE','C_CODE','C_NAME',trim($arrReceived[0]['C_RECEIVE_BOOK']));?>
+							</select>
+	 					</td>
+	 				</tr>
+	 				<tr width="100%">
+	 					<td>
+	 						<label>7. Số đến:<font color="Red" size="2px;">*</font> </label>
+	 					</td>
+	 					<td>
+	 						<div id="docNumber">							
+								<input class="textbox" style="width:196px;" type="text" id="C_NUM_DOCUMENT" name="C_NUM_DOCUMENT"  value="<?=$arrReceived[0]['C_NUM_DOCUMENT'];?>" align="right" option = "true" xml_tag_in_db="" xml_data="false" column_name="C_NUM_DOCUMENT" message="<?php echo "SO VAN BAN DEN phai la so nguyen duong (1, 2, …)!";?>">
+							</div>	
+	 					</td>
+	 				</tr>
+					<tr width="100%">
+	 					<td>
+	 						<label>8. Độ khẩn văn bản: </label>
+	 					</td>
+	 					<td>
+	 						<select id="do_khan" name="do_khan" optional = "true" style="width:150px;" class="textbox normal_label"  xml_tag_in_db="do_khan" xml_data="true" column_name="" message="<?php echo "Phai xac dinh DO KHAN van ban!";?>">
+								<option id="" name = "" value="">-- Chọn độ khẩn --</option><?php
+								$arrUrgent = $this->arrUrgent;
+								echo Efy_Library::_generateSelectOption($arrUrgent,'C_CODE','C_CODE','C_NAME',$arrReceived[0]['C_DO_KHAN']);?>
+							</select>
+	 					</td>
+	 				</tr>	 				
+	 				<tr width="100%">
+	 					<td>
+	 						<label>9. Ngày nhận: </label>
+	 					</td>
+	 					<td>
+	 						<input class="textbox c2" id ="C_RECEIVED_DATE" name="C_RECEIVED_DATE" value="<?=$arrReceived[0]['C_RECEIVED_DATE'];?>" type="text" isdate="true" optional = "false"  xml_tag_in_db="" xml_data="false" column_name="C_RECEIVED_DATE" message="<?php echo "NGAY NHAN khong dung dinh dang ngay/thang/nam!";?>" onKeyDown="change_focus(document.forms[0],this)">
+							<img src="<?= $this->baseUrl?>images/calendar.gif" border="0" onclick="DoCal('<?= $urlCalendar;?>',document.getElementById('C_RECEIVED_DATE'));" style="cursor:pointer">	 						
+	 					</td>
+	 				</tr>
+					<tr width="100%">
+	 					<td>
+	 						<label>10. Hạn trả lời: </label>
+	 					</td>
+	 					<td>
+	 						<input class="textbox c2" id ="han_tra_loi" name="han_tra_loi" value="<?=$arrReceived[0]['C_LIMITED_REPLY'];?>" type="text" isdate="true" optional = "true"  xml_tag_in_db="han_tra_loi" xml_data="true" column_name="" message="<?php echo "HAN TRA LOI khong dung dinh dang ngay/thang/nam!";?>" onKeyDown="change_focus(document.forms[0],this)">
+							<img src="<?= $this->baseUrl?>images/calendar.gif" border="0" onclick="DoCal('<?= $urlCalendar;?>',document.getElementById('han_tra_loi'));" style="cursor:pointer">	 						
+	 					</td>
+	 				</tr>	
+					<tr width="100%">
+	 					<td>
+	 						<label>11. Ngày trả lời: </label>
+	 					</td>
+	 					<td>
+	 						<input class="textbox c2" id ="ngay_tra_loi" name="ngay_tra_loi" value="<?=$arrReceived[0]['C_REPLY_DATE'];?>" type="text" isdate="true" optional = "true"  xml_tag_in_db="ngay_tra_loi" xml_data="true" column_name="" message="<?php echo "NGAY TRA LOI khong dung dinh dang ngay/thang/nam!";?>" onKeyDown="change_focus(document.forms[0],this)">
+							<img src="<?= $this->baseUrl?>images/calendar.gif" border="0" onclick="DoCal('<?= $urlCalendar;?>',document.getElementById('ngay_tra_loi'));" style="cursor:pointer">	 						
+	 					</td>
+	 				</tr>	 				 				
+					<tr  width="100%">
+	 					<td>
+	 						<label>12. Công văn trả lời:</label>
+	 					</td>
+	 					<td>
+	 						<textarea class="textbox normal_textarea" id="doc_reply" style="width:99%;" optional = "true" rows="2" name="doc_reply"  xml_tag_in_db="doc_reply" xml_data="true" column_name="" message="<?php echo "CONG VAN TRA LOI khong duoc de trong!";?>"><?=$arrReceived[0]['C_DOC_REPLY'];?></textarea>
+	 					</td>
+	 				</tr>					
+	 				<tr width="100%">
+	 					<td>
+	 						<label>13. Hình thức xử lý: </label>
+	 					</td>
+	 					<td>
+	 						<select id="C_PROCESSING_TYPE" name="C_PROCESSING_TYPE" optional = "true" style="width:200px;" class="textbox normal_label" xml_tag_in_db="" xml_data="false" column_name="C_PROCESSING_TYPE" message="<?php echo "HINH THUC XU LY khong duoc de trong!";?>">
+								<option id="" name = "" value="">-- Chọn hình thức xử lý --</option><?php
+								$arrProcessType = $this->arrProcessType;
+								echo Efy_Library::_generateSelectOption($arrProcessType,'C_CODE','C_CODE','C_NAME',$arrReceived[0]['C_PROCESSING_TYPE']);?>
+							</select>
+	 					</td>
+	 				</tr>
+	 	 			<tr>
+	 					<td colspan="2">
+	 						<div id="divMoiHop" style="display:none;">
+	 							<br>
+	 							<div align="center"><b>MỜI HỌP</b></div>
+	 							<table width="100%">
+	 								<col width="20%"><col width="80%">		
+	 								<tr>
+	 									<td>
+	 										<label>Ngày họp: </label>
+	 									</td>
+	 									<td>
+	 										<input class="textbox c2" value="<?=$arrReceived[0]['C_MEETING_DATE']?>" id ="C_MEETING_DATE" name="C_MEETING_DATE" type="text" isdate="true" optional = "false" message="NGAY HOP khong dung dinh dang ngay/thang/nam!" onKeyDown="change_focus(document.forms[0],this)">
+											<img src="<?= $this->baseUrl?>images/calendar.gif" border="0" onclick="DoCal('<?= $urlCalendar;?>',document.getElementById('C_MEETING_DATE'));" style="cursor:pointer">
+	 									</td>
+	 								</tr>
+	 								<tr>
+	 									<td>
+	 										<label>Thời gian: </label>
+	 									</td>
+	 									<td>
+	 										<input type="text" id="C_TIME" name="C_TIME" value="<?=$arrReceived[0]['C_TIME']?>" optional="true" class="textbox c2" value="8h00">
+	 									</td>
+	 								</tr>
+	 								<tr>
+	 									<td>
+	 										<label>Địa điểm: </label>
+	 									</td>
+	 									<td>
+	 										<textarea id="C_ADDRESS" name="C_ADDRESS" optional="true" class="textbox normal_textarea" style="width:99%"><?=$arrReceived[0]['C_ADDRESS']?></textarea>
+	 									</td>
+	 								</tr>
+	 								<tr>
+	 									<td>
+	 										<label>Người họp: </label>
+	 									</td>
+	 									<td>
+	 										<textarea id="C_MEETING_PEOPLE" name="C_MEETING_PEOPLE" optional="true" class="textbox normal_textarea" style="width:99%"><?=$arrReceived[0]['C_MEETING_PEOPLE']?></textarea>
+	 									</td>
+	 								</tr>
+	 								<tr>
+	 									<td>
+	 										&nbsp;
+	 									</td>
+	 									<td colspan="2">
+	 										<?=$this->formButton("btn_update","Lấy tên",array("type"=>"button","class"=>"update_large_button","onClick"=>"show_modal_dialog_onclick_update_unit_all('Received/documents/sign/showModalDialog/1',document.getElementById('C_MEETING_PEOPLE'),'".$this->brwName."');"))?>
+	 									</td>
+	 								</tr>
+	 							</table>
+	 						</div>
+	 					</td>
+	 					<td>&nbsp;</td>
+	 				</tr>	
+	 			</table>
+	 		</td>	 		
+	 	</tr>
+	</table>
+	<div><hr width='99%' color='#3399FF' size='1'></div>
+	<table width='99%'  border='0' cellspacing='0' cellpadding='0' align="center">
+	<col width="20%"><col width="80%">
+		<tr width="100%">
+			<td align="left" valign="top">
+				<label class="normal_label"><b>Danh sách File đính kèm:</b></label>
+			</td>
+			<td align="left" width="100%">
+				<?php echo $this->AttachFile;?>
+			</td>
+		</tr>
+		<tr width="100%">
+			<td align="left">
+				<label class="normal_label"><b>Nơi nhận văn bản</b></label>
+			</td>
+			<td align="left" width="100%">
+				<textarea id="C_RECEIVED_PLACE" name="C_RECEIVED_PLACE" optional="true" class="textbox normal_textarea" style="width:99%"><?=$arrReceived[0]['C_RECEIVED_PLACE']?></textarea>
+				<?=$this->formButton("btn_update","Nơi nhận",array("type"=>"button","class"=>"update_large_button","onClick"=>"show_modal_dialog_onclick_update_unit_all('sent/registration/unit/showModalDialog/1',document.getElementById('C_RECEIVED_PLACE'),'".$this->brwName."');"))?>
+			</td>
+		</tr>
+	</table>
+	<!--Check-box Thong tin phan phoi - phan cong xu ly!-->
+	<div><hr width='99%' color='#3399FF' size='1'></div>	
+	<div class="normal_label"><input type="checkbox" id="chk_pp_pcxl" onclick="showHideDistribution(this,'pp_pcxl');">THÔNG TIN PHÂN PHỐI PHÂN CÔNG XỬ LÝ</div>
+	<!------------------------------------------Thong tin phan phoi - phan cong xu ly!------------------------------------------>
+	<div id = 'pp_pcxl' style="display:none;">
+		<div><hr width='99%' color='#3399FF' size='1'></div>
+		<table width='99%'  border='0' cellspacing='0' cellpadding='0' align='center' class='normal_label'>
+			<col width="30%"><col width="70%">
+			<tr width="100%">
+				<td valign="top"  colspan="10">
+					<label><b>Chuyển Lãnh Đạo:</b></label>
+				</td>
+			</tr>
+			<?php
+				//Danh sach LANH DAO DAO DON VI
+				$arrLeader = $this->arrLeader;				
+				//Danh sach LANH DAO DAO DON VI da cho Y KIEN CHI DAO
+				$sLeaderIdList = $arrReceived[0]['C_LEADER_LIST'];			
+				//Danh sach Y KIEN CHI DAO		
+				$sLeaderIdeaList = $arrReceived[0]['C_IDEAR_LIST'];				
+				echo Efy_Function_DocFunctions::generateUnitLeaderList($arrLeader,$sLeaderIdList,$sLeaderIdeaList);
+			?>
+		</table>
+		<table width='99%'  border=0' cellspacing='0' cellpadding='0' align='center' class='normal_label'>
+			<col width="30%"><col width="70%">
+			<tr width="100%">
+				<td valign="middle" >
+					<label><b>Hạn xử lý:</b></label>
+				</td>
+				<td>
+					<label>Hạn:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>					
+					<input class="textbox c3" id ="han_xu_ly" name="han_xu_ly" type="text" isdate="true" optional = "true" value="<?=$arrReceived[0]['C_HAN_XU_LY'];?>" message="HAN XU LY khong dung dinh dang ngay/thang/nam!" onKeyDown="change_focus(document.forms[0],this)">
+					<img src="<?= $this->baseUrl?>images/calendar.gif" border="0" onclick="DoCal('<?= $urlCalendar;?>',document.getElementById('han_xu_ly'));" style="cursor:pointer">	 						
+					<label>Số ngày:</label>
+					<input class="textbox c3" type="text" id="limit_date" name="limit_date" value="" align="right" optional = "true" xml_tag_in_db="limit_date" xml_data="true" column_name="" message="<?php echo "SO NGAY phai la so nguyen duong (1, 2, ...)!";?>">										
+				</td>
+			</tr>
+		</table>
+		
+		<div class="normal_label" style="padding-bottom:5px;"><?php	
+			//Xu ly an/hien
+			$sBlockNoneUnit = "none";
+			$sBlockNoneStaff = "none";
+			if ($this->PermissionUser == 1){
+				$sBlockNoneUnit = "block";
+				$sBlockNoneStaff = "none";
+			}
+			//	
+			if ($this->PermissionUser != 1){//Khong phai VT Bo
+				$sBlockNoneUnit = "none";
+				$sBlockNoneStaff = "block";
+				if (count($this->UnitList) > 1){//Neu don vi khong co mot phong ban thi khong hien thi option chuyen phong ban?>
+					<input type="radio" value="DONVI_PHONGBAN" id="move_unit" name="move_unit" optional="true" onclick="showHideProcessPlace(this.value)"><u>Chuyển đơn vị (phòng ban) xử lý</u><?php
+				}?>					
+				<input type="radio" value="CANBO" id="move_staff" name="move_staff" optional="true"  onclick="showHideProcessPlace(this.value)"><u>Chuyển cán bộ xử lý</u><?php
+			}
+			if(($arrReceived[0]['FK_PROCESS_UNIT'] != "" || $arrReceived[0]['FK_PROCESS_UNIT'] != null) and $arrReceived[0]['FK_PROCESS_UNIT'] != 0){
+				$sBlockNoneUnit = "block";
+				$sBlockNoneStaff = "none";
+			}
+			if( ($arrReceived[0]['FK_PROCESSOR']!= "" ||  $arrReceived[0]['FK_PROCESSOR'] != null) and $arrReceived[0]['FK_PROCESSOR'] != 0){
+				$sBlockNoneStaff = "block";
+				$sBlockNoneUnit = "none";
+			}?>
+		</div>
+		
+		<!--Don vi xu ly!-->
+		<div class="normal_label" style="padding-left:5px; display:<?=$sBlockNoneUnit;?>" id="processing_unit">
+			<table width='99%'  border=0' cellspacing='0' cellpadding='0' align='center' class='normal_label'>
+				<col width="30%"><col width="70%">	
+				<tr width="100%">
+					<td>
+						<label><b>Đơn vị chủ trì:</b></label>
+					</td>
+					<td>
+					<select id="FK_PROCESS_UNIT" name="FK_PROCESS_UNIT" optional = "true" style="width:64%;" class="textbox normal_label" xml_tag_in_db="" xml_data="false" column_name="FK_PROCESS_UNIT" message = "<?php echo "Ban phai chon DON VI XU LY van ban!";?>">
+						<option id="" name = "" value="">-- Chọn đơn vị chủ trì --</option><?php
+						$arrUnitList = $this->UnitList;
+						$iUnitId = $arrReceived[0]['FK_PROCESS_UNIT'];
+							if($iUnitId ==""|| $iUnitId == Null){
+								$iUnitId = "-- Chọn đơn vị chủ trì --";
+							}
+						echo Efy_Library::_generateSelectOption($arrUnitList,'id','id','name',$iUnitId);?>
+					</select>	
+					</td>
+				</tr>		
+			</table>		
+			<div class="normal_label" style="padding-left:5px;"><b>Đơn vị phối hợp xử lý:</b></div>	
+			<table width='99%'  border='0' cellspacing='0' cellpadding='0' align='center' class='list_table2'>
+				<col width="50%"><col width="50%"><?php
+					//Mang danh sach cac DON VI SU DUNG
+					$arrUnitList = $this->UnitList;	
+					//Danh sach DON VI phoi hop xu ly
+					$unitIdList = $arrReceived[0]['FK_UNIT_ID_LIST'];					
+					echo Efy_Function_DocFunctions::DocGenerateMultipleCheckbox($arrUnitList, $unitIdList);?>
+			</table>
+		</div>	
+		
+		<!--Can bo xu ly!-->
+		<div class="normal_label" style="padding-left:5px; display:<?=$sBlockNoneStaff;?>" id="processing_staff">
+			<table width='99%'  border=0' cellspacing='0' cellpadding='0' align='center' class='normal_label'>
+				<col width="30%"><col width="70%">	
+				<tr width="100%">
+					<td>
+						<label><b>Cán bộ xử lý chính:</b></label>
+					</td>
+					<td>
+					<select id="FK_PROCESSOR" name="FK_PROCESSOR" optional = "true" style="width:64%;" class="textbox normal_label" xml_tag_in_db="" xml_data="false" column_name="FK_PROCESS_UNIT" message = "<?php echo "Ban phai chon CAN BO XU CHINH van ban!";?>">
+						<option id="" name = "" value="">-- Chọn cán bộ xử lý chính --</option><?php
+						$arrStaffDepartment = $this->arrStaffDepartment;
+						//Id can bo xu ly chinh
+						$iProcessId = $arrReceived[0]['FK_PROCESSOR'];
+							if($iProcessId ==""|| $iProcessId == Null){
+								$iProcessId = "-- Chọn cán bộ xử lý chính--";
+							}
+						echo Efy_Library::_generateSelectOption($arrStaffDepartment,'id','id','name',$iProcessId);?>
+					</select>	
+					</td>
+				</tr>		
+			</table>		
+			<!--Can bo phoi hop!-->
+			<div class="normal_label" style="padding-left:5px;"><b>Cán bộ phối hợp xử lý:</b></div>	
+			<table width='99%'  border='0' cellspacing='0' cellpadding='0' align='center' class='list_table2'>
+				<col width="50%"><col width="50%"><?php
+					//Mang danh sach CAN BO
+					$arrStaffDepartment = $this->arrStaffDepartment;	
+					//Danh sach CAN BO phoi hop xu ly
+					$sCombineIdList = $arrReceived[0]['FK_COMBINE_ID_LIST'];					
+					echo Efy_Function_DocFunctions::DocGenerateMultipleCheckbox($arrStaffDepartment, $sCombineIdList, 'canbo_phoihop');?>
+			</table>
+		</div>
+	</div>	
+	<!--Hien thi nut!-->		
+	<table width='99%'  border='0' cellspacing='0' cellpadding='0' align='center' class='normal_label'>
+		<tr><td style="height:20px;"><hr width='100%' color='#3399FF' size='1'></td></tr>		
+		<tr>
+			<td align="center" style="padding-bottom:10px;">	
+				<button name="btn_ghivathemmoi" id="btn_ghivathemmoi" type="button" value="Ghi&amp;Thêm mới" class="btn_nut" onClick="document.getElementById('hdh_option').value='GHI_THEMMOI';btn_save_doc_received(document.getElementById('hdn_xml_tag_list'),document.getElementById('hdn_xml_value_list'),'');">Ghi&amp;Thêm <u>m</u>ới</button>
+				<button name="btn_ghivathemtiep" id="btn_ghivathemtiep" type="button" value="Ghi&amp;Thêm tiếp" class="btn_nut" onClick="document.getElementById('hdh_option').value='GHI_THEMTIEP';btn_save_doc_received(document.getElementById('hdn_xml_tag_list'),document.getElementById('hdn_xml_value_list'),'');">Ghi&amp;Thêm Ti<u>ế</u>p</button>
+				<button name="btn_ghivaquaylai" id="btn_ghivaquaylai" type="button" value="Ghi&amp;Quay lại" class="btn_nut" onClick="document.getElementById('hdh_option').value='GHI_QUAYLAI';btn_save_doc_received(document.getElementById('hdn_xml_tag_list'),document.getElementById('hdn_xml_value_list'),'');">Ghi&amp;<u>Q</u>uay lại</button>
+				<button name="btn_ghinhan" id="btn_ghinhan" type="button" value="&lt;u&gt;G&lt;/u&gt;hi nhận" class="btn_nut" onClick="document.getElementById('hdh_option').value='GHI_NHAN';btn_save_doc_received(document.getElementById('hdn_xml_tag_list'),document.getElementById('hdn_xml_value_list'),'');"><u>G</u>hi nhận</button>
+				<?=$this->formsubmit('button','Quay lại',array("onClick"=>"document.getElementById('hdh_option').value='QUAY_LAI';","class"=>"btn_nut"))?>
+			</td>
+		</tr>			
+	</table>	
+</form>
+<?php echo $this->search_textselectbox_received_place; ?>
+<script type="text/javascript">
+shortcut.add("Ctrl+M",function() {
+	document.getElementById('hdh_option').value='GHI_THEMMOI';
+	btn_save_doc_received(document.getElementById('hdn_xml_tag_list'),document.getElementById('hdn_xml_value_list'),'');
+});
+
+shortcut.add("Ctrl+E",function() {
+	document.getElementById('hdh_option').value='GHI_THEMTIEP';
+	btn_save_doc_received(document.getElementById('hdn_xml_tag_list'),document.getElementById('hdn_xml_value_list'),'');
+});
+shortcut.add("Ctrl+Q",function() {
+	document.getElementById('hdh_option').value='GHI_QUAYLAI';
+	btn_save_doc_received(document.getElementById('hdn_xml_tag_list'),document.getElementById('hdn_xml_value_list'),'');
+});
+
+shortcut.add("Ctrl+G",function() {
+	document.getElementById('hdh_option').value='GHI_NHAN';
+	btn_save_doc_received(document.getElementById('hdn_xml_tag_list'),document.getElementById('hdn_xml_value_list'),'');
+});
+shortcut.add("Enter",function() {
+	document.getElementById('hdh_option').value='GHI_NHAN';
+	btn_save_doc_received(document.getElementById('hdn_xml_tag_list'),document.getElementById('hdn_xml_value_list'),'');
+});
+if("<?=$arrReceived[0]['C_DOC_TYPE']?>" == "MH"){
+	document.getElementById('divMoiHop').style.display = "block";
+}
+//ham lay cac lua chon chi tiet van ban theo tung nhom van ban chinh.
+function getNhomChinh(objView, vObj, xmlTag){
+	var key = 'code=' + vObj.value + '&xmlTag=' + xmlTag;
+	postAJAXHTTPText('<?=$this->UrlAjax;?>' + '/Received/generatehtml/documents/doctype.php', key, objView, null);	
+}
+if('<?=$arrReceived[0]['C_LEADER_LIST']?>' != ''){
+	document.getElementById('chk_pp_pcxl').checked = true;
+	showHideDistribution(document.getElementById('chk_pp_pcxl'), 'pp_pcxl');
+}
+
+//Ham lay so VB den tu dong.
+function getDocNumber(objView,vObj,OwnerCode){
+	if(vObj.value == '' ){
+		document.getElementById('C_NUM_DOCUMENT').value = '';
+		return;
+	}
+	if(document.getElementById('C_DOCUMENT_BOOKS').value == '<?= trim($arrReceived[0]['C_RECEIVE_BOOK']);?>'){
+		document.getElementById('C_NUM_DOCUMENT').value = '<?=$arrReceived[0]['C_NUM_DOCUMENT'];?>';	
+	}
+	if(document.getElementById('C_DOCUMENT_BOOKS').value != '<?= trim($arrReceived[0]['C_RECEIVE_BOOK']);?>'){
+		var key = 'DocBook=' + vObj.value + '&OwnerCode=' + OwnerCode;
+		postAJAXHTTPText('<?=$this->UrlAjax;?>' + '/Received/generatehtml/documents/getdocnumber.php', key, objView, null);	
+	}	
+}
+if(('<?=$arrReceived[0]['FK_PROCESS_UNIT']?>' != '' || '<?=$arrReceived[0]['FK_PROCESS_UNIT']?>' != null) && '<?=$arrReceived[0]['FK_PROCESS_UNIT']?>' != 0){
+	document.getElementById('move_unit').checked = true;
+	document.getElementById('move_staff').checked = false;
+}
+if(('<?=$arrReceived[0]['FK_PROCESSOR']?>' != '' || '<?=$arrReceived[0]['FK_PROCESSOR']?>' != null) && '<?=$arrReceived[0]['FK_PROCESS_UNIT']?>' !=0){
+	document.getElementById('move_staff').checked = true;
+	document.getElementById('move_unit').checked = false;
+}
+</script>
+<?php } 
+else 
+	echo 'Bạn không có quyền truy cập chức năng này';
+?>

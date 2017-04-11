@@ -1,0 +1,52 @@
+BODY {
+	FONT-SIZE: 9pt; FONT-FAMILY: Arial
+}
+TD {
+	FONT-SIZE: 9pt; FONT-FAMILY: Arial
+}
+A {
+FONT-WEIGHT: bold; COLOR: #442A1D; TEXT-DECORATION: none
+}
+A:visited {
+	FONT-WEIGHT: bold; COLOR: #442A1D; TEXT-DECORATION: none
+}
+A:link {
+	FONT-WEIGHT: bold; COLOR: #442A1D; TEXT-DECORATION: none
+}
+A:active {
+	FONT-WEIGHT: bold; COLOR: #442A1D; TEXT-DECORATION: none
+}
+A:hover {
+	FONT-WEIGHT: bold; COLOR: #FDF5E4; TEXT-DECORATION: none
+}
+A.menu {
+	FONT-WEIGHT: bold; COLOR: #442A1D; TEXT-DECORATION: none
+}
+A.menu:visited {
+	FONT-WEIGHT: bold; COLOR: #442A1D; TEXT-DECORATION: none
+}
+A.menu:link {
+	FONT-WEIGHT: bold; COLOR: #442A1D; TEXT-DECORATION: none
+}
+A.menu:active {
+	FONT-WEIGHT: bold; COLOR: #442A1D; TEXT-DECORATION: none
+}
+A.menu:hover {
+	FONT-WEIGHT: bold; COLOR: #FDF5E4; TEXT-DECORATION: none
+}
+A.submenu {
+	COLOR: #ffff99; TEXT-DECORATION: none
+}
+A.submenu:visited {
+	COLOR: #ffff99; TEXT-DECORATION: none
+}
+A.submenu:link {
+	COLOR: #ffff99; TEXT-DECORATION: none
+}
+A.submenu:active {
+	COLOR: #ffff99; TEXT-DECORATION: none
+}
+A.submenu:hover {
+	COLOR: #FBECCD; TEXT-DECORATION: none
+}
+
