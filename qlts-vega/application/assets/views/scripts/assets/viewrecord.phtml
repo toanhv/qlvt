@@ -50,7 +50,7 @@
 					<td class="normal_label"><?=$arrAsset[0]['C_BEGIN_DATE']?></td>
 				</tr>	
 				<tr>
-					<td class="normal_label">Ngày hết khấu hao</td>
+					<td class="normal_label">Ngày hết hạn sử dụng</td>
 					<td class="normal_label"><?=$arrAsset[0]['C_DEPRECIATION_DATE']?></td>
 				</tr>	
 				<tr>
@@ -67,7 +67,7 @@
 			$delimitor = $this->delimitor;//Lay ky tu phan cach giua cac phan tu
 			//Hien thi cac cot cua bang hien thi du lieu
 			$StrHeader = explode("!~~!",Efy_Library::_GenerateHeaderTable("3%" . $delimitor . "10%" . $delimitor . "30%" . $delimitor . "7%" . $delimitor . "20%" . $delimitor . "20%" . $delimitor . "10%"
-											,$this->formCheckbox('all','', array('checked' => false,'onclick'=>'_checkedAll(this,document.getElementsByName(\'chk_item_id\'))')) . $delimitor . "Mã" . $delimitor . "Tên tài sản" . $delimitor . "SL" . $delimitor . "Ngày bắt đầu sử dụng" . $delimitor . "Ngày hết khấu hao" . $delimitor . "Tình trạng"
+											,$this->formCheckbox('all','', array('checked' => false,'onclick'=>'_checkedAll(this,document.getElementsByName(\'chk_item_id\'))')) . $delimitor . "Mã" . $delimitor . "Tên tài sản" . $delimitor . "SL" . $delimitor . "Ngày bắt đầu sử dụng" . $delimitor . "Ngày hết hạn sử dụng" . $delimitor . "Tình trạng"
 											,$delimitor));
 			echo $StrHeader[0];				
 			echo $StrHeader[1]; 		

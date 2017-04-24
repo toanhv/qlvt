@@ -43,7 +43,7 @@
 					<td class="normal_label"><?=$arrAsset[0]['C_BEGIN_DATE']?></td>
 				</tr>	
 				<tr>
-					<td class="normal_label">Ngày hết khấu hao</td>
+					<td class="normal_label">Ngày hết hạn sử dụng</td>
 					<td class="normal_label"><?=$arrAsset[0]['C_DEPRECIATION_DATE']?></td>
 				</tr>	
 				<tr>
@@ -142,7 +142,7 @@
 			<td>
 				<input class="textbox" style="width:10%" id ="C_BEGIN_DATE" name="C_BEGIN_DATE" value="<?=$arrResul[0]['C_BEGIN_DATE']?>" onchange="getNowYear(this);" onblur = 'this.value=DatePrompt(this)' type="text" isdate="true" option = "true"  message="<?php echo "Ngay khong dung dinh dang ngay/thang/nam!";?>" onKeyDown="change_focus(document.forms[0],this)">
 				<img src="<?= $this->baseUrl?>images/calendar.gif" border="0" onclick="DoCal('<?=$urlCalendar;?>',document.getElementById('C_BEGIN_DATE'));" style="cursor:pointer">	 						
-				<label style="padding-left:60px;">Ngày hết khấu hao</label>
+				<label style="padding-left:60px;">Ngày hết hạn sử dụng</label>
 				<input class="textbox" style="width:10%" id ="C_DEPRECIATION_DATE" name="C_DEPRECIATION_DATE" value="<?=$arrResul[0]['C_DEPRECIATION_DATE']?>" onchange="getNowYear(this);" onblur = 'this.value=DatePrompt(this)' type="text" isdate="true" optional = "true"  message="<?php echo "Ngay khong dung dinh dang ngay/thang/nam!";?>" onKeyDown="change_focus(document.forms[0],this)">
 				<img src="<?= $this->baseUrl?>images/calendar.gif" border="0" onclick="DoCal('<?= $urlCalendar;?>',document.getElementById('C_DEPRECIATION_DATE'));" style="cursor:pointer">
 			</td>

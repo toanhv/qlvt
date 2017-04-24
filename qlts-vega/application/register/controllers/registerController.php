@@ -285,7 +285,7 @@ class register_registerController extends  Zend_Controller_Action {
 							  ,'C_DETAIL_STATUS'			=>1	
 							  ,'C_WORK_TYPE'				=>$sWorkType						      
 						      ,'C_CONTENT'					=>trim($objFilter->filter($arrInput['C_CONTENT']))						    
-						      ,'C_DATE'						=>$ojbEfyLib->_ddmmyyyyToYYyymmdd($objFilter->filter($arrInput['C_DATE']))		      
+						      ,'C_DATE'						=>$ojbEfyLib->_ddmmyyyyToYYyymmdd($objFilter->filter($arrInput['C_DATE']))	
 							);								
 			$arrResult = "";
 			if(!empty($sApproveId)){	

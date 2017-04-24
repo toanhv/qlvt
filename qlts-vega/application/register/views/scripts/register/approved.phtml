@@ -1,4 +1,4 @@
-<form action="index" method="POST" id="frmAll">		
+<form action="index" method="POST" id="frmAddSent" enctype="multipart/form-data">	
 	<table cellpadding="0" cellspacing="0" width="100%" border="0">
 		<!--tao tac hidden!-->
 		<tr>
@@ -17,4 +17,35 @@
 			<?php echo $this->formHidden("hdn_object_id",$this->hdn_object_id,null); ?>
 		</tr>
 	</table>	
+	
+	$urlCalendar = $this->urlCalendar; 
+	$arrAsset = $this->arrAsset;
+	$arrFluctuations = $this->arrFluctuations;?>
+	
+	<table width='98%'  border='0' cellspacing='0' cellpadding='0' align="center" class="normal_label">
+		<col width="20%"><col width="80%">
+		<tr><td style="height:20px;" colspan="2"><!--<hr width='100%' color='#' size='0'>--></td></tr>
+		<tr width="100%">
+				<td>
+					Lý do từ chối:
+				</td>
+				<td>
+					<textarea id="C_CONTENT" name="C_CONTENT" option="true" style="width:98%" class="normal_label" message="Ban phai cap nhat noi dung cong viec"></textarea>
+				</td>
+			</tr>
+		<tr><td style="height:20px;" colspan="2"><!--<hr width='100%' color='#' size='0'>--></td></tr>
+	</table>
+	
+	<!--Hien thi nut!-->			
+	<table 	width='99%'  border='0' cellspacing='0' cellpadding='0' align="center" class="table_title">
+		<tr><td style="height:20px;"><!--<hr width='100%' color='#3399FF' size='1'>--></td></tr>		
+		<tr>
+			<td align="center" style="padding-bottom:10px;">			
+				<button name="btn_ghivathemmoi" id="btn_ghivathemmoi" type="button" class="add_large_button" onClick="actionUrl('fluctuations');document.getElementById('C_CONTENT').value = '';this.disabled=true;">Cập nhật</button>
+				<?=$this->formsubmit('button','Quay lại',array("onClick"=>"actionUrl('index');","class"=>"add_large_button"))?>
+			</td>
+		</tr>			
+	</table>
+	
 </form>
+	
